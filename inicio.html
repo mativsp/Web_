@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Momentos Bonitos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ff0f70;
+            --pink-soft: #ff3d8d;
+            --cyan: #00eaff;
+            --bg: #08090c;
+            --panel: #0d1014;
+            --text: #eeeeee;
+            --muted: #777c84;
+            --line: rgba(255,255,255,.10);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255,15,112,.11), transparent 28%),
+                radial-gradient(circle at 90% 60%, rgba(0,234,255,.055), transparent 30%),
+                var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Efecto de pantalla */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100;
+            opacity: .09;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0,
+                transparent 3px,
+                rgba(255,255,255,.18) 4px
+            );
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 99;
+            opacity: .025;
+            background-image: radial-gradient(
+                rgba(255,255,255,.8) .5px,
+                transparent .5px
+            );
+            background-size: 4px 4px;
+        }
+
+        /* Decoración de esquinas */
+        header::before,
+        header::after,
+        .audio-section::before,
+        .audio-section::after {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--pink);
+            opacity: .8;
+        }
+
+        header::before {
+            top: 25px;
+            left: 25px;
+            border-top: 1px solid;
+            border-left: 1px solid;
+        }
+
+        header::after {
+            top: 25px;
+            right: 25px;
+            border-top: 1px solid;
+            border-right: 1px solid;
+        }
+
+        /* 1. TÍTULO */
+        header {
+            position: relative;
+            min-height: 48vh;
+            padding: clamp(55px, 8vw, 110px) 25px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        header .eyebrow {
+            font: 700 12px "JetBrains Mono", monospace;
+            letter-spacing: 5px;
+            color: var(--pink);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        header .eyebrow::before {
+            content: "// ";
+            color: var(--cyan);
+        }
+
+        header h1 {
+            margin: 0;
+            max-width: 950px;
+            font-size: clamp(55px, 10vw, 145px);
+            line-height: .82;
+            letter-spacing: -6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 rgba(255,255,255,.06);
+        }
+
+        header p {
+            margin: 30px 0 0;
+            color: #777c84;
+            font: 13px "JetBrains Mono", monospace;
+            letter-spacing: 2px;
+        }
+
+        header p::before {
+            content: "> ";
+            color: var(--pink);
+        }
+
+        /* TEXTO CENTRADO */
+        .texto-centro {
+            position: relative;
+            margin: 0;
+            padding: 28px 20px;
+            text-align: center;
+            color: #9a9da5;
+            font: italic 14px "JetBrains Mono", monospace;
+            letter-spacing: 3px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255,255,255,.012);
+        }
+
+        .texto-centro::before,
+        .texto-centro::after {
+            content: "—";
+            color: var(--pink);
+            margin: 0 14px;
+        }
+
+        /* 2. AUDIO */
+        .audio-section {
+            position: relative;
+            padding: 55px 20px;
+            text-align: center;
+            background: rgba(255,255,255,.015);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .audio-section::before {
+            bottom: 25px;
+            left: 25px;
+            border-bottom: 1px solid;
+            border-left: 1px solid;
+        }
+
+        .audio-section::after {
+            bottom: 25px;
+            right: 25px;
+            border-bottom: 1px solid;
+            border-right: 1px solid;
+        }
+
+        .audio-section::marker {
+            display: none;
+        }
+
+        audio {
+            width: min(80%, 600px);
+            filter: sepia(1) saturate(3) hue-rotate(290deg);
+            opacity: .85;
+        }
+
+        /* 3. PORTADA */
+        .portada {
+            position: relative;
+            padding: clamp(45px, 7vw, 90px) 20px;
+            background:
+                linear-gradient(rgba(255,15,112,.025), rgba(0,234,255,.015));
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .portada::before {
+            content: "ARCHIVO / VISUAL";
+            display: block;
+            width: min(90%, 1000px);
+            margin: 0 auto 18px;
+            text-align: left;
+            color: var(--pink);
+            font: 700 11px "JetBrains Mono", monospace;
+            letter-spacing: 4px;
+        }
+
+        .portada img {
+            display: block;
+            width: 90%;
+            max-width: 1000px;
+            height: auto;
+            margin: auto;
+            border: 1px solid rgba(255,15,112,.35);
+            border-radius: 0;
+            box-shadow:
+                0 0 0 8px rgba(255,255,255,.015),
+                0 25px 70px rgba(0,0,0,.55),
+                0 0 35px rgba(255,15,112,.08);
+        }
+
+        /* 4. APARTADO DE PÁGINAS */
+        .paginas {
+            position: relative;
+            padding: clamp(55px, 8vw, 100px) 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .paginas h2 {
+            margin: 0 0 35px;
+            color: #eee;
+            font-size: clamp(25px, 4vw, 42px);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .paginas h2::before {
+            content: "> ";
+            color: var(--pink);
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .galeria a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 85px;
+            padding: 20px;
+            border: 1px solid #292d33;
+            border-left: 2px solid var(--pink);
+            background: #0b0e12;
+            color: #b9bdc4;
+            font: 600 12px "JetBrains Mono", monospace;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: .25s ease;
+            overflow: hidden;
+        }
+
+        .galeria a::after {
+            content: "↗";
+            position: absolute;
+            top: 10px;
+            right: 13px;
+            color: #3d4249;
+            transition: .25s ease;
+        }
+
+        .galeria a:hover {
+            color: white;
+            border-color: var(--pink);
+            background: rgba(255,15,112,.08);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255,15,112,.10);
+        }
+
+        .galeria a:hover::after {
+            color: var(--cyan);
+        }
+
+        /* 5. PIE DE PÁGINA */
+        footer {
+            position: relative;
+            background: #06070a;
+            color: #50545b;
+            text-align: center;
+            padding: 35px 20px;
+            font: 10px "JetBrains Mono", monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer::before {
+            content: "// conexión Establecida";
+            display: block;
+            margin-bottom: 12px;
+            color: var(--pink);
+        }
+
+        @media (max-width: 800px) {
+            header {
+                min-height: 42vh;
+            }
+
+            header h1 {
+                letter-spacing: -3px;
+            }
+
+            .galeria {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .galeria a {
+                min-height: 65px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            header {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            header h1 {
+                font-size: clamp(48px, 16vw, 75px);
+            }
+
+            .texto-centro::before,
+            .texto-centro::after {
+                display: none;
+            }
+
+            audio {
+                width: 100%;
+            }
+
+            .portada img {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. TÍTULO -->
+    <header>
+        <div class="eyebrow">Inicioooo</div>
+        <h1>Migajitas<br>en página</h1>
+        <p>Mish</p>
+    </header>
+
+    <p class="texto-centro">Slow Summer Eve</p>
+
+    <!-- 2. AUDIO -->
+    <section class="audio-section">
+        <audio controls>
+            <source src="slow.mp3" type="audio/mpeg">
+        </audio>
+    </section>
+
+    <!-- 3. PORTADA -->
+    <section class="portada">
+        <img src="banne.jpg" alt="Imagen de portada">
+    </section>
+
+    <!-- 4. APARTADO DE PÁGINAS -->
+    <section class="paginas">
+        <h2>Galería / Páginas</h2>
+        <div class="galeria">
+            <a href="gale.html">📸 Galería de fotitos</a>
+            <a href="gale1.html">🎥 Galería de videos</a>
+            <a href="poe.html">💌 Carta</a>
+        </div>
+    </section>
+
+    <!-- 5. PIE DE PÁGINA -->
+    <footer>
+        <p>© 2026 Actualizada - Web de Matiiii | No sale nada de aquí ehh</p>
+    </footer>
+
+</body>
+</html>
