@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,7 +39,6 @@
             overflow-x: hidden;
         }
 
-        /* Efecto de pantalla */
         body::before {
             content: "";
             position: fixed;
@@ -68,7 +68,10 @@
             background-size: 4px 4px;
         }
 
-        /* Decoración de esquinas */
+        /* ==========================================
+           DECORACIÓN
+           ========================================== */
+
         header::before,
         header::after,
         .audio-section::before,
@@ -95,7 +98,10 @@
             border-right: 1px solid;
         }
 
-        /* 1. TÍTULO */
+        /* ==========================================
+           TÍTULO
+           ========================================== */
+
         header {
             position: relative;
             min-height: 48vh;
@@ -144,7 +150,10 @@
             color: var(--pink);
         }
 
-        /* TEXTO CENTRADO */
+        /* ==========================================
+           TEXTO CENTRADO
+           ========================================== */
+
         .texto-centro {
             position: relative;
             margin: 0;
@@ -164,7 +173,10 @@
             margin: 0 14px;
         }
 
-        /* 2. AUDIO */
+        /* ==========================================
+           AUDIO
+           ========================================== */
+
         .audio-section {
             position: relative;
             padding: 55px 20px;
@@ -187,17 +199,16 @@
             border-right: 1px solid;
         }
 
-        .audio-section::marker {
-            display: none;
-        }
-
         audio {
             width: min(80%, 600px);
             filter: sepia(1) saturate(3) hue-rotate(290deg);
             opacity: .85;
         }
 
-        /* 3. PORTADA */
+        /* ==========================================
+           PORTADA
+           ========================================== */
+
         .portada {
             position: relative;
             padding: clamp(45px, 7vw, 90px) 20px;
@@ -232,7 +243,10 @@
                 0 0 35px rgba(255,15,112,.08);
         }
 
-        /* 4. APARTADO DE PÁGINAS */
+        /* ==========================================
+           PÁGINAS
+           ========================================== */
+
         .paginas {
             position: relative;
             padding: clamp(55px, 8vw, 100px) 20px;
@@ -262,47 +276,463 @@
             margin: auto;
         }
 
-        .galeria a {
+        /* ==========================================
+           BOTONES BLOQUEADOS
+           ========================================== */
+
+        .pagina-bloqueada {
             position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 85px;
+            min-height: 110px;
             padding: 20px;
             border: 1px solid #292d33;
-            border-left: 2px solid var(--pink);
+            border-left: 2px solid #444950;
             background: #0b0e12;
-            color: #b9bdc4;
+            color: #555b63;
             font: 600 12px "JetBrains Mono", monospace;
             letter-spacing: 1px;
-            text-decoration: none;
             text-transform: uppercase;
-            transition: .25s ease;
+            cursor: not-allowed;
+            user-select: none;
             overflow: hidden;
         }
 
-        .galeria a::after {
-            content: "↗";
+        .pagina-bloqueada::before {
+            content: "🔒";
+            font-size: 20px;
+            margin-bottom: 9px;
+            filter: grayscale(1);
+            opacity: .65;
+        }
+
+        .pagina-bloqueada .estado {
+            margin-top: 8px;
+            color: #555b63;
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        .pagina-bloqueada::after {
+            content: "EN PROCESO";
             position: absolute;
-            top: 10px;
-            right: 13px;
+            top: 9px;
+            right: 12px;
             color: #3d4249;
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================
+           COSITAS ESPECIALES
+           ========================================== */
+
+        .especiales {
+            position: relative;
+            padding: clamp(60px, 8vw, 100px) 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255,15,112,.045), transparent 35%),
+                radial-gradient(circle at 80% 50%, rgba(0,234,255,.035), transparent 35%);
+        }
+
+        .especiales h2 {
+            margin: 0 0 12px;
+            color: #eee;
+            font-size: clamp(25px, 4vw, 42px);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .especiales h2::before {
+            content: "> ";
+            color: var(--pink);
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .especiales-subtitulo {
+            margin: 0 auto 40px;
+            color: var(--muted);
+            font: 12px "JetBrains Mono", monospace;
+            letter-spacing: 1px;
+        }
+
+        .especiales-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .especial-card {
+            position: relative;
+            min-height: 180px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #292d33;
+            border-left: 2px solid var(--pink);
+            background: #0b0e12;
+            overflow: hidden;
             transition: .25s ease;
         }
 
-        .galeria a:hover {
-            color: white;
-            border-color: var(--pink);
-            background: rgba(255,15,112,.08);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(255,15,112,.10);
+        .especial-card:hover {
+            border-color: rgba(255,15,112,.6);
+            box-shadow: 0 15px 40px rgba(255,15,112,.08);
+            transform: translateY(-3px);
         }
 
-        .galeria a:hover::after {
+        .especial-icono {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .especial-card h3 {
+            margin: 0 0 8px;
+            font-size: 19px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .especial-card p {
+            margin: 0;
+            color: var(--muted);
+            font: 11px "JetBrains Mono", monospace;
+            line-height: 1.6;
+        }
+
+        .btn-especial {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px 18px;
+            border: 1px solid var(--pink);
+            background: rgba(255,15,112,.07);
+            color: white;
+            font: 700 11px "JetBrains Mono", monospace;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: .25s ease;
+        }
+
+        .btn-especial:hover {
+            background: var(--pink);
+            box-shadow: 0 0 25px rgba(255,15,112,.22);
+            transform: translateY(-2px);
+        }
+
+        .especial-card.proceso {
+            border-left-color: #555b63;
+            opacity: .72;
+        }
+
+        .especial-card.proceso:hover {
+            transform: none;
+            border-color: #555b63;
+            box-shadow: none;
+        }
+
+        .proceso-tag {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 8px 13px;
+            border: 1px solid #343941;
+            color: #777c84;
+            font: 700 10px "JetBrains Mono", monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================
+           FORMULARIOS
+           ========================================== */
+
+        .quiz-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,15,112,.12), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(0,234,255,.08), transparent 30%),
+                rgba(4,5,8,.97);
+            overflow-y: auto;
+        }
+
+        .quiz-overlay.activo {
+            display: flex;
+        }
+
+        .quiz-box {
+            position: relative;
+            width: min(900px, 100%);
+            margin: auto;
+            padding: clamp(30px, 5vw, 55px);
+            background: #0b0e12;
+            border: 1px solid rgba(255,15,112,.4);
+            box-shadow:
+                0 0 0 8px rgba(255,255,255,.015),
+                0 25px 80px rgba(0,0,0,.7),
+                0 0 45px rgba(255,15,112,.08);
+        }
+
+        .quiz-box::before,
+        .quiz-box::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-color: var(--pink);
+        }
+
+        .quiz-box::before {
+            top: 18px;
+            left: 18px;
+            border-top: 1px solid;
+            border-left: 1px solid;
+        }
+
+        .quiz-box::after {
+            bottom: 18px;
+            right: 18px;
+            border-bottom: 1px solid;
+            border-right: 1px solid;
+        }
+
+        .quiz-label {
+            color: var(--pink);
+            font: 700 11px "JetBrains Mono", monospace;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .quiz-label::before {
+            content: "// ";
             color: var(--cyan);
         }
 
-        /* 5. PIE DE PÁGINA */
+        .quiz-box h2 {
+            margin: 0 0 10px;
+            font-size: clamp(28px, 5vw, 48px);
+            line-height: 1;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .quiz-subtitle {
+            color: var(--muted);
+            font: 12px "JetBrains Mono", monospace;
+            margin: 0 0 35px;
+        }
+
+        .pregunta {
+            margin-bottom: 30px;
+            padding: 22px;
+            background: rgba(255,255,255,.018);
+            border: 1px solid #252a30;
+            border-left: 2px solid var(--pink);
+        }
+
+        .pregunta-titulo {
+            display: block;
+            margin-bottom: 17px;
+            color: #eeeeee;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .pregunta-numero {
+            color: var(--pink);
+            font-family: "JetBrains Mono", monospace;
+            margin-right: 8px;
+        }
+
+        .opcion {
+            display: block;
+            position: relative;
+            margin: 9px 0;
+            cursor: pointer;
+        }
+
+        .opcion input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .opcion-contenido {
+            display: block;
+            padding: 13px 16px;
+            border: 1px solid #292d33;
+            background: #090b0e;
+            color: #aeb2b9;
+            font: 12px "JetBrains Mono", monospace;
+            transition: .2s ease;
+        }
+
+        .opcion-contenido:hover {
+            border-color: var(--cyan);
+            color: white;
+            background: rgba(0,234,255,.035);
+        }
+
+        .opcion input:checked + .opcion-contenido {
+            border-color: var(--pink);
+            color: white;
+            background: rgba(255,15,112,.10);
+            box-shadow: inset 3px 0 0 var(--pink);
+        }
+
+        .quiz-botones {
+            display: flex;
+            gap: 12px;
+            margin-top: 35px;
+        }
+
+        .btn-quiz {
+            flex: 1;
+            padding: 17px 20px;
+            border: 1px solid var(--pink);
+            background: rgba(255,15,112,.08);
+            color: white;
+            font: 700 12px "JetBrains Mono", monospace;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: .25s ease;
+        }
+
+        .btn-quiz:hover {
+            background: var(--pink);
+            box-shadow: 0 0 25px rgba(255,15,112,.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-cerrar {
+            flex: 0 0 auto;
+            border-color: #343941;
+            background: rgba(255,255,255,.02);
+            color: #858a92;
+        }
+
+        .btn-cerrar:hover {
+            background: rgba(255,255,255,.07);
+            border-color: #777;
+            box-shadow: none;
+        }
+
+        .mensaje {
+            display: none;
+            margin-top: 25px;
+            padding: 17px;
+            border: 1px solid;
+            text-align: center;
+            font: 600 12px "JetBrains Mono", monospace;
+            line-height: 1.6;
+        }
+
+        .mensaje.error {
+            display: block;
+            color: #ff6b9f;
+            border-color: rgba(255,15,112,.45);
+            background: rgba(255,15,112,.06);
+        }
+
+        .mensaje.exito {
+            display: block;
+            color: var(--cyan);
+            border-color: rgba(0,234,255,.4);
+            background: rgba(0,234,255,.05);
+        }
+
+        /* ==========================================
+           VIDEO
+           ========================================== */
+
+        .video-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(2,3,5,.97);
+        }
+
+        .video-overlay.activo {
+            display: flex;
+        }
+
+        .video-box {
+            position: relative;
+            width: min(1000px, 100%);
+            padding: 20px;
+            background: #0b0e12;
+            border: 1px solid rgba(255,15,112,.4);
+            box-shadow:
+                0 0 0 8px rgba(255,255,255,.015),
+                0 25px 80px rgba(0,0,0,.8),
+                0 0 45px rgba(255,15,112,.08);
+        }
+
+        .video-box h2 {
+            margin: 5px 0 18px;
+            color: white;
+            font-size: clamp(24px, 4vw, 40px);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .video-box h2::before {
+            content: "> ";
+            color: var(--pink);
+        }
+
+        .video-box video {
+            display: block;
+            width: 100%;
+            max-height: 70vh;
+            background: #000;
+            border: 1px solid #292d33;
+        }
+
+        .cerrar-video {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid #343941;
+            background: rgba(0,0,0,.7);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2;
+            transition: .2s ease;
+        }
+
+        .cerrar-video:hover {
+            border-color: var(--pink);
+            color: var(--pink);
+        }
+
+        /* ==========================================
+           PIE
+           ========================================== */
+
         footer {
             position: relative;
             background: #06070a;
@@ -325,7 +755,12 @@
             color: var(--pink);
         }
 
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+
         @media (max-width: 800px) {
+
             header {
                 min-height: 42vh;
             }
@@ -339,12 +774,23 @@
                 max-width: 500px;
             }
 
-            .galeria a {
-                min-height: 65px;
+            .especiales-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .galeria a,
+            .pagina-bloqueada {
+                min-height: 80px;
+            }
+
+            .quiz-box {
+                padding: 30px 22px;
             }
         }
 
         @media (max-width: 500px) {
+
             header {
                 padding-left: 25px;
                 padding-right: 25px;
@@ -366,13 +812,55 @@
             .portada img {
                 width: 94%;
             }
+
+            .quiz-overlay {
+                padding: 12px;
+                align-items: flex-start;
+            }
+
+            .quiz-box {
+                margin-top: 10px;
+                padding: 30px 17px;
+            }
+
+            .pregunta {
+                padding: 17px 13px;
+            }
+
+            .pregunta-titulo {
+                font-size: 14px;
+            }
+
+            .opcion-contenido {
+                font-size: 11px;
+                padding: 12px;
+            }
+
+            .quiz-botones {
+                flex-direction: column;
+            }
+
+            .btn-cerrar {
+                order: 2;
+            }
+
+            .video-overlay {
+                padding: 8px;
+            }
+
+            .video-box {
+                padding: 12px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- 1. TÍTULO -->
+    <!-- ==========================================
+         1. TÍTULO
+         ========================================== -->
+
     <header>
         <div class="eyebrow">Inicioooo</div>
         <h1>Migajitas<br>en página</h1>
@@ -381,32 +869,632 @@
 
     <p class="texto-centro">Slow Summer Eve</p>
 
-    <!-- 2. AUDIO -->
+
+    <!-- ==========================================
+         2. AUDIO
+         ========================================== -->
+
     <section class="audio-section">
+
         <audio controls>
             <source src="slow.mp3" type="audio/mpeg">
         </audio>
+
     </section>
 
-    <!-- 3. PORTADA -->
+
+    <!-- ==========================================
+         3. PORTADA
+         ========================================== -->
+
     <section class="portada">
+
         <img src="banne.jpg" alt="Imagen de portada">
+
     </section>
 
-    <!-- 4. APARTADO DE PÁGINAS -->
+
+    <!-- ==========================================
+         4. GALERÍA / PÁGINAS
+         ========================================== -->
+
     <section class="paginas">
+
         <h2>Galería / Páginas</h2>
+
         <div class="galeria">
-            <a href="gale.html">📸 Galería de fotitos</a>
-            <a href="gale1.html">🎥 Galería de videos</a>
-            <a href="poe.html">💌 Carta</a>
+
+            <!-- GALERÍA DE FOTITOS BLOQUEADA -->
+
+            <div class="pagina-bloqueada">
+
+                📸 Galería de fotitos
+
+                <span class="estado">
+                    🔒 EN PROCESO DE CREACIÓN
+                </span>
+
+            </div>
+
+
+            <!-- GALERÍA DE VIDEOS BLOQUEADA -->
+
+            <div class="pagina-bloqueada">
+
+                🎥 Galería de videos
+
+                <span class="estado">
+                    🔒 EN PROCESO DE CREACIÓN
+                </span>
+
+            </div>
+
+
+            <!-- CARTA BLOQUEADA -->
+
+            <div class="pagina-bloqueada">
+
+                💌 Carta
+
+                <span class="estado">
+                    🔒 EN PROCESO DE CREACIÓN
+                </span>
+
+            </div>
+
         </div>
+
     </section>
 
-    <!-- 5. PIE DE PÁGINA -->
+
+    <!-- ==========================================
+         5. COSITAS ESPECIALES
+         ========================================== -->
+
+    <section class="especiales">
+
+        <h2>Cositas Especiales</h2>
+
+        <p class="especiales-subtitulo">
+            > Algunos recuerdos necesitan una pequeña prueba para ser desbloqueados...
+        </p>
+
+
+        <div class="especiales-grid">
+
+
+            <!-- ==================================
+                 MELANCOLÍA — ACTIVA
+                 ================================== -->
+
+            <div class="especial-card">
+
+                <div class="especial-icono">
+                    🎵
+                </div>
+
+                <h3>
+                    Melancolía
+                </h3>
+
+                <p>
+                    Un recuerdo especial esperando ser desbloqueado.
+                </p>
+
+                <button
+                    class="btn-especial"
+                    onclick="abrirQuizMelancolia()">
+
+                    🔒 DESBLOQUEAR
+
+                </button>
+
+            </div>
+
+
+            <!-- ==================================
+                 QUEMA — BLOQUEADO
+                 ================================== -->
+
+            <div class="especial-card proceso">
+
+                <div class="especial-icono">
+                    🔥
+                </div>
+
+                <h3>
+                    Quema
+                </h3>
+
+                <p>
+                    Este apartado todavía está siendo preparado...
+                </p>
+
+                <div class="proceso-tag">
+                    ⏳ EN PROCESO DE CREACIÓN
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         6. FORMULARIO MELANCOLÍA
+         ========================================== -->
+
+    <div
+        class="quiz-overlay"
+        id="quizMelancoliaOverlay">
+
+
+        <div class="quiz-box">
+
+            <div class="quiz-label">
+                Acceso / Melancolía
+            </div>
+
+
+            <h2>
+                Antes de ver...
+            </h2>
+
+
+            <p class="quiz-subtitle">
+                > Responde correctamente para desbloquear este recuerdo.
+            </p>
+
+
+            <form id="quizMelancoliaForm">
+
+
+                <div class="pregunta">
+
+                    <span class="pregunta-titulo">
+
+                        <span class="pregunta-numero">
+                            01 //
+                        </span>
+
+                        ¿En qué momentos Matías piensa más en la Maite?
+
+                    </span>
+
+
+                    <label class="opcion">
+
+                        <input
+                            type="radio"
+                            name="melancolia1"
+                            value="a">
+
+                        <span class="opcion-contenido">
+
+                            A) Cuando ve la cajita con recuerdos
+
+                        </span>
+
+                    </label>
+
+
+                    <label class="opcion">
+
+                        <input
+                            type="radio"
+                            name="melancolia1"
+                            value="b">
+
+                        <span class="opcion-contenido">
+
+                            B) Cuando la topa en el liceo
+
+                        </span>
+
+                    </label>
+
+
+                    <label class="opcion">
+
+                        <input
+                            type="radio"
+                            name="melancolia1"
+                            value="c">
+
+                        <span class="opcion-contenido">
+
+                            C) Cuando escucha música
+
+                        </span>
+
+                    </label>
+
+
+                    <label class="opcion">
+
+                        <input
+                            type="radio"
+                            name="melancolia1"
+                            value="d">
+
+                        <span class="opcion-contenido">
+
+                            D) Cuando pasa por lugares donde ambos estuvieron
+
+                        </span>
+
+                    </label>
+
+
+                    <label class="opcion">
+
+                        <input
+                            type="radio"
+                            name="melancolia1"
+                            value="e">
+
+                        <span class="opcion-contenido">
+
+                            E) Todas las alternativas
+
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <div
+                    id="mensajeMelancolia"
+                    class="mensaje">
+                </div>
+
+
+                <div class="quiz-botones">
+
+                    <button
+                        type="submit"
+                        class="btn-quiz">
+
+                        DESBLOQUEAR →
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn-quiz btn-cerrar"
+                        onclick="cerrarQuizMelancolia()">
+
+                        ← VOLVER
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         7. VIDEO MELANCOLÍA
+         ========================================== -->
+
+    <div
+        class="video-overlay"
+        id="videoOverlay">
+
+
+        <div class="video-box">
+
+
+            <button
+                class="cerrar-video"
+                onclick="cerrarVideo()">
+
+                ×
+
+            </button>
+
+
+            <h2>
+                Melancolía
+            </h2>
+
+
+            <video
+                id="videoMelancolia"
+                controls
+                playsinline>
+
+                <source
+                    src="Melancolía.mp4"
+                    type="video/mp4">
+
+                Tu navegador no puede reproducir este video.
+
+            </video>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         8. PIE DE PÁGINA
+         ========================================== -->
+
     <footer>
-        <p>© 2026 Actualizada - Web de Matiiii | No sale nada de aquí ehh</p>
+
+        <p>
+            © 2026 Actualizada - Web de Matiiii |
+            No sale nada de aquí ehh
+        </p>
+
     </footer>
+
+
+    <!-- ==========================================
+         9. JAVASCRIPT
+         ========================================== -->
+
+    <script>
+
+        /* ==========================================
+           MELANCOLÍA
+           ========================================== */
+
+
+        const quizMelancoliaOverlay =
+            document.getElementById(
+                "quizMelancoliaOverlay"
+            );
+
+
+        const quizMelancoliaForm =
+            document.getElementById(
+                "quizMelancoliaForm"
+            );
+
+
+        const mensajeMelancolia =
+            document.getElementById(
+                "mensajeMelancolia"
+            );
+
+
+        const videoOverlay =
+            document.getElementById(
+                "videoOverlay"
+            );
+
+
+        const videoMelancolia =
+            document.getElementById(
+                "videoMelancolia"
+            );
+
+
+        /* ==========================================
+           ABRIR CUESTIONARIO
+           ========================================== */
+
+        function abrirQuizMelancolia() {
+
+            quizMelancoliaOverlay.classList.add(
+                "activo"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+            mensajeMelancolia.className =
+                "mensaje";
+
+            mensajeMelancolia.textContent =
+                "";
+
+        }
+
+
+        /* ==========================================
+           CERRAR CUESTIONARIO
+           ========================================== */
+
+        function cerrarQuizMelancolia() {
+
+            quizMelancoliaOverlay.classList.remove(
+                "activo"
+            );
+
+            document.body.style.overflow =
+                "";
+
+            mensajeMelancolia.className =
+                "mensaje";
+
+            mensajeMelancolia.textContent =
+                "";
+
+        }
+
+
+        /* ==========================================
+           COMPROBAR RESPUESTA
+           ========================================== */
+
+        quizMelancoliaForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const seleccionada =
+                    document.querySelector(
+                        'input[name="melancolia1"]:checked'
+                    );
+
+
+                /* NO RESPONDIÓ */
+
+                if (!seleccionada) {
+
+                    mensajeMelancolia.className =
+                        "mensaje error";
+
+                    mensajeMelancolia.textContent =
+                        "✕ Primero debes seleccionar una respuesta.";
+
+                    return;
+
+                }
+
+
+                /* RESPUESTA CORRECTA */
+
+                if (
+                    seleccionada.value === "e"
+                ) {
+
+                    mensajeMelancolia.className =
+                        "mensaje exito";
+
+                    mensajeMelancolia.textContent =
+                        "✓ Acceso concedido. Parece que conoces demasiado bien a Matías... 💗";
+
+
+                    setTimeout(
+                        function() {
+
+                            cerrarQuizMelancolia();
+
+                            abrirVideo();
+
+                        },
+                        1200
+                    );
+
+                }
+
+                /* RESPUESTA INCORRECTA */
+
+                else {
+
+                    mensajeMelancolia.className =
+                        "mensaje error";
+
+                    mensajeMelancolia.textContent =
+                        "✕ Mmm... piénsalo un poquito más. La respuesta está en todos esos pequeños recuerdos 💗";
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           ABRIR VIDEO
+           ========================================== */
+
+        function abrirVideo() {
+
+            videoOverlay.classList.add(
+                "activo"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        /* ==========================================
+           CERRAR VIDEO
+           ========================================== */
+
+        function cerrarVideo() {
+
+            videoOverlay.classList.remove(
+                "activo"
+            );
+
+            videoMelancolia.pause();
+
+            videoMelancolia.currentTime = 0;
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        /* ==========================================
+           ESC PARA CERRAR
+           ========================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    if (
+                        quizMelancoliaOverlay
+                        .classList
+                        .contains("activo")
+                    ) {
+
+                        cerrarQuizMelancolia();
+
+                    }
+
+
+                    if (
+                        videoOverlay
+                        .classList
+                        .contains("activo")
+                    ) {
+
+                        cerrarVideo();
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           CERRAR VIDEO HACIENDO CLICK AFUERA
+           ========================================== */
+
+        videoOverlay.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    videoOverlay
+                ) {
+
+                    cerrarVideo();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
+```
