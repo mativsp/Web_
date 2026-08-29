@@ -1,1500 +1,539 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Momentos Bonitos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
-
-        * {
-            box-sizing: border-box;
-        }
-
-        :root {
-            --pink: #ff0f70;
-            --pink-soft: #ff3d8d;
-            --cyan: #00eaff;
-            --bg: #08090c;
-            --panel: #0d1014;
-            --text: #eeeeee;
-            --muted: #777c84;
-            --line: rgba(255,255,255,.10);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(255,15,112,.11), transparent 28%),
-                radial-gradient(circle at 90% 60%, rgba(0,234,255,.055), transparent 30%),
-                var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 100;
-            opacity: .09;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0,
-                transparent 3px,
-                rgba(255,255,255,.18) 4px
-            );
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 99;
-            opacity: .025;
-            background-image: radial-gradient(
-                rgba(255,255,255,.8) .5px,
-                transparent .5px
-            );
-            background-size: 4px 4px;
-        }
-
-        /* ==========================================
-           DECORACIÓN
-           ========================================== */
-
-        header::before,
-        header::after,
-        .audio-section::before,
-        .audio-section::after {
-            content: "";
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-color: var(--pink);
-            opacity: .8;
-        }
-
-        header::before {
-            top: 25px;
-            left: 25px;
-            border-top: 1px solid;
-            border-left: 1px solid;
-        }
-
-        header::after {
-            top: 25px;
-            right: 25px;
-            border-top: 1px solid;
-            border-right: 1px solid;
-        }
-
-        /* ==========================================
-           TÍTULO
-           ========================================== */
-
-        header {
-            position: relative;
-            min-height: 48vh;
-            padding: clamp(55px, 8vw, 110px) 25px 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-            border-bottom: 1px solid var(--line);
-            overflow: hidden;
-        }
-
-        header .eyebrow {
-            font: 700 12px "JetBrains Mono", monospace;
-            letter-spacing: 5px;
-            color: var(--pink);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        header .eyebrow::before {
-            content: "// ";
-            color: var(--cyan);
-        }
-
-        header h1 {
-            margin: 0;
-            max-width: 950px;
-            font-size: clamp(55px, 10vw, 145px);
-            line-height: .82;
-            letter-spacing: -6px;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 0 rgba(255,255,255,.06);
-        }
-
-        header p {
-            margin: 30px 0 0;
-            color: #777c84;
-            font: 13px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-        }
-
-        header p::before {
-            content: "> ";
-            color: var(--pink);
-        }
-
-        /* ==========================================
-           TEXTO CENTRADO
-           ========================================== */
-
-        .texto-centro {
-            position: relative;
-            margin: 0;
-            padding: 28px 20px;
-            text-align: center;
-            color: #9a9da5;
-            font: italic 14px "JetBrains Mono", monospace;
-            letter-spacing: 3px;
-            border-bottom: 1px solid var(--line);
-            background: rgba(255,255,255,.012);
-        }
-
-        .texto-centro::before,
-        .texto-centro::after {
-            content: "—";
-            color: var(--pink);
-            margin: 0 14px;
-        }
-
-        /* ==========================================
-           AUDIO
-           ========================================== */
-
-        .audio-section {
-            position: relative;
-            padding: 55px 20px;
-            text-align: center;
-            background: rgba(255,255,255,.015);
-            border-bottom: 1px solid var(--line);
-        }
-
-        .audio-section::before {
-            bottom: 25px;
-            left: 25px;
-            border-bottom: 1px solid;
-            border-left: 1px solid;
-        }
-
-        .audio-section::after {
-            bottom: 25px;
-            right: 25px;
-            border-bottom: 1px solid;
-            border-right: 1px solid;
-        }
-
-        audio {
-            width: min(80%, 600px);
-            filter: sepia(1) saturate(3) hue-rotate(290deg);
-            opacity: .85;
-        }
-
-        /* ==========================================
-           PORTADA
-           ========================================== */
-
-        .portada {
-            position: relative;
-            padding: clamp(45px, 7vw, 90px) 20px;
-            background:
-                linear-gradient(rgba(255,15,112,.025), rgba(0,234,255,.015));
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .portada::before {
-            content: "ARCHIVO / VISUAL";
-            display: block;
-            width: min(90%, 1000px);
-            margin: 0 auto 18px;
-            text-align: left;
-            color: var(--pink);
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 4px;
-        }
-
-        .portada img {
-            display: block;
-            width: 90%;
-            max-width: 1000px;
-            height: auto;
-            margin: auto;
-            border: 1px solid rgba(255,15,112,.35);
-            border-radius: 0;
-            box-shadow:
-                0 0 0 8px rgba(255,255,255,.015),
-                0 25px 70px rgba(0,0,0,.55),
-                0 0 35px rgba(255,15,112,.08);
-        }
-
-        /* ==========================================
-           PÁGINAS
-           ========================================== */
-
-        .paginas {
-            position: relative;
-            padding: clamp(55px, 8vw, 100px) 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .paginas h2 {
-            margin: 0 0 35px;
-            color: #eee;
-            font-size: clamp(25px, 4vw, 42px);
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }
-
-        .paginas h2::before {
-            content: "> ";
-            color: var(--pink);
-            font-family: "JetBrains Mono", monospace;
-        }
-
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 15px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        /* ==========================================
-           BOTONES BLOQUEADOS
-           ========================================== */
-
-        .pagina-bloqueada {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 110px;
-            padding: 20px;
-            border: 1px solid #292d33;
-            border-left: 2px solid #444950;
-            background: #0b0e12;
-            color: #555b63;
-            font: 600 12px "JetBrains Mono", monospace;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: not-allowed;
-            user-select: none;
-            overflow: hidden;
-        }
-
-        .pagina-bloqueada::before {
-            content: "🔒";
-            font-size: 20px;
-            margin-bottom: 9px;
-            filter: grayscale(1);
-            opacity: .65;
-        }
-
-        .pagina-bloqueada .estado {
-            margin-top: 8px;
-            color: #555b63;
-            font-size: 9px;
-            letter-spacing: 2px;
-        }
-
-        .pagina-bloqueada::after {
-            content: "EN PROCESO";
-            position: absolute;
-            top: 9px;
-            right: 12px;
-            color: #3d4249;
-            font-size: 8px;
-            letter-spacing: 1px;
-        }
-
-        /* ==========================================
-           COSITAS ESPECIALES
-           ========================================== */
-
-        .especiales {
-            position: relative;
-            padding: clamp(60px, 8vw, 100px) 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-            background:
-                radial-gradient(circle at 20% 50%, rgba(255,15,112,.045), transparent 35%),
-                radial-gradient(circle at 80% 50%, rgba(0,234,255,.035), transparent 35%);
-        }
-
-        .especiales h2 {
-            margin: 0 0 12px;
-            color: #eee;
-            font-size: clamp(25px, 4vw, 42px);
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }
-
-        .especiales h2::before {
-            content: "> ";
-            color: var(--pink);
-            font-family: "JetBrains Mono", monospace;
-        }
-
-        .especiales-subtitulo {
-            margin: 0 auto 40px;
-            color: var(--muted);
-            font: 12px "JetBrains Mono", monospace;
-            letter-spacing: 1px;
-        }
-
-        .especiales-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .especial-card {
-            position: relative;
-            min-height: 180px;
-            padding: 30px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #292d33;
-            border-left: 2px solid var(--pink);
-            background: #0b0e12;
-            overflow: hidden;
-            transition: .25s ease;
-        }
-
-        .especial-card:hover {
-            border-color: rgba(255,15,112,.6);
-            box-shadow: 0 15px 40px rgba(255,15,112,.08);
-            transform: translateY(-3px);
-        }
-
-        .especial-icono {
-            font-size: 30px;
-            margin-bottom: 12px;
-        }
-
-        .especial-card h3 {
-            margin: 0 0 8px;
-            font-size: 19px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .especial-card p {
-            margin: 0;
-            color: var(--muted);
-            font: 11px "JetBrains Mono", monospace;
-            line-height: 1.6;
-        }
-
-        .btn-especial {
-            width: 100%;
-            margin-top: 20px;
-            padding: 15px 18px;
-            border: 1px solid var(--pink);
-            background: rgba(255,15,112,.07);
-            color: white;
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: .25s ease;
-        }
-
-        .btn-especial:hover {
-            background: var(--pink);
-            box-shadow: 0 0 25px rgba(255,15,112,.22);
-            transform: translateY(-2px);
-        }
-
-        .especial-card.proceso {
-            border-left-color: #555b63;
-            opacity: .72;
-        }
-
-        .especial-card.proceso:hover {
-            transform: none;
-            border-color: #555b63;
-            box-shadow: none;
-        }
-
-        .proceso-tag {
-            display: inline-block;
-            margin-top: 18px;
-            padding: 8px 13px;
-            border: 1px solid #343941;
-            color: #777c84;
-            font: 700 10px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* ==========================================
-           FORMULARIOS
-           ========================================== */
-
-        .quiz-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 25px;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(255,15,112,.12), transparent 30%),
-                radial-gradient(circle at 80% 80%, rgba(0,234,255,.08), transparent 30%),
-                rgba(4,5,8,.97);
-            overflow-y: auto;
-        }
-
-        .quiz-overlay.activo {
-            display: flex;
-        }
-
-        .quiz-box {
-            position: relative;
-            width: min(900px, 100%);
-            margin: auto;
-            padding: clamp(30px, 5vw, 55px);
-            background: #0b0e12;
-            border: 1px solid rgba(255,15,112,.4);
-            box-shadow:
-                0 0 0 8px rgba(255,255,255,.015),
-                0 25px 80px rgba(0,0,0,.7),
-                0 0 45px rgba(255,15,112,.08);
-        }
-
-        .quiz-box::before,
-        .quiz-box::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-color: var(--pink);
-        }
-
-        .quiz-box::before {
-            top: 18px;
-            left: 18px;
-            border-top: 1px solid;
-            border-left: 1px solid;
-        }
-
-        .quiz-box::after {
-            bottom: 18px;
-            right: 18px;
-            border-bottom: 1px solid;
-            border-right: 1px solid;
-        }
-
-        .quiz-label {
-            color: var(--pink);
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .quiz-label::before {
-            content: "// ";
-            color: var(--cyan);
-        }
-
-        .quiz-box h2 {
-            margin: 0 0 10px;
-            font-size: clamp(28px, 5vw, 48px);
-            line-height: 1;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .quiz-subtitle {
-            color: var(--muted);
-            font: 12px "JetBrains Mono", monospace;
-            margin: 0 0 35px;
-        }
-
-        .pregunta {
-            margin-bottom: 30px;
-            padding: 22px;
-            background: rgba(255,255,255,.018);
-            border: 1px solid #252a30;
-            border-left: 2px solid var(--pink);
-        }
-
-        .pregunta-titulo {
-            display: block;
-            margin-bottom: 17px;
-            color: #eeeeee;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-
-        .pregunta-numero {
-            color: var(--pink);
-            font-family: "JetBrains Mono", monospace;
-            margin-right: 8px;
-        }
-
-        .opcion {
-            display: block;
-            position: relative;
-            margin: 9px 0;
-            cursor: pointer;
-        }
-
-        .opcion input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .opcion-contenido {
-            display: block;
-            padding: 13px 16px;
-            border: 1px solid #292d33;
-            background: #090b0e;
-            color: #aeb2b9;
-            font: 12px "JetBrains Mono", monospace;
-            transition: .2s ease;
-        }
-
-        .opcion-contenido:hover {
-            border-color: var(--cyan);
-            color: white;
-            background: rgba(0,234,255,.035);
-        }
-
-        .opcion input:checked + .opcion-contenido {
-            border-color: var(--pink);
-            color: white;
-            background: rgba(255,15,112,.10);
-            box-shadow: inset 3px 0 0 var(--pink);
-        }
-
-        .quiz-botones {
-            display: flex;
-            gap: 12px;
-            margin-top: 35px;
-        }
-
-        .btn-quiz {
-            flex: 1;
-            padding: 17px 20px;
-            border: 1px solid var(--pink);
-            background: rgba(255,15,112,.08);
-            color: white;
-            font: 700 12px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: .25s ease;
-        }
-
-        .btn-quiz:hover {
-            background: var(--pink);
-            box-shadow: 0 0 25px rgba(255,15,112,.25);
-            transform: translateY(-2px);
-        }
-
-        .btn-cerrar {
-            flex: 0 0 auto;
-            border-color: #343941;
-            background: rgba(255,255,255,.02);
-            color: #858a92;
-        }
-
-        .btn-cerrar:hover {
-            background: rgba(255,255,255,.07);
-            border-color: #777;
-            box-shadow: none;
-        }
-
-        .mensaje {
-            display: none;
-            margin-top: 25px;
-            padding: 17px;
-            border: 1px solid;
-            text-align: center;
-            font: 600 12px "JetBrains Mono", monospace;
-            line-height: 1.6;
-        }
-
-        .mensaje.error {
-            display: block;
-            color: #ff6b9f;
-            border-color: rgba(255,15,112,.45);
-            background: rgba(255,15,112,.06);
-        }
-
-        .mensaje.exito {
-            display: block;
-            color: var(--cyan);
-            border-color: rgba(0,234,255,.4);
-            background: rgba(0,234,255,.05);
-        }
-
-        /* ==========================================
-           VIDEO
-           ========================================== */
-
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 300;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(2,3,5,.97);
-        }
-
-        .video-overlay.activo {
-            display: flex;
-        }
-
-        .video-box {
-            position: relative;
-            width: min(1000px, 100%);
-            padding: 20px;
-            background: #0b0e12;
-            border: 1px solid rgba(255,15,112,.4);
-            box-shadow:
-                0 0 0 8px rgba(255,255,255,.015),
-                0 25px 80px rgba(0,0,0,.8),
-                0 0 45px rgba(255,15,112,.08);
-        }
-
-        .video-box h2 {
-            margin: 5px 0 18px;
-            color: white;
-            font-size: clamp(24px, 4vw, 40px);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .video-box h2::before {
-            content: "> ";
-            color: var(--pink);
-        }
-
-        .video-box video {
-            display: block;
-            width: 100%;
-            max-height: 70vh;
-            background: #000;
-            border: 1px solid #292d33;
-        }
-
-        .cerrar-video {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 38px;
-            height: 38px;
-            border: 1px solid #343941;
-            background: rgba(0,0,0,.7);
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 2;
-            transition: .2s ease;
-        }
-
-        .cerrar-video:hover {
-            border-color: var(--pink);
-            color: var(--pink);
-        }
-
-        /* ==========================================
-           PIE
-           ========================================== */
-
-        footer {
-            position: relative;
-            background: #06070a;
-            color: #50545b;
-            text-align: center;
-            padding: 35px 20px;
-            font: 10px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        footer::before {
-            content: "// conexión Establecida";
-            display: block;
-            margin-bottom: 12px;
-            color: var(--pink);
-        }
-
-        /* ==========================================
-           RESPONSIVE
-           ========================================== */
-
-        @media (max-width: 800px) {
-
-            header {
-                min-height: 42vh;
-            }
-
-            header h1 {
-                letter-spacing: -3px;
-            }
-
-            .galeria {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .especiales-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .galeria a,
-            .pagina-bloqueada {
-                min-height: 80px;
-            }
-
-            .quiz-box {
-                padding: 30px 22px;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            header {
-                padding-left: 25px;
-                padding-right: 25px;
-            }
-
-            header h1 {
-                font-size: clamp(48px, 16vw, 75px);
-            }
-
-            .texto-centro::before,
-            .texto-centro::after {
-                display: none;
-            }
-
-            audio {
-                width: 100%;
-            }
-
-            .portada img {
-                width: 94%;
-            }
-
-            .quiz-overlay {
-                padding: 12px;
-                align-items: flex-start;
-            }
-
-            .quiz-box {
-                margin-top: 10px;
-                padding: 30px 17px;
-            }
-
-            .pregunta {
-                padding: 17px 13px;
-            }
-
-            .pregunta-titulo {
-                font-size: 14px;
-            }
-
-            .opcion-contenido {
-                font-size: 11px;
-                padding: 12px;
-            }
-
-            .quiz-botones {
-                flex-direction: column;
-            }
-
-            .btn-cerrar {
-                order: 2;
-            }
-
-            .video-overlay {
-                padding: 8px;
-            }
-
-            .video-box {
-                padding: 12px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso restringido</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+
+      
+    }
+
+    :root {
+      --pink: #ff0f70;
+      --pink-dark: #a8074b;
+      --cyan: #00eaff;
+      --bg: #08090c;
+      --panel: #0d1014;
+      --text: #e8e8e8;
+      --muted: #777b83;
+      --line: rgba(255, 255, 255, 0.10);
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 15, 112, 0.12), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(0, 234, 255, 0.06), transparent 30%),
+        var(--bg);
+      font-family: "Space Grotesk", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Líneas de pantalla */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      opacity: .10;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        rgba(255,255,255,.16) 4px
+      );
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+      z-index: 19;
+      background-image:
+        radial-gradient(rgba(255,255,255,.8) .5px, transparent .5px);
+      background-size: 4px 4px;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      position: relative;
+    }
+
+    /* Barra lateral decorativa */
+    .page::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--pink),
+        var(--pink),
+        transparent
+      );
+      box-shadow: 0 0 18px rgba(255,15,112,.6);
+    }
+
+    .intro {
+      padding: clamp(42px, 7vw, 100px) clamp(30px, 8vw, 150px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .tag {
+      font: 700 13px "JetBrains Mono", monospace;
+      letter-spacing: 5px;
+      color: var(--pink);
+      margin-bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-transform: uppercase;
+    }
+
+    .tag::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: var(--pink);
+      box-shadow: 0 0 10px var(--pink);
+    }
+
+    h1 {
+      font-size: clamp(58px, 7vw, 120px);
+      line-height: .82;
+      letter-spacing: -5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      max-width: 760px;
+      text-shadow: 2px 2px 0 rgba(255,255,255,.12);
+    }
+
+    h1 span {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.55);
+    }
+
+    .description {
+      margin-top: 38px;
+      max-width: 600px;
+      color: #9a9da5;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .description strong {
+      color: var(--pink);
+      font-weight: 700;
+    }
+
+    .terminal {
+      margin-top: 44px;
+      color: #5f646d;
+      font: 13px/2 "JetBrains Mono", monospace;
+    }
+
+    .terminal div::first-letter {
+      color: var(--pink);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 14px;
+      background: var(--cyan);
+      vertical-align: middle;
+      animation: blink 1s steps(1) infinite;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .form-area {
+      padding: clamp(40px, 7vw, 100px) clamp(30px, 7vw, 110px);
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 560px;
+      margin: auto;
+    }
+
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 32px;
+    }
+
+    .form-header h2 {
+      font: 700 14px "JetBrains Mono", monospace;
+      letter-spacing: 4px;
+      color: var(--pink);
+      text-transform: uppercase;
+    }
+
+    .id {
+      font: 11px "JetBrains Mono", monospace;
+      color: #50545b;
+    }
+
+    .field {
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font: 11px "JetBrains Mono", monospace;
+      letter-spacing: 2px;
+      color: #747981;
+      text-transform: uppercase;
+      margin-bottom: 11px;
+    }
+
+    label::before {
+      content: "> ";
+      color: var(--pink);
+    }
+
+    textarea,
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      color: #ddd;
+      background: transparent;
+      border-bottom: 1px solid #2a2d32;
+      padding: 12px 0 15px;
+      font: 16px "JetBrains Mono", monospace;
+      transition: .25s ease;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    textarea:focus,
+    input:focus {
+      border-bottom-color: var(--pink);
+      box-shadow: 0 5px 15px -10px var(--pink);
+    }
+
+    textarea::placeholder,
+    input::placeholder {
+      color: #44484f;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap::after {
+      content: "DD-MM-YYYY";
+      position: absolute;
+      right: 0;
+      bottom: 17px;
+      color: #34373c;
+      font: 10px "JetBrains Mono", monospace;
+      pointer-events: none;
+    }
+
+    #password {
+      letter-spacing: 3px;
+      padding-right: 100px;
+    }
+
+    .hint {
+      margin-top: 9px;
+      color: #4e5259;
+      font: 10px "JetBrains Mono", monospace;
+    }
+
+    button {
+      width: 100%;
+      border: 1px solid var(--pink);
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          #ff176f 0,
+          #ff176f 2px,
+          #e70d61 3px,
+          #ff176f 4px
+        );
+      color: white;
+      padding: 21px 20px;
+      font: 700 13px "JetBrains Mono", monospace;
+      letter-spacing: 4px;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 0 25px rgba(255,15,112,.12);
+      transition: .2s ease;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(255,15,112,.28);
+      filter: brightness(1.15);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 18px;
+      font: 11px "JetBrains Mono", monospace;
+      letter-spacing: 1px;
+    }
+
+    .error {
+      color: var(--pink);
+    }
+
+    .success {
+      color: var(--cyan);
+    }
+
+    .success-screen {
+      display: none;
+      margin-top: 25px;
+      border: 1px solid rgba(0,234,255,.35);
+      padding: 28px;
+      background: rgba(0,234,255,.025);
+    }
+
+    .success-screen h3 {
+      color: var(--cyan);
+      font: 700 15px "JetBrains Mono", monospace;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+
+    .success-screen p {
+      color: #858a92;
+      font: 13px/1.7 "JetBrains Mono", monospace;
+    }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: #3d4147;
+      font: 9px "JetBrains Mono", monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .corner {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-color: var(--pink);
+      opacity: .65;
+    }
+
+    .corner.tl { top: 25px; left: 25px; border-top: 1px solid; border-left: 1px solid; }
+    .corner.tr { top: 25px; right: 25px; border-top: 1px solid; border-right: 1px solid; }
+    .corner.bl { bottom: 25px; left: 25px; border-bottom: 1px solid; border-left: 1px solid; }
+    .corner.br { bottom: 25px; right: 25px; border-bottom: 1px solid; border-right: 1px solid; }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .page::after {
+        display: none;
+      }
+
+      .intro {
+        padding-bottom: 35px;
+      }
+
+      .form-area {
+        padding-top: 20px;
+      }
+
+      h1 {
+        font-size: clamp(52px, 14vw, 90px);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .intro,
+      .form-area {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .description {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="noise"></div>
 
-    <!-- ==========================================
-         1. TÍTULO
-         ========================================== -->
+  <main class="page">
+    <section class="intro">
+      <div class="corner tl"></div>
+      <div class="corner bl"></div>
 
-    <header>
-        <div class="eyebrow">Inicioooo</div>
-        <h1>Migajitas<br>en página</h1>
-        <p>Mish</p>
-    </header>
+      <div class="tag">Inicia Sesion pe</div>
 
-    <p class="texto-centro">Slow Summer Eve</p>
+      <h1>
+        ACCESO<br>
+        <span>SOLO</span><br>
+        AUTORIZADO.
+      </h1>
 
+      <p class="description">
+        Hay información esperando detrás de esta pantalla.
+        <strong>Matías tiene sus mayores migajeadas aqui</strong> si te sabes una fecha importante puedes entrar demuestra que tienes
+        autorización para continuar.
+      </p>
 
-    <!-- ==========================================
-         2. AUDIO
-         ========================================== -->
-
-    <section class="audio-section">
-
-        <audio controls>
-            <source src="slow.mp3" type="audio/mpeg">
-        </audio>
-
+      <div class="terminal">
+        <div>// conexión establecida apenas wajaa</div>
+        <div>// canal cifrado :: achetemeele</div>
+        <div>// sistema :: aveces</div>
+        <div>// usuario :: Sepa dios</div>
+        <div>// estado :: en espera <span class="cursor"></span></div>
+      </div>
     </section>
 
+    <section class="form-area">
+      <div class="corner tr"></div>
+      <div class="corner br"></div>
 
-    <!-- ==========================================
-         3. PORTADA
-         ========================================== -->
-
-    <section class="portada">
-
-        <img src="banne.jpg" alt="Imagen de portada">
-
-    </section>
-
-
-    <!-- ==========================================
-         4. GALERÍA / PÁGINAS
-         ========================================== -->
-
-    <section class="paginas">
-
-        <h2>Galería / Páginas Mañana 10pm</h2>
-
-        <div class="galeria">
-
-            <!-- GALERÍA DE FOTITOS BLOQUEADA -->
-
-            <div class="pagina-bloqueada">
-
-                📸 Galería de fotitos
-
-                <span class="estado">
-                    🔒 EN PROCESO DE CREACIÓN
-                </span>
-
-            </div>
-
-
-            <!-- GALERÍA DE VIDEOS BLOQUEADA -->
-
-            <div class="pagina-bloqueada">
-
-                🎥 Galería de videos
-
-                <span class="estado">
-                    🔒 EN PROCESO DE CREACIÓN
-                </span>
-
-            </div>
-
-
-            <!-- CARTA BLOQUEADA -->
-
-            <div class="pagina-bloqueada">
-
-                💌 Carta
-
-                <span class="estado">
-                    🔒 EN PROCESO DE CREACIÓN
-                </span>
-
-            </div>
-
+      <div class="form-box">
+        <div class="form-header">
+          <h2>Tus datos</h2>
+          <span class="id">ID Matí</span>
         </div>
 
-    </section>
+        <form id="accessForm" autocomplete="off">
+          <div class="field">
+            <label for="password">Contraseña de acceso</label>
 
-
-    <!-- ==========================================
-         5. COSITAS ESPECIALES
-         ========================================== -->
-
-    <section class="especiales">
-
-        <h2>Cositas Especiales</h2>
-
-        <p class="especiales-subtitulo">
-            > Algunos recuerdos necesitan una pequeña prueba para ser desbloqueados...
-        </p>
-
-
-        <div class="especiales-grid">
-
-
-            <!-- ==================================
-                 MELANCOLÍA — ACTIVA
-                 ================================== -->
-
-            <div class="especial-card">
-
-                <div class="especial-icono">
-                    🎵
-                </div>
-
-                <h3>
-                    Melancolía
-                </h3>
-
-                <p>
-                    Un recuerdo especial esperando ser desbloqueado.
-                </p>
-
-                <button
-                    class="btn-especial"
-                    onclick="abrirQuizMelancolia()">
-
-                    🔒 DESBLOQUEAR
-
-                </button>
-
+            <div class="password-wrap">
+              <input
+                id="password"
+                type="text"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="00-00-0000"
+                autocomplete="off"
+                required
+              >
             </div>
 
-
-            <!-- ==================================
-                 QUEMA — BLOQUEADO
-                 ================================== -->
-
-            <div class="especial-card proceso">
-
-                <div class="especial-icono">
-                    🔥
-                </div>
-
-                <h3>
-                    Quema
-                </h3>
-
-                <p>
-                    Este apartado todavía está siendo preparado...
-                </p>
-
-                <div class="proceso-tag">
-                    ⏳ EN PROCESO DE CREACIÓN
-                </div>
-
+            <div class="hint">
+              // SOLO NÚMEROS · FORMATO AUTOMÁTICO DD-MM-YYYY
             </div>
+          </div>
 
-        </div>
+          <button type="submit">Verificar acceso</button>
 
-    </section>
+          <div id="status" class="status"></div>
 
-
-    <!-- ==========================================
-         6. FORMULARIO MELANCOLÍA
-         ========================================== -->
-
-    <div
-        class="quiz-overlay"
-        id="quizMelancoliaOverlay">
-
-
-        <div class="quiz-box">
-
-            <div class="quiz-label">
-                Acceso / Melancolía
-            </div>
-
-
-            <h2>
-                Antes de ver...
-            </h2>
-
-
-            <p class="quiz-subtitle">
-                > Responde correctamente para desbloquear este recuerdo.
+          <div id="successScreen" class="success-screen">
+            <h3>✓ ACCESO CONCEDIDO</h3>
+            <p>
+              Credenciales verificadas correctamente.<br>
+              El canal privado ha sido desbloqueado.
             </p>
+          </div>
+        </form>
 
-
-            <form id="quizMelancoliaForm">
-
-
-                <div class="pregunta">
-
-                    <span class="pregunta-titulo">
-
-                        <span class="pregunta-numero">
-                            01 //
-                        </span>
-
-                        ¿En qué momentos Matías piensa más en la Maite?
-
-                    </span>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="melancolia1"
-                            value="a">
-
-                        <span class="opcion-contenido">
-
-                            A) Cuando ve la cajita con recuerdos
-
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="melancolia1"
-                            value="b">
-
-                        <span class="opcion-contenido">
-
-                            B) Cuando la topa en el liceo
-
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="melancolia1"
-                            value="c">
-
-                        <span class="opcion-contenido">
-
-                            C) Cuando escucha música
-
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="melancolia1"
-                            value="d">
-
-                        <span class="opcion-contenido">
-
-                            D) Cuando pasa por lugares donde ambos estuvieron
-
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="melancolia1"
-                            value="e">
-
-                        <span class="opcion-contenido">
-
-                            E) Todas las alternativas
-
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-                <div
-                    id="mensajeMelancolia"
-                    class="mensaje">
-                </div>
-
-
-                <div class="quiz-botones">
-
-                    <button
-                        type="submit"
-                        class="btn-quiz">
-
-                        DESBLOQUEAR →
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn-quiz btn-cerrar"
-                        onclick="cerrarQuizMelancolia()">
-
-                        ← VOLVER
-
-                    </button>
-
-                </div>
-
-
-            </form>
-
+        <div class="footer">
+          conexión segura · datos procesados localmente
         </div>
-
-    </div>
-
-
-    <!-- ==========================================
-         7. VIDEO MELANCOLÍA
-         ========================================== -->
-
-    <div
-        class="video-overlay"
-        id="videoOverlay">
-
-
-        <div class="video-box">
-
-
-            <button
-                class="cerrar-video"
-                onclick="cerrarVideo()">
-
-                ×
-
-            </button>
-
-
-            <h2>
-                Melancolía
-            </h2>
-
-
-            <video
-                id="videoMelancolia"
-                controls
-                playsinline>
-
-                <source
-                    src="Melancolía.mp4"
-                    type="video/mp4">
-
-                Tu navegador no puede reproducir este video.
-
-            </video>
-
-        </div>
-
-    </div>
-
-
-    <!-- ==========================================
-         8. PIE DE PÁGINA
-         ========================================== -->
-
-    <footer>
-
-        <p>
-            © 2026 Actualizada - Web de Matiiii |
-            No sale nada de aquí ehh
-        </p>
-
-    </footer>
-
-
-    <!-- ==========================================
-         9. JAVASCRIPT
-         ========================================== -->
-
-    <script>
-
-        /* ==========================================
-           MELANCOLÍA
-           ========================================== */
-
-
-        const quizMelancoliaOverlay =
-            document.getElementById(
-                "quizMelancoliaOverlay"
-            );
-
-
-        const quizMelancoliaForm =
-            document.getElementById(
-                "quizMelancoliaForm"
-            );
-
-
-        const mensajeMelancolia =
-            document.getElementById(
-                "mensajeMelancolia"
-            );
-
-
-        const videoOverlay =
-            document.getElementById(
-                "videoOverlay"
-            );
-
-
-        const videoMelancolia =
-            document.getElementById(
-                "videoMelancolia"
-            );
-
-
-        /* ==========================================
-           ABRIR CUESTIONARIO
-           ========================================== */
-
-        function abrirQuizMelancolia() {
-
-            quizMelancoliaOverlay.classList.add(
-                "activo"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-            mensajeMelancolia.className =
-                "mensaje";
-
-            mensajeMelancolia.textContent =
-                "";
-
-        }
-
-
-        /* ==========================================
-           CERRAR CUESTIONARIO
-           ========================================== */
-
-        function cerrarQuizMelancolia() {
-
-            quizMelancoliaOverlay.classList.remove(
-                "activo"
-            );
-
-            document.body.style.overflow =
-                "";
-
-            mensajeMelancolia.className =
-                "mensaje";
-
-            mensajeMelancolia.textContent =
-                "";
-
-        }
-
-
-        /* ==========================================
-           COMPROBAR RESPUESTA
-           ========================================== */
-
-        quizMelancoliaForm.addEventListener(
-            "submit",
-            function(event) {
-
-                event.preventDefault();
-
-
-                const seleccionada =
-                    document.querySelector(
-                        'input[name="melancolia1"]:checked'
-                    );
-
-
-                /* NO RESPONDIÓ */
-
-                if (!seleccionada) {
-
-                    mensajeMelancolia.className =
-                        "mensaje error";
-
-                    mensajeMelancolia.textContent =
-                        "✕ Primero debes seleccionar una respuesta.";
-
-                    return;
-
-                }
-
-
-                /* RESPUESTA CORRECTA */
-
-                if (
-                    seleccionada.value === "e"
-                ) {
-
-                    mensajeMelancolia.className =
-                        "mensaje exito";
-
-                    mensajeMelancolia.textContent =
-                        "✓ Acceso concedido. Parece que conoces demasiado bien a Matías... 💗";
-
-
-                    setTimeout(
-                        function() {
-
-                            cerrarQuizMelancolia();
-
-                            abrirVideo();
-
-                        },
-                        1200
-                    );
-
-                }
-
-                /* RESPUESTA INCORRECTA */
-
-                else {
-
-                    mensajeMelancolia.className =
-                        "mensaje error";
-
-                    mensajeMelancolia.textContent =
-                        "✕ Mmm... piénsalo un poquito más. La respuesta está en todos esos pequeños recuerdos 💗";
-
-                }
-
-            }
-        );
-
-
-        /* ==========================================
-           ABRIR VIDEO
-           ========================================== */
-
-        function abrirVideo() {
-
-            videoOverlay.classList.add(
-                "activo"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        /* ==========================================
-           CERRAR VIDEO
-           ========================================== */
-
-        function cerrarVideo() {
-
-            videoOverlay.classList.remove(
-                "activo"
-            );
-
-            videoMelancolia.pause();
-
-            videoMelancolia.currentTime = 0;
-
-            document.body.style.overflow =
-                "";
-
-        }
-
-
-        /* ==========================================
-           ESC PARA CERRAR
-           ========================================== */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    if (
-                        quizMelancoliaOverlay
-                        .classList
-                        .contains("activo")
-                    ) {
-
-                        cerrarQuizMelancolia();
-
-                    }
-
-
-                    if (
-                        videoOverlay
-                        .classList
-                        .contains("activo")
-                    ) {
-
-                        cerrarVideo();
-
-                    }
-
-                }
-
-            }
-        );
-
-
-        /* ==========================================
-           CERRAR VIDEO HACIENDO CLICK AFUERA
-           ========================================== */
-
-        videoOverlay.addEventListener(
-            "click",
-            function(event) {
-
-                if (
-                    event.target ===
-                    videoOverlay
-                ) {
-
-                    cerrarVideo();
-
-                }
-
-            }
-        );
-
-    </script>
-
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const passwordInput = document.getElementById("password");
+    const form = document.getElementById("accessForm");
+    const status = document.getElementById("status");
+    const successScreen = document.getElementById("successScreen");
+
+    // Solo permite números y agrega automáticamente los guiones.
+    passwordInput.addEventListener("input", function () {
+      let numbers = this.value.replace(/\D/g, "").slice(0, 8);
+
+      if (numbers.length > 4) {
+        numbers =
+          numbers.slice(0, 2) + "-" +
+          numbers.slice(2, 4) + "-" +
+          numbers.slice(4);
+      } else if (numbers.length > 2) {
+        numbers =
+          numbers.slice(0, 2) + "-" +
+          numbers.slice(2);
+      }
+
+      this.value = numbers;
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const password = passwordInput.value;
+
+      status.className = "status";
+      successScreen.style.display = "none";
+
+      if (password === "17-07-2024") {
+        status.textContent = "// CREDENCIALES VÁLIDAS";
+        status.classList.add("success");
+        successScreen.style.display = "block";
+
+        // Redirigir a la página "inicio".
+        window.location.href = "inicio.html";
+      } else {
+        status.textContent = "// ERROR: CONTRASEÑA INCORRECTA";
+        status.classList.add("error");
+
+        passwordInput.value = "";
+        passwordInput.focus();
+      }
+    });
+  </script>
 </body>
 </html>
-```
