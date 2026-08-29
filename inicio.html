@@ -1,1316 +1,2088 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momentos Bonitos</title>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+```
+<style>
 
-        * {
-            box-sizing: border-box;
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --pink: #ff0f70;
+        --cyan: #00eaff;
+        --bg: #08090c;
+        --text: #eeeeee;
+        --muted: #777c84;
+        --line: rgba(255,255,255,.10);
+    }
+
+    body {
+        margin: 0;
+        font-family: "Space Grotesk", Arial, sans-serif;
+        background:
+            radial-gradient(circle at 10% 10%, rgba(255,15,112,.11), transparent 28%),
+            radial-gradient(circle at 90% 60%, rgba(0,234,255,.055), transparent 30%),
+            var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 100;
+        opacity: .08;
+        background: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 3px,
+            rgba(255,255,255,.18) 4px
+        );
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    header {
+        position: relative;
+        min-height: 45vh;
+        padding: 80px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    header .eyebrow {
+        font: 700 12px "JetBrains Mono", monospace;
+        letter-spacing: 5px;
+        color: var(--pink);
+        margin-bottom: 25px;
+    }
+
+    header .eyebrow::before {
+        content: "// ";
+        color: var(--cyan);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: clamp(55px, 10vw, 145px);
+        line-height: .82;
+        letter-spacing: -6px;
+        text-transform: uppercase;
+    }
+
+    header p {
+        margin-top: 30px;
+        color: var(--muted);
+        font: 13px "JetBrains Mono", monospace;
+    }
+
+    header p::before {
+        content: "> ";
+        color: var(--pink);
+    }
+
+    /* =========================
+       TEXTO
+       ========================= */
+
+    .texto-centro {
+        padding: 28px 20px;
+        text-align: center;
+        color: #9a9da5;
+        font: italic 14px "JetBrains Mono", monospace;
+        letter-spacing: 3px;
+        border-bottom: 1px solid var(--line);
+    }
+
+    /* =========================
+       AUDIO
+       ========================= */
+
+    .audio-section {
+        padding: 55px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    audio {
+        width: min(80%, 600px);
+    }
+
+    /* =========================
+       PORTADA
+       ========================= */
+
+    .portada {
+        padding: 70px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .portada img {
+        width: 90%;
+        max-width: 1000px;
+        border: 1px solid rgba(255,15,112,.35);
+        box-shadow: 0 25px 70px rgba(0,0,0,.55);
+    }
+
+    /* =========================
+       CONTADOR VIDEOS
+       ========================= */
+
+    .contador-section {
+        padding: 55px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255,15,112,.025);
+    }
+
+    .contador-label {
+        color: var(--pink);
+        font: 700 11px "JetBrains Mono", monospace;
+        letter-spacing: 4px;
+        margin-bottom: 18px;
+    }
+
+    .contador-label::before {
+        content: "// ";
+        color: var(--cyan);
+    }
+
+    .contador {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(38px, 8vw, 75px);
+        font-weight: 700;
+        letter-spacing: 4px;
+        color: white;
+        text-shadow: 0 0 25px rgba(255,15,112,.25);
+    }
+
+    .contador-subtexto {
+        margin-top: 15px;
+        color: var(--muted);
+        font: 11px "JetBrains Mono", monospace;
+    }
+
+    .contador.oculto {
+        display: none;
+    }
+
+    .desbloqueado {
+        color: var(--cyan);
+        font: 700 clamp(22px, 5vw, 38px) "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        animation: aparecer .6s ease;
+    }
+
+    @keyframes aparecer {
+
+        from {
+            opacity: 0;
+            transform: translateY(10px);
         }
 
-        :root {
-            --pink: #ff0f70;
-            --cyan: #00eaff;
-            --bg: #08090c;
-            --text: #eeeeee;
-            --muted: #777c84;
-            --line: rgba(255,255,255,.10);
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        body {
-            margin: 0;
-            font-family: "Space Grotesk", Arial, sans-serif;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(255,15,112,.11), transparent 28%),
-                radial-gradient(circle at 90% 60%, rgba(0,234,255,.055), transparent 30%),
-                var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
+    }
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 100;
-            opacity: .08;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0,
-                transparent 3px,
-                rgba(255,255,255,.18) 4px
-            );
-        }
+    /* =========================
+       PÁGINAS
+       ========================= */
 
-        header {
-            position: relative;
-            min-height: 45vh;
-            padding: 80px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-bottom: 1px solid var(--line);
-        }
+    .paginas {
+        padding: 80px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
 
-        header .eyebrow {
-            font: 700 12px "JetBrains Mono", monospace;
-            letter-spacing: 5px;
-            color: var(--pink);
-            margin-bottom: 25px;
-        }
+    .paginas h2,
+    .especiales h2 {
+        margin: 0 0 35px;
+        font-size: clamp(25px, 4vw, 42px);
+        text-transform: uppercase;
+    }
 
-        header .eyebrow::before {
-            content: "// ";
-            color: var(--cyan);
-        }
+    .paginas h2::before,
+    .especiales h2::before {
+        content: "> ";
+        color: var(--pink);
+        font-family: "JetBrains Mono", monospace;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: clamp(55px, 10vw, 145px);
-            line-height: .82;
-            letter-spacing: -6px;
-            text-transform: uppercase;
-        }
+    .galeria {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        max-width: 1000px;
+        margin: auto;
+    }
 
-        header p {
-            margin-top: 30px;
-            color: var(--muted);
-            font: 13px "JetBrains Mono", monospace;
-        }
+    /* =========================
+       BOTONES / PAGINAS
+       ========================= */
 
-        header p::before {
-            content: "> ";
-            color: var(--pink);
-        }
+    .pagina {
+        position: relative;
+        min-height: 120px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #292d33;
+        background: #0b0e12;
+        font: 600 12px "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        transition: .25s ease;
+    }
 
-        .texto-centro {
-            padding: 28px 20px;
-            text-align: center;
-            color: #9a9da5;
-            font: italic 14px "JetBrains Mono", monospace;
-            letter-spacing: 3px;
-            border-bottom: 1px solid var(--line);
-        }
+    .pagina.bloqueada {
+        color: #555b63;
+        cursor: not-allowed;
+    }
 
-        .audio-section {
-            padding: 55px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
+    .pagina.bloqueada::before {
+        content: "🔒";
+        font-size: 22px;
+        margin-bottom: 10px;
+        filter: grayscale(1);
+    }
 
-        audio {
-            width: min(80%, 600px);
-        }
+    .pagina.bloqueada .estado {
+        margin-top: 8px;
+        color: #4d5259;
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
 
-        .portada {
-            padding: 70px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
+    .pagina.fotos {
+        border-left: 2px solid var(--pink);
+    }
 
-        .portada img {
-            width: 90%;
-            max-width: 1000px;
-            border: 1px solid rgba(255,15,112,.35);
-            box-shadow: 0 25px 70px rgba(0,0,0,.55);
-        }
+    .pagina.fotos.desbloqueada {
+        color: white;
+        border-color: var(--pink);
+        border-left: 2px solid var(--pink);
+        cursor: pointer;
+        background: rgba(255,15,112,.05);
+        box-shadow: 0 0 25px rgba(255,15,112,.06);
+    }
 
-        /* =========================
-           CONTADOR
-           ========================= */
+    .pagina.fotos.desbloqueada::before {
+        content: "📸";
+        filter: none;
+    }
 
-        .contador-section {
-            padding: 55px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-            background: rgba(255,15,112,.025);
-        }
+    .pagina.fotos.desbloqueada:hover {
+        transform: translateY(-4px);
+        background: rgba(255,15,112,.12);
+        box-shadow: 0 15px 40px rgba(255,15,112,.12);
+    }
 
-        .contador-label {
-            color: var(--pink);
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 4px;
-            margin-bottom: 18px;
-        }
+    .pagina.fotos.desbloqueada .estado {
+        color: var(--cyan);
+    }
 
-        .contador-label::before {
-            content: "// ";
-            color: var(--cyan);
-        }
+    /* =========================
+       VIDEOS DESBLOQUEADOS
+       ========================= */
 
-        .contador {
-            font-family: "JetBrains Mono", monospace;
-            font-size: clamp(38px, 8vw, 75px);
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: white;
-            text-shadow: 0 0 25px rgba(255,15,112,.25);
-        }
+    .pagina.videos.desbloqueada {
+        color: white;
+        border-color: var(--pink);
+        border-left: 2px solid var(--pink);
+        cursor: pointer;
+        background: rgba(255,15,112,.05);
+        box-shadow: 0 0 25px rgba(255,15,112,.06);
+    }
 
-        .contador-subtexto {
-            margin-top: 15px;
-            color: var(--muted);
-            font: 11px "JetBrains Mono", monospace;
-        }
+    .pagina.videos.desbloqueada::before {
+        content: "🎥";
+        filter: none;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
 
-        .contador.oculto {
-            display: none;
-        }
+    .pagina.videos.desbloqueada:hover {
+        transform: translateY(-4px);
+        background: rgba(255,15,112,.12);
+        box-shadow: 0 15px 40px rgba(255,15,112,.12);
+    }
 
-        .desbloqueado {
-            color: var(--cyan);
-            font: 700 clamp(22px, 5vw, 38px) "JetBrains Mono", monospace;
-            text-transform: uppercase;
-            animation: aparecer .6s ease;
-        }
+    .pagina.videos.desbloqueada .estado {
+        color: var(--cyan);
+    }
 
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
+    /* =========================
+       COSITAS ESPECIALES
+       ========================= */
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .especiales {
+        padding: 80px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
 
-        /* =========================
-           PÁGINAS
-           ========================= */
+    .especiales-subtitulo {
+        color: var(--muted);
+        font: 12px "JetBrains Mono", monospace;
+        margin-bottom: 40px;
+    }
 
-        .paginas {
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
+    .especiales-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        max-width: 1000px;
+        margin: auto;
+    }
 
-        .paginas h2,
-        .especiales h2 {
-            margin: 0 0 35px;
-            font-size: clamp(25px, 4vw, 42px);
-            text-transform: uppercase;
-        }
+    .especial-card {
+        min-height: 180px;
+        padding: 30px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #292d33;
+        border-left: 2px solid var(--pink);
+        background: #0b0e12;
+    }
 
-        .paginas h2::before,
-        .especiales h2::before {
-            content: "> ";
-            color: var(--pink);
-            font-family: "JetBrains Mono", monospace;
-        }
+    .especial-card.proceso {
+        border-left-color: #555b63;
+        opacity: .65;
+    }
+
+    .especial-card.desbloqueada {
+        border-left-color: var(--pink);
+        opacity: 1;
+        background: rgba(255,15,112,.05);
+        box-shadow: 0 0 25px rgba(255,15,112,.06);
+    }
+
+    .especial-card.desbloqueada:hover {
+        transform: translateY(-4px);
+        background: rgba(255,15,112,.12);
+        box-shadow: 0 15px 40px rgba(255,15,112,.12);
+    }
+
+    .especial-icono {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .especial-card h3 {
+        margin: 0 0 8px;
+        font-size: 19px;
+        text-transform: uppercase;
+    }
+
+    .especial-card p {
+        margin: 0;
+        color: var(--muted);
+        font: 11px "JetBrains Mono", monospace;
+        line-height: 1.6;
+    }
+
+    .btn-especial {
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid var(--pink);
+        background: rgba(255,15,112,.07);
+        color: white;
+        font: 700 11px "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+        cursor: pointer;
+    }
+
+    .btn-especial:hover {
+        background: var(--pink);
+    }
+
+    .proceso-tag {
+        margin-top: 18px;
+        padding: 8px 13px;
+        border: 1px solid #343941;
+        color: #777c84;
+        font: 700 10px "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+    }
+
+    .proceso-tag.desbloqueado-quema {
+        color: var(--cyan);
+        border-color: rgba(0,234,255,.4);
+    }
+
+    .contador-quema {
+        margin-top: 20px;
+        color: white;
+        font: 700 clamp(25px, 5vw, 40px) "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+        text-shadow: 0 0 20px rgba(255,15,112,.25);
+    }
+
+    /* =========================
+       OVERLAY
+       ========================= */
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(4,5,8,.97);
+        overflow-y: auto;
+    }
+
+    .overlay.activo {
+        display: flex;
+    }
+
+    /* =========================
+       QUIZ
+       ========================= */
+
+    .quiz-box {
+        width: min(850px, 100%);
+        padding: 40px;
+        background: #0b0e12;
+        border: 1px solid rgba(255,15,112,.4);
+    }
+
+    .quiz-label {
+        color: var(--pink);
+        font: 700 11px "JetBrains Mono", monospace;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+    }
+
+    .quiz-label::before {
+        content: "// ";
+        color: var(--cyan);
+    }
+
+    .quiz-box h2 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 5vw, 48px);
+        text-transform: uppercase;
+    }
+
+    .quiz-subtitle {
+        color: var(--muted);
+        font: 12px "JetBrains Mono", monospace;
+        margin-bottom: 30px;
+    }
+
+    .pregunta {
+        padding: 22px;
+        border: 1px solid #252a30;
+        border-left: 2px solid var(--pink);
+    }
+
+    .pregunta-titulo {
+        display: block;
+        margin-bottom: 17px;
+        line-height: 1.5;
+    }
+
+    .opcion {
+        display: block;
+        margin: 9px 0;
+        cursor: pointer;
+    }
+
+    .opcion input {
+        display: none;
+    }
+
+    .opcion-contenido {
+        display: block;
+        padding: 13px 16px;
+        border: 1px solid #292d33;
+        background: #090b0e;
+        color: #aeb2b9;
+        font: 12px "JetBrains Mono", monospace;
+    }
+
+    .opcion input:checked + .opcion-contenido {
+        border-color: var(--pink);
+        color: white;
+        background: rgba(255,15,112,.10);
+    }
+
+    .quiz-botones {
+        display: flex;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .btn-quiz {
+        flex: 1;
+        padding: 16px;
+        border: 1px solid var(--pink);
+        background: rgba(255,15,112,.08);
+        color: white;
+        font: 700 11px "JetBrains Mono", monospace;
+        cursor: pointer;
+    }
+
+    .btn-quiz:hover {
+        background: var(--pink);
+    }
+
+    .btn-cerrar {
+        border-color: #343941;
+        background: rgba(255,255,255,.02);
+    }
+
+    .mensaje {
+        display: none;
+        margin-top: 20px;
+        padding: 15px;
+        font: 600 12px "JetBrains Mono", monospace;
+        text-align: center;
+    }
+
+    .mensaje.error {
+        display: block;
+        color: #ff6b9f;
+        border: 1px solid rgba(255,15,112,.45);
+    }
+
+    .mensaje.exito {
+        display: block;
+        color: var(--cyan);
+        border: 1px solid rgba(0,234,255,.4);
+    }
+
+    /* =========================
+       VIDEO
+       ========================= */
+
+    .video-box {
+        position: relative;
+        width: min(1000px, 100%);
+        padding: 20px;
+        background: #0b0e12;
+        border: 1px solid rgba(255,15,112,.4);
+    }
+
+    .video-box h2 {
+        margin: 5px 0 18px;
+    }
+
+    .video-box video {
+        width: 100%;
+        max-height: 75vh;
+        background: black;
+    }
+
+    .cerrar-video {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #343941;
+        background: #000;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+        padding: 35px 20px;
+        text-align: center;
+        color: #50545b;
+        font: 10px "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 800px) {
 
         .galeria {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        /* =========================
-           BOTONES
-           ========================= */
-
-        .pagina {
-            position: relative;
-            min-height: 120px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #292d33;
-            background: #0b0e12;
-            font: 600 12px "JetBrains Mono", monospace;
-            text-transform: uppercase;
-            transition: .25s ease;
-        }
-
-        .pagina.bloqueada {
-            color: #555b63;
-            cursor: not-allowed;
-        }
-
-        .pagina.bloqueada::before {
-            content: "🔒";
-            font-size: 22px;
-            margin-bottom: 10px;
-            filter: grayscale(1);
-        }
-
-        .pagina.bloqueada .estado {
-            margin-top: 8px;
-            color: #4d5259;
-            font-size: 8px;
-            letter-spacing: 2px;
-        }
-
-        .pagina.fotos {
-            border-left: 2px solid #555b63;
-        }
-
-        .pagina.fotos.desbloqueada {
-            color: white;
-            border-color: var(--pink);
-            border-left: 2px solid var(--pink);
-            cursor: pointer;
-            background: rgba(255,15,112,.05);
-            box-shadow: 0 0 25px rgba(255,15,112,.06);
-        }
-
-        .pagina.fotos.desbloqueada::before {
-            content: "📸";
-            filter: none;
-        }
-
-        .pagina.fotos.desbloqueada:hover {
-            transform: translateY(-4px);
-            background: rgba(255,15,112,.12);
-            box-shadow: 0 15px 40px rgba(255,15,112,.12);
-        }
-
-        .pagina.fotos.desbloqueada .estado {
-            color: var(--cyan);
-        }
-
-        /* =========================
-           COSITAS ESPECIALES
-           ========================= */
-
-        .especiales {
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .especiales-subtitulo {
-            color: var(--muted);
-            font: 12px "JetBrains Mono", monospace;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr;
+            max-width: 500px;
         }
 
         .especiales-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-            max-width: 1000px;
-            margin: auto;
+            grid-template-columns: 1fr;
+            max-width: 500px;
         }
 
-        .especial-card {
-            min-height: 180px;
-            padding: 30px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #292d33;
-            border-left: 2px solid var(--pink);
-            background: #0b0e12;
+        header h1 {
+            letter-spacing: -3px;
         }
 
-        .especial-card.proceso {
-            border-left-color: #555b63;
-            opacity: .65;
+    }
+
+    @media (max-width: 500px) {
+
+        .contador {
+            font-size: 35px;
+            letter-spacing: 1px;
         }
 
-        .especial-icono {
+        .contador-quema {
             font-size: 30px;
-            margin-bottom: 12px;
-        }
-
-        .especial-card h3 {
-            margin: 0 0 8px;
-            font-size: 19px;
-            text-transform: uppercase;
-        }
-
-        .especial-card p {
-            margin: 0;
-            color: var(--muted);
-            font: 11px "JetBrains Mono", monospace;
-            line-height: 1.6;
-        }
-
-        .btn-especial {
-            width: 100%;
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid var(--pink);
-            background: rgba(255,15,112,.07);
-            color: white;
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-
-        .btn-especial:hover {
-            background: var(--pink);
-        }
-
-        .proceso-tag {
-            margin-top: 18px;
-            padding: 8px 13px;
-            border: 1px solid #343941;
-            color: #777c84;
-            font: 700 10px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-        }
-
-        /* =========================
-           FORMULARIO MELANCOLÍA
-           ========================= */
-
-        .overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(4,5,8,.97);
-            overflow-y: auto;
-        }
-
-        .overlay.activo {
-            display: flex;
         }
 
         .quiz-box {
-            width: min(850px, 100%);
-            padding: 40px;
-            background: #0b0e12;
-            border: 1px solid rgba(255,15,112,.4);
-        }
-
-        .quiz-label {
-            color: var(--pink);
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        }
-
-        .quiz-label::before {
-            content: "// ";
-            color: var(--cyan);
-        }
-
-        .quiz-box h2 {
-            margin: 0 0 10px;
-            font-size: clamp(28px, 5vw, 48px);
-            text-transform: uppercase;
-        }
-
-        .quiz-subtitle {
-            color: var(--muted);
-            font: 12px "JetBrains Mono", monospace;
-            margin-bottom: 30px;
-        }
-
-        .pregunta {
-            padding: 22px;
-            border: 1px solid #252a30;
-            border-left: 2px solid var(--pink);
-        }
-
-        .pregunta-titulo {
-            display: block;
-            margin-bottom: 17px;
-            line-height: 1.5;
-        }
-
-        .opcion {
-            display: block;
-            margin: 9px 0;
-            cursor: pointer;
-        }
-
-        .opcion input {
-            display: none;
-        }
-
-        .opcion-contenido {
-            display: block;
-            padding: 13px 16px;
-            border: 1px solid #292d33;
-            background: #090b0e;
-            color: #aeb2b9;
-            font: 12px "JetBrains Mono", monospace;
-        }
-
-        .opcion input:checked + .opcion-contenido {
-            border-color: var(--pink);
-            color: white;
-            background: rgba(255,15,112,.10);
+            padding: 25px 17px;
         }
 
         .quiz-botones {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
+            flex-direction: column;
         }
 
-        .btn-quiz {
-            flex: 1;
-            padding: 16px;
-            border: 1px solid var(--pink);
-            background: rgba(255,15,112,.08);
-            color: white;
-            font: 700 11px "JetBrains Mono", monospace;
-            cursor: pointer;
+        .portada img {
+            width: 95%;
         }
 
-        .btn-quiz:hover {
-            background: var(--pink);
-        }
+    }
 
-        .btn-cerrar {
-            border-color: #343941;
-            background: rgba(255,255,255,.02);
-        }
+</style>
+```
 
-        .mensaje {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            font: 600 12px "JetBrains Mono", monospace;
-            text-align: center;
-        }
-
-        .mensaje.error {
-            display: block;
-            color: #ff6b9f;
-            border: 1px solid rgba(255,15,112,.45);
-        }
-
-        .mensaje.exito {
-            display: block;
-            color: var(--cyan);
-            border: 1px solid rgba(0,234,255,.4);
-        }
-
-        /* =========================
-           VIDEO
-           ========================= */
-
-        .video-box {
-            position: relative;
-            width: min(1000px, 100%);
-            padding: 20px;
-            background: #0b0e12;
-            border: 1px solid rgba(255,15,112,.4);
-        }
-
-        .video-box h2 {
-            margin: 5px 0 18px;
-        }
-
-        .video-box video {
-            width: 100%;
-            max-height: 75vh;
-            background: black;
-        }
-
-        .cerrar-video {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 38px;
-            height: 38px;
-            border: 1px solid #343941;
-            background: #000;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        footer {
-            padding: 35px 20px;
-            text-align: center;
-            color: #50545b;
-            font: 10px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-        }
-
-        /* =========================
-           RESPONSIVE
-           ========================= */
-
-        @media (max-width: 800px) {
-
-            .galeria {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .especiales-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            header h1 {
-                letter-spacing: -3px;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            .contador {
-                font-size: 35px;
-                letter-spacing: 1px;
-            }
-
-            .quiz-box {
-                padding: 25px 17px;
-            }
-
-            .quiz-botones {
-                flex-direction: column;
-            }
-
-            .portada img {
-                width: 95%;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="eyebrow">Inicioooo</div>
+```
+<!-- ======================================
+     HEADER
+     ====================================== -->
 
-        <h1>
-            Migajitas<br>
-            en página
-        </h1>
+<header>
 
-        <p>Mish</p>
-    </header>
+    <div class="eyebrow">
+        Inicioooo
+    </div>
+
+    <h1>
+        Migajitas<br>
+        en página
+    </h1>
+
+    <p>
+        Mish
+    </p>
+
+</header>
 
 
-    <p class="texto-centro">
-        Slow Summer Eve
+<!-- ======================================
+     TEXTO
+     ====================================== -->
+
+<p class="texto-centro">
+    Slow Summer Eve
+</p>
+
+
+<!-- ======================================
+     AUDIO
+     ====================================== -->
+
+<section class="audio-section">
+
+    <audio controls>
+
+        <source
+            src="slow.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+</section>
+
+
+<!-- ======================================
+     PORTADA
+     ====================================== -->
+
+<section class="portada">
+
+    <img
+        src="banne.jpg"
+        alt="Imagen de portada"
+    >
+
+</section>
+
+
+<!-- ======================================
+     CONTADOR VIDEOS
+     29-08-2026 23:00
+     ====================================== -->
+
+<section class="contador-section">
+
+    <div class="contador-label">
+        Próxima actualización
+    </div>
+
+
+    <div
+        id="contador"
+        class="contador"
+    >
+        00:00:00
+    </div>
+
+
+    <div
+        id="contadorSubtexto"
+        class="contador-subtexto"
+    >
+        La Galería de Videos se desbloqueará el 29-08-2026 a las 23:00
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     PÁGINAS
+     ====================================== -->
+
+<section class="paginas">
+
+    <h2>
+        Galería / Páginas
+    </h2>
+
+
+    <div class="galeria">
+
+
+        <!-- FOTOS -->
+
+        <div
+            id="paginaFotos"
+            class="pagina fotos desbloqueada"
+            onclick="abrirFotos()"
+        >
+
+            📸 Galería de fotitos
+
+            <span
+                id="estadoFotos"
+                class="estado"
+            >
+                ✓ AHORA PUEDES ENTRAR
+            </span>
+
+        </div>
+
+
+        <!-- VIDEOS -->
+
+        <div
+            id="paginaVideos"
+            class="pagina videos bloqueada"
+            onclick="abrirVideos()"
+        >
+
+            🎥 Galería de videos
+
+            <span
+                id="estadoVideos"
+                class="estado"
+            >
+                🔒 DESBLOQUEA EL 29-08-2026 A LAS 23:00
+            </span>
+
+        </div>
+
+
+        <!-- CARTA -->
+
+        <div class="pagina bloqueada">
+
+            💌 Carta
+
+            <span class="estado">
+                🔒 EN PROCESO DE CREACIÓN
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     COSITAS ESPECIALES
+     ====================================== -->
+
+<section class="especiales">
+
+    <h2>
+        Cositas Especiales
+    </h2>
+
+
+    <p class="especiales-subtitulo">
+        > Algunos recuerdos necesitan una pequeña prueba...
     </p>
 
 
-    <section class="audio-section">
-
-        <audio controls>
-            <source src="slow.mp3" type="audio/mpeg">
-        </audio>
-
-    </section>
+    <div class="especiales-grid">
 
 
-    <section class="portada">
+        <!-- MELANCOLÍA -->
 
-        <img src="banne.jpg" alt="Imagen de portada">
+        <div class="especial-card">
 
-    </section>
+            <div class="especial-icono">
+                🎵
+            </div>
 
+            <h3>
+                Melancolía
+            </h3>
 
-    <!-- ======================================
-         CONTADOR HASTA LAS 22:00
-         ====================================== -->
+            <p>
+                Un recuerdo especial esperando ser desbloqueado.
+            </p>
 
-    <section class="contador-section">
+            <button
+                class="btn-especial"
+                onclick="abrirQuizMelancolia()"
+            >
+                🔒 DESBLOQUEAR
+            </button>
 
-        <div class="contador-label">
-            Próxima actualización
         </div>
 
-        <div id="contador" class="contador">
-            00:00:00
-        </div>
 
-        <div id="contadorSubtexto" class="contador-subtexto">
-            La Galería de Fotitos se desbloqueará a las 22:00
-        </div>
+        <!-- QUEMA -->
 
-    </section>
+        <div
+            id="quemaCard"
+            class="especial-card proceso"
+        >
 
+            <div class="especial-icono">
+                🔥
+            </div>
 
-    <!-- ======================================
-         PÁGINAS
-         ====================================== -->
+            <h3>
+                Quema
+            </h3>
 
-    <section class="paginas">
+            <p>
+                Un recuerdo especial esperando ser desbloqueado.
+            </p>
 
-        <h2>
-            Galería / Páginas
-        </h2>
-
-
-        <div class="galeria">
-
-
-            <!-- FOTOS: SE DESBLOQUEA A LAS 22:00 -->
 
             <div
-                id="paginaFotos"
-                class="pagina fotos bloqueada"
-                onclick="abrirFotos()"
+                id="contadorQuema"
+                class="contador-quema"
             >
-
-                Galería de fotitos
-
-                <span
-                    id="estadoFotos"
-                    class="estado"
-                >
-                    🔒 BLOQUEADA HASTA LAS 22:00
-                </span>
-
+                00:00:00
             </div>
 
 
-            <!-- VIDEOS BLOQUEADO -->
-
-            <div class="pagina bloqueada">
-
-                🎥 Galería de videos
-
-                <span class="estado">
-                    🔒 EN PROCESO DE CREACIÓN
-                </span>
-
+            <div
+                id="estadoQuema"
+                class="proceso-tag"
+            >
+                ⏳ DESBLOQUEA EL 29-08-2026 A LAS 22:00
             </div>
 
 
-            <!-- CARTA BLOQUEADA -->
-
-            <div class="pagina bloqueada">
-
-                💌 Carta
-
-                <span class="estado">
-                    🔒 EN PROCESO DE CREACIÓN
-                </span>
-
-            </div>
+            <button
+                id="btnQuema"
+                class="btn-especial"
+                style="display:none;"
+                onclick="abrirQuizQuema()"
+            >
+                🔒 DESBLOQUEAR
+            </button>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ======================================
-         COSITAS ESPECIALES
-         ====================================== -->
+<!-- ======================================
+     QUIZ MELANCOLÍA
+     ====================================== -->
 
-    <section class="especiales">
+<div
+    id="quizMelancolia"
+    class="overlay"
+>
+
+    <div class="quiz-box">
+
+        <div class="quiz-label">
+            Acceso / Melancolía
+        </div>
+
 
         <h2>
-            Cositas Especiales
+            Antes de ver...
         </h2>
 
-        <p class="especiales-subtitulo">
-            > Algunos recuerdos necesitan una pequeña prueba...
+
+        <p class="quiz-subtitle">
+            > Responde correctamente para desbloquear este recuerdo.
         </p>
 
 
-        <div class="especiales-grid">
+        <form id="formMelancolia">
+
+            <div class="pregunta">
+
+                <span class="pregunta-titulo">
+
+                    <b>01 //</b>
+                    ¿En qué momentos Matías piensa más en la Maite?
+
+                </span>
 
 
-            <!-- MELANCOLÍA -->
+                <label class="opcion">
 
-            <div class="especial-card">
+                    <input
+                        type="radio"
+                        name="respuesta"
+                        value="a"
+                    >
 
-                <div class="especial-icono">
-                    🎵
-                </div>
+                    <span class="opcion-contenido">
+                        A) Cuando ve la cajita con recuerdos
+                    </span>
 
-                <h3>
-                    Melancolía
-                </h3>
+                </label>
 
-                <p>
-                    Un recuerdo especial esperando ser desbloqueado.
-                </p>
+
+                <label class="opcion">
+
+                    <input
+                        type="radio"
+                        name="respuesta"
+                        value="b"
+                    >
+
+                    <span class="opcion-contenido">
+                        B) Cuando la topa en el liceo
+                    </span>
+
+                </label>
+
+
+                <label class="opcion">
+
+                    <input
+                        type="radio"
+                        name="respuesta"
+                        value="c"
+                    >
+
+                    <span class="opcion-contenido">
+                        C) Cuando escucha música
+                    </span>
+
+                </label>
+
+
+                <label class="opcion">
+
+                    <input
+                        type="radio"
+                        name="respuesta"
+                        value="d"
+                    >
+
+                    <span class="opcion-contenido">
+                        D) Cuando pasa por lugares donde ambos estuvieron
+                    </span>
+
+                </label>
+
+
+                <label class="opcion">
+
+                    <input
+                        type="radio"
+                        name="respuesta"
+                        value="e"
+                    >
+
+                    <span class="opcion-contenido">
+                        E) Todas las alternativas
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <div
+                id="mensaje"
+                class="mensaje"
+            ></div>
+
+
+            <div class="quiz-botones">
 
                 <button
-                    class="btn-especial"
-                    onclick="abrirQuizMelancolia()"
+                    type="submit"
+                    class="btn-quiz"
                 >
-                    🔒 DESBLOQUEAR
+                    DESBLOQUEAR →
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-quiz btn-cerrar"
+                    onclick="cerrarQuiz()"
+                >
+                    ← VOLVER
                 </button>
 
             </div>
 
+        </form>
 
-            <!-- QUEMA -->
+    </div>
 
-            <div class="especial-card proceso">
+</div>
 
-                <div class="especial-icono">
-                    🔥
-                </div>
 
-                <h3>
-                    Quema
-                </h3>
+<!-- ======================================
+     VIDEO MELANCOLÍA
+     ====================================== -->
 
-                <p>
-                    Este apartado todavía está siendo preparado...
-                </p>
+<div
+    id="videoOverlay"
+    class="overlay"
+>
 
-                <div class="proceso-tag">
-                    ⏳ EN PROCESO DE CREACIÓN
-                </div>
+    <div class="video-box">
 
-            </div>
+        <button
+            class="cerrar-video"
+            onclick="cerrarVideo()"
+        >
+            ×
+        </button>
 
+
+        <h2>
+            > Melancolía
+        </h2>
+
+
+        <video
+            id="videoMelancolia"
+            controls
+            playsinline
+        >
+
+            <source
+                src="Melancolía.mp4"
+                type="video/mp4"
+            >
+
+            Tu navegador no puede reproducir este video.
+
+        </video>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================
+     QUIZ QUEMA
+     ====================================== -->
+
+<div
+    id="quizQuema"
+    class="overlay"
+>
+
+    <div class="quiz-box">
+
+        <div class="quiz-label">
+            Acceso / Quema
         </div>
 
-    </section>
+
+        <h2>
+            Antes de ver...
+        </h2>
 
 
-    <!-- ======================================
-         QUIZ MELANCOLÍA
-         ====================================== -->
-
-    <div
-        id="quizMelancolia"
-        class="overlay"
-    >
-
-        <div class="quiz-box">
-
-            <div class="quiz-label">
-                Acceso / Melancolía
-            </div>
-
-            <h2>
-                Antes de ver...
-            </h2>
-
-            <p class="quiz-subtitle">
-                > Responde correctamente para desbloquear este recuerdo.
-            </p>
+        <p class="quiz-subtitle">
+            > Responde correctamente para desbloquear este recuerdo.
+        </p>
 
 
-            <form id="formMelancolia">
+        <form id="formQuema">
 
-                <div class="pregunta">
+            <div class="pregunta">
 
-                    <span class="pregunta-titulo">
+                <span class="pregunta-titulo">
 
-                        <b>01 //</b>
-                        ¿En qué momentos Matías piensa más en la Maite?
+                    <b>01 //</b>
+                    ¿Cuál fue la primera vez que Matías se enojó con la Maite?
 
+                </span>
+
+
+                <!-- A -->
+
+                <label class="opcion">
+
+                    <input
+                        type="radio"
+                        name="respuestaQuema"
+                        value="a"
+                    >
+
+                    <span class="opcion-contenido">
+                        A) Cuando lo trató feito
                     </span>
 
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="respuesta"
-                            value="a"
-                        >
-
-                        <span class="opcion-contenido">
-                            A) Cuando ve la cajita con recuerdos
-                        </span>
-
-                    </label>
+                </label>
 
 
-                    <label class="opcion">
+                <!-- B -->
 
-                        <input
-                            type="radio"
-                            name="respuesta"
-                            value="b"
-                        >
+                <label class="opcion">
 
-                        <span class="opcion-contenido">
-                            B) Cuando la topa en el liceo
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="respuesta"
-                            value="c"
-                        >
-
-                        <span class="opcion-contenido">
-                            C) Cuando escucha música
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="respuesta"
-                            value="d"
-                        >
-
-                        <span class="opcion-contenido">
-                            D) Cuando pasa por lugares donde ambos estuvieron
-                        </span>
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input
-                            type="radio"
-                            name="respuesta"
-                            value="e"
-                        >
-
-                        <span class="opcion-contenido">
-                            E) Todas las alternativas
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-                <div
-                    id="mensaje"
-                    class="mensaje"
-                ></div>
-
-
-                <div class="quiz-botones">
-
-                    <button
-                        type="submit"
-                        class="btn-quiz"
+                    <input
+                        type="radio"
+                        name="respuestaQuema"
+                        value="b"
                     >
-                        DESBLOQUEAR →
-                    </button>
+
+                    <span class="opcion-contenido">
+                        B) Cuando se olvidó del primer mes
+                    </span>
+
+                </label>
 
 
-                    <button
-                        type="button"
-                        class="btn-quiz btn-cerrar"
-                        onclick="cerrarQuiz()"
+                <!-- C -->
+
+                <label class="opcion">
+
+                    <input
+                        type="radio"
+                        name="respuestaQuema"
+                        value="c"
                     >
-                        ← VOLVER
-                    </button>
 
-                </div>
+                    <span class="opcion-contenido">
+                        C) Nunca se enojó
+                    </span>
 
-            </form>
-
-        </div>
-
-    </div>
+                </label>
 
 
-    <!-- ======================================
-         VIDEO MELANCOLÍA
-         ====================================== -->
+                <!-- D -->
 
-    <div
-        id="videoOverlay"
-        class="overlay"
-    >
+                <label class="opcion">
 
-        <div class="video-box">
+                    <input
+                        type="radio"
+                        name="respuestaQuema"
+                        value="d"
+                    >
 
-            <button
-                class="cerrar-video"
-                onclick="cerrarVideo()"
-            >
-                ×
-            </button>
+                    <span class="opcion-contenido">
+                        D) Te amo Maite :3
+                    </span>
 
+                </label>
 
-            <h2>
-                > Melancolía
-            </h2>
+            </div>
 
 
-            <video
-                id="videoMelancolia"
-                controls
-                playsinline
-            >
+            <div
+                id="mensajeQuema"
+                class="mensaje"
+            ></div>
 
-                <source
-                    src="Melancolía.mp4"
-                    type="video/mp4"
+
+            <div class="quiz-botones">
+
+                <button
+                    type="submit"
+                    class="btn-quiz"
                 >
+                    DESBLOQUEAR →
+                </button>
 
-                Tu navegador no puede reproducir este video.
 
-            </video>
+                <button
+                    type="button"
+                    class="btn-quiz btn-cerrar"
+                    onclick="cerrarQuizQuema()"
+                >
+                    ← VOLVER
+                </button>
 
-        </div>
+            </div>
+
+        </form>
 
     </div>
 
-
-    <footer>
-
-        // conexión Establecida
-
-        <br><br>
-
-        © 2026 Actualizada - Web de Matiiii |
-        No sale nada de aquí ehh
-
-    </footer>
+</div>
 
 
-    <script>
+<!-- ======================================
+     VIDEO QUEMA
+     ====================================== -->
 
-        /* ==================================================
-           CONTADOR HASTA LAS 22:00 DE HOY
-           ================================================== */
+<div
+    id="videoQuemaOverlay"
+    class="overlay"
+>
 
-        const contador =
-            document.getElementById("contador");
+    <div class="video-box">
 
-        const contadorSubtexto =
-            document.getElementById("contadorSubtexto");
-
-        const paginaFotos =
-            document.getElementById("paginaFotos");
-
-        const estadoFotos =
-            document.getElementById("estadoFotos");
-
-
-        function actualizarContador() {
-
-            const ahora = new Date();
-
-            /*
-             * Creamos la hora objetivo:
-             * HOY a las 22:00:00
-             */
-
-            const objetivo = new Date();
-
-            objetivo.setHours(22);
-            objetivo.setMinutes(0);
-            objetivo.setSeconds(0);
-            objetivo.setMilliseconds(0);
+        <button
+            class="cerrar-video"
+            onclick="cerrarVideoQuema()"
+        >
+            ×
+        </button>
 
 
-            let diferencia =
-                objetivo.getTime() -
-                ahora.getTime();
+        <h2>
+            > Quema
+        </h2>
 
 
-            /*
-             * Si ya son las 22:00,
-             * desbloqueamos Fotos.
-             */
+        <video
+            id="videoQuema"
+            controls
+            playsinline
+        >
 
-            if (diferencia <= 0) {
+            <source
+                src="quema.mp4"
+                type="video/mp4"
+            >
 
-                desbloquearFotos();
+            Tu navegador no puede reproducir este video.
+
+        </video>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================
+     FOOTER
+     ====================================== -->
+
+<footer>
+
+    // conexión Establecida
+
+    <br><br>
+
+    © 2026 Actualizada - Web de Matiiii |
+    No sale nada de aquí ehh
+
+</footer>
+
+
+<!-- ======================================
+     JAVASCRIPT
+     ====================================== -->
+
+<script>
+
+
+    /* ==================================================
+       FECHAS DE DESBLOQUEO
+       ================================================== */
+
+    /*
+     * VIDEOS:
+     * 29 de agosto de 2026 a las 23:00
+     */
+
+    const fechaVideos =
+        new Date("2026-08-29T23:00:00");
+
+
+    /*
+     * QUEMA:
+     * 29 de agosto de 2026 a las 22:00
+     */
+
+    const fechaQuema =
+        new Date("2026-08-29T22:00:00");
+
+
+    /* ==================================================
+       ELEMENTOS VIDEOS
+       ================================================== */
+
+    const contador =
+        document.getElementById(
+            "contador"
+        );
+
+    const contadorSubtexto =
+        document.getElementById(
+            "contadorSubtexto"
+        );
+
+    const paginaVideos =
+        document.getElementById(
+            "paginaVideos"
+        );
+
+    const estadoVideos =
+        document.getElementById(
+            "estadoVideos"
+        );
+
+
+    /* ==================================================
+       FORMATEAR CONTADOR
+       ================================================== */
+
+    function formatearTiempo(diferencia) {
+
+        const horas =
+            Math.floor(
+                diferencia /
+                (1000 * 60 * 60)
+            );
+
+
+        const minutos =
+            Math.floor(
+                (
+                    diferencia %
+                    (1000 * 60 * 60)
+                ) /
+                (1000 * 60)
+            );
+
+
+        const segundos =
+            Math.floor(
+                (
+                    diferencia %
+                    (1000 * 60)
+                ) /
+                1000
+            );
+
+
+        return (
+            String(horas).padStart(2, "0") +
+            ":" +
+            String(minutos).padStart(2, "0") +
+            ":" +
+            String(segundos).padStart(2, "0")
+        );
+
+    }
+
+
+    /* ==================================================
+       CONTADOR VIDEOS
+       ================================================== */
+
+    function actualizarContador() {
+
+        const ahora =
+            new Date();
+
+
+        const diferencia =
+            fechaVideos.getTime() -
+            ahora.getTime();
+
+
+        /*
+         * YA LLEGÓ LA HORA
+         */
+
+        if (
+            diferencia <= 0
+        ) {
+
+            desbloquearVideos();
+
+            return;
+
+        }
+
+
+        /*
+         * MOSTRAR CONTADOR
+         */
+
+        contador.textContent =
+            formatearTiempo(
+                diferencia
+            );
+
+    }
+
+
+    /* ==================================================
+       DESBLOQUEAR VIDEOS
+       ================================================== */
+
+    function desbloquearVideos() {
+
+        contador.classList.add(
+            "oculto"
+        );
+
+
+        contadorSubtexto.innerHTML =
+            '<span class="desbloqueado">✨ GALERÍA DE VIDEOS DESBLOQUEADA ✨</span>';
+
+
+        paginaVideos.classList.remove(
+            "bloqueada"
+        );
+
+
+        paginaVideos.classList.add(
+            "desbloqueada"
+        );
+
+
+        estadoVideos.textContent =
+            "✓ AHORA PUEDES ENTRAR";
+
+
+        paginaVideos.onclick =
+            function() {
+
+                /*
+                 * AL ENTRAR REDIRIGE
+                 * A gale1.html
+                 */
+
+                window.location.href =
+                    "gale1.html";
+
+            };
+
+    }
+
+
+    /* ==================================================
+       ABRIR VIDEOS
+       ================================================== */
+
+    function abrirVideos() {
+
+        const ahora =
+            new Date();
+
+
+        if (
+            ahora.getTime() >=
+            fechaVideos.getTime()
+        ) {
+
+            window.location.href =
+                "gale1.html";
+
+        }
+
+    }
+
+
+    /* ==================================================
+       FOTOS
+       ================================================== */
+
+    function abrirFotos() {
+
+        window.location.href =
+            "gale.html";
+
+    }
+
+
+    /* ==================================================
+       INICIAR CONTADOR VIDEOS
+       ================================================== */
+
+    actualizarContador();
+
+
+    setInterval(
+        actualizarContador,
+        1000
+    );
+
+
+    /* ==================================================
+       QUIZ MELANCOLÍA
+       ================================================== */
+
+    const quiz =
+        document.getElementById(
+            "quizMelancolia"
+        );
+
+
+    const formulario =
+        document.getElementById(
+            "formMelancolia"
+        );
+
+
+    const mensaje =
+        document.getElementById(
+            "mensaje"
+        );
+
+
+    function abrirQuizMelancolia() {
+
+        quiz.classList.add(
+            "activo"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function cerrarQuiz() {
+
+        quiz.classList.remove(
+            "activo"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    formulario.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const respuesta =
+                document.querySelector(
+                    'input[name="respuesta"]:checked'
+                );
+
+
+            if (!respuesta) {
+
+                mensaje.className =
+                    "mensaje error";
+
+                mensaje.textContent =
+                    "✕ Selecciona una respuesta primero.";
 
                 return;
 
             }
 
 
-            const horas =
-                Math.floor(
-                    diferencia /
-                    (1000 * 60 * 60)
-                );
+            if (
+                respuesta.value === "e"
+            ) {
+
+                mensaje.className =
+                    "mensaje exito";
+
+                mensaje.textContent =
+                    "✓ Respuesta correcta. Acceso concedido 💗";
 
 
-            const minutos =
-                Math.floor(
-                    (diferencia %
-                    (1000 * 60 * 60)) /
-                    (1000 * 60)
-                );
+                setTimeout(
+                    function() {
 
+                        cerrarQuiz();
 
-            const segundos =
-                Math.floor(
-                    (diferencia %
-                    (1000 * 60)) /
+                        abrirVideo();
+
+                    },
                     1000
                 );
 
+            }
 
-            const horasTexto =
-                String(horas).padStart(2, "0");
+            else {
 
-            const minutosTexto =
-                String(minutos).padStart(2, "0");
+                mensaje.className =
+                    "mensaje error";
 
-            const segundosTexto =
-                String(segundos).padStart(2, "0");
+                mensaje.textContent =
+                    "✕ Mmm... esa no es. Piénsalo un poquito más 💗";
 
-
-            contador.textContent =
-                horasTexto +
-                ":" +
-                minutosTexto +
-                ":" +
-                segundosTexto;
+            }
 
         }
+    );
 
 
-        function desbloquearFotos() {
+    /* ==================================================
+       VIDEO MELANCOLÍA
+       ================================================== */
 
-            contador.classList.add("oculto");
-
-            contadorSubtexto.innerHTML =
-                '<span class="desbloqueado">✨ GALERÍA DE FOTITOS DESBLOQUEADA ✨</span>';
-
-
-            paginaFotos.classList.remove(
-                "bloqueada"
-            );
-
-            paginaFotos.classList.add(
-                "desbloqueada"
-            );
+    const videoOverlay =
+        document.getElementById(
+            "videoOverlay"
+        );
 
 
-            estadoFotos.textContent =
-                "✓ AHORA PUEDES ENTRAR";
+    const video =
+        document.getElementById(
+            "videoMelancolia"
+        );
 
 
-            paginaFotos.onclick =
-                function() {
+    function abrirVideo() {
 
-                    window.location.href =
-                        "gale.html";
-
-                };
-
-        }
+        videoOverlay.classList.add(
+            "activo"
+        );
 
 
-        actualizarContador();
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function cerrarVideo() {
+
+        videoOverlay.classList.remove(
+            "activo"
+        );
+
+
+        video.pause();
+
+
+        video.currentTime =
+            0;
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* ==================================================
+       QUEMA
+       ================================================== */
+
+    const contadorQuema =
+        document.getElementById(
+            "contadorQuema"
+        );
+
+
+    const estadoQuema =
+        document.getElementById(
+            "estadoQuema"
+        );
+
+
+    const quemaCard =
+        document.getElementById(
+            "quemaCard"
+        );
+
+
+    const btnQuema =
+        document.getElementById(
+            "btnQuema"
+        );
+
+
+    /* ==================================================
+       CONTADOR QUEMA
+       ================================================== */
+
+    function actualizarContadorQuema() {
+
+        const ahora =
+            new Date();
+
+
+        const diferencia =
+            fechaQuema.getTime() -
+            ahora.getTime();
 
 
         /*
-         * Actualizar cada segundo
+         * YA LLEGÓ LA HORA
          */
 
-        setInterval(
-            actualizarContador,
-            1000
+        if (
+            diferencia <= 0
+        ) {
+
+            desbloquearQuema();
+
+            return;
+
+        }
+
+
+        contadorQuema.textContent =
+            formatearTiempo(
+                diferencia
+            );
+
+    }
+
+
+    /* ==================================================
+       DESBLOQUEAR QUEMA
+       ================================================== */
+
+    function desbloquearQuema() {
+
+        contadorQuema.textContent =
+            "00:00:00";
+
+
+        quemaCard.classList.remove(
+            "proceso"
         );
 
 
-        /* ==================================================
-           ABRIR FOTOS
-           ================================================== */
+        quemaCard.classList.add(
+            "desbloqueada"
+        );
 
-        function abrirFotos() {
+
+        estadoQuema.classList.add(
+            "desbloqueado-quema"
+        );
+
+
+        estadoQuema.textContent =
+            "✓ AHORA PUEDES ENTRAR";
+
+
+        btnQuema.style.display =
+            "block";
+
+    }
+
+
+    /* ==================================================
+       INICIAR CONTADOR QUEMA
+       ================================================== */
+
+    actualizarContadorQuema();
+
+
+    setInterval(
+        actualizarContadorQuema,
+        1000
+    );
+
+
+    /* ==================================================
+       QUIZ QUEMA
+       ================================================== */
+
+    const quizQuema =
+        document.getElementById(
+            "quizQuema"
+        );
+
+
+    const formularioQuema =
+        document.getElementById(
+            "formQuema"
+        );
+
+
+    const mensajeQuema =
+        document.getElementById(
+            "mensajeQuema"
+        );
+
+
+    /* ==================================================
+       ABRIR QUIZ QUEMA
+       ================================================== */
+
+    function abrirQuizQuema() {
+
+        const ahora =
+            new Date();
+
+
+        /*
+         * Solo permite abrirlo
+         * después de las 22:00.
+         */
+
+        if (
+            ahora.getTime() <
+            fechaQuema.getTime()
+        ) {
+
+            return;
+
+        }
+
+
+        quizQuema.classList.add(
+            "activo"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* ==================================================
+       CERRAR QUIZ QUEMA
+       ================================================== */
+
+    function cerrarQuizQuema() {
+
+        quizQuema.classList.remove(
+            "activo"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* ==================================================
+       COMPROBAR RESPUESTA QUEMA
+       ================================================== */
+
+    formularioQuema.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const respuesta =
+                document.querySelector(
+                    'input[name="respuestaQuema"]:checked'
+                );
+
+
+            /*
+             * NO SELECCIONÓ NADA
+             */
+
+            if (!respuesta) {
+
+                mensajeQuema.className =
+                    "mensaje error";
+
+                mensajeQuema.textContent =
+                    "✕ Selecciona una respuesta primero.";
+
+                return;
+
+            }
+
+
+            /*
+             * CORRECTAS:
+             *
+             * B = Cuando se olvidó del primer mes
+             *
+             * D = Te amo Maite :3
+             *
+             * CUALQUIERA DE LAS DOS
+             * DESBLOQUEA EL VIDEO.
+             */
 
             if (
-                paginaFotos.classList.contains(
-                    "desbloqueada"
-                )
+                respuesta.value === "b" ||
+                respuesta.value === "d"
             ) {
 
-                window.location.href =
-                    "gale.html";
+                mensajeQuema.className =
+                    "mensaje exito";
+
+                mensajeQuema.textContent =
+                    "✓ Respuesta correcta. Acceso concedido 🔥";
+
+
+                setTimeout(
+                    function() {
+
+                        cerrarQuizQuema();
+
+                        abrirVideoQuema();
+
+                    },
+                    1000
+                );
+
+            }
+
+            else {
+
+                mensajeQuema.className =
+                    "mensaje error";
+
+                mensajeQuema.textContent =
+                    "✕ Mmm... esa no es. Piénsalo un poquito más 🔥";
 
             }
 
         }
+    );
 
 
-        /* ==================================================
-           QUIZ MELANCOLÍA
-           ================================================== */
+    /* ==================================================
+       VIDEO QUEMA
+       ================================================== */
 
-        const quiz =
-            document.getElementById(
-                "quizMelancolia"
-            );
-
-        const formulario =
-            document.getElementById(
-                "formMelancolia"
-            );
-
-        const mensaje =
-            document.getElementById(
-                "mensaje"
-            );
-
-
-        function abrirQuizMelancolia() {
-
-            quiz.classList.add(
-                "activo"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        function cerrarQuiz() {
-
-            quiz.classList.remove(
-                "activo"
-            );
-
-            document.body.style.overflow =
-                "";
-
-        }
-
-
-        formulario.addEventListener(
-            "submit",
-            function(event) {
-
-                event.preventDefault();
-
-
-                const respuesta =
-                    document.querySelector(
-                        'input[name="respuesta"]:checked'
-                    );
-
-
-                if (!respuesta) {
-
-                    mensaje.className =
-                        "mensaje error";
-
-                    mensaje.textContent =
-                        "✕ Selecciona una respuesta primero.";
-
-                    return;
-
-                }
-
-
-                if (
-                    respuesta.value === "e"
-                ) {
-
-                    mensaje.className =
-                        "mensaje exito";
-
-                    mensaje.textContent =
-                        "✓ Respuesta correcta. Acceso concedido 💗";
-
-
-                    setTimeout(
-                        function() {
-
-                            cerrarQuiz();
-
-                            abrirVideo();
-
-                        },
-                        1000
-                    );
-
-                }
-
-                else {
-
-                    mensaje.className =
-                        "mensaje error";
-
-                    mensaje.textContent =
-                        "✕ Mmm... esa no es. Piénsalo un poquito más 💗";
-
-                }
-
-            }
+    const videoQuemaOverlay =
+        document.getElementById(
+            "videoQuemaOverlay"
         );
 
 
-        /* ==================================================
-           VIDEO
-           ================================================== */
-
-        const videoOverlay =
-            document.getElementById(
-                "videoOverlay"
-            );
-
-        const video =
-            document.getElementById(
-                "videoMelancolia"
-            );
-
-
-        function abrirVideo() {
-
-            videoOverlay.classList.add(
-                "activo"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        function cerrarVideo() {
-
-            videoOverlay.classList.remove(
-                "activo"
-            );
-
-            video.pause();
-
-            video.currentTime = 0;
-
-            document.body.style.overflow =
-                "";
-
-        }
-
-
-        /* ==================================================
-           ESC PARA CERRAR
-           ================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    cerrarQuiz();
-
-                    cerrarVideo();
-
-                }
-
-            }
+    const videoQuema =
+        document.getElementById(
+            "videoQuema"
         );
 
-    </script>
+
+    /* ==================================================
+       ABRIR VIDEO QUEMA
+       ================================================== */
+
+    function abrirVideoQuema() {
+
+        videoQuemaOverlay.classList.add(
+            "activo"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* ==================================================
+       CERRAR VIDEO QUEMA
+       ================================================== */
+
+    function cerrarVideoQuema() {
+
+        videoQuemaOverlay.classList.remove(
+            "activo"
+        );
+
+
+        videoQuema.pause();
+
+
+        videoQuema.currentTime =
+            0;
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* ==================================================
+       ESC PARA CERRAR
+       ================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                cerrarQuiz();
+
+                cerrarQuizQuema();
+
+                cerrarVideo();
+
+                cerrarVideoQuema();
+
+            }
+
+        }
+    );
+
+</script>
 
 </body>
 </html>
