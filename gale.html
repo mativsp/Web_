@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Fotitos</title>
+
+    <title>Galería de Videos</title>
 
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
 
         * {
@@ -16,10 +18,13 @@
             --pink: #ff0f70;
             --pink-soft: #ff3d8d;
             --cyan: #00eaff;
+
             --bg: #08090c;
             --panel: #0d1014;
+
             --text: #eeeeee;
             --muted: #777c84;
+
             --line: rgba(255,255,255,.10);
         }
 
@@ -29,47 +34,75 @@
 
         body {
             margin: 0;
-            font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+
+            font-family:
+                "Space Grotesk",
+                Arial,
+                Helvetica,
+                sans-serif;
 
             background:
+
                 radial-gradient(
                     circle at 10% 10%,
                     rgba(255,15,112,.11),
                     transparent 28%
                 ),
+
                 radial-gradient(
                     circle at 90% 60%,
                     rgba(0,234,255,.055),
                     transparent 30%
                 ),
+
                 var(--bg);
 
             color: var(--text);
+
             overflow-x: hidden;
         }
 
+
+        /* =====================================
+           EFECTO DE PANTALLA
+        ===================================== */
+
         body::before {
+
             content: "";
+
             position: fixed;
+
             inset: 0;
+
             pointer-events: none;
+
             z-index: 100;
+
             opacity: .08;
 
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0,
-                transparent 3px,
-                rgba(255,255,255,.18) 4px
-            );
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 3px,
+                    rgba(255,255,255,.18) 4px
+                );
         }
 
+
         body::after {
+
             content: "";
+
             position: fixed;
+
             inset: 0;
+
             pointer-events: none;
+
             z-index: 99;
+
             opacity: .025;
 
             background-image:
@@ -81,11 +114,13 @@
             background-size: 4px 4px;
         }
 
-        /* =========================
+
+        /* =====================================
            HEADER
-        ========================= */
+        ===================================== */
 
         header {
+
             position: relative;
 
             min-height: 40vh;
@@ -96,16 +131,23 @@
                 60px;
 
             display: flex;
+
             flex-direction: column;
+
             justify-content: center;
 
-            border-bottom: 1px solid var(--line);
+            border-bottom:
+                1px solid var(--line);
 
             overflow: hidden;
         }
 
+
+        /* Esquinas */
+
         header::before,
         header::after {
+
             content: "";
 
             position: absolute;
@@ -118,7 +160,9 @@
             opacity: .8;
         }
 
+
         header::before {
+
             top: 25px;
             left: 25px;
 
@@ -126,7 +170,9 @@
             border-left: 1px solid;
         }
 
+
         header::after {
+
             top: 25px;
             right: 25px;
 
@@ -134,7 +180,13 @@
             border-right: 1px solid;
         }
 
+
+        /* =====================================
+           TEXTO PEQUEÑO
+        ===================================== */
+
         .eyebrow {
+
             font:
                 700 12px
                 "JetBrains Mono",
@@ -149,13 +201,21 @@
             text-transform: uppercase;
         }
 
+
         .eyebrow::before {
+
             content: "// ";
 
             color: var(--cyan);
         }
 
+
+        /* =====================================
+           TÍTULO
+        ===================================== */
+
         header h1 {
+
             margin: 0;
 
             max-width: 1000px;
@@ -172,10 +232,13 @@
             text-transform: uppercase;
 
             text-shadow:
-                3px 3px 0 rgba(255,255,255,.06);
+                3px 3px 0
+                rgba(255,255,255,.06);
         }
 
+
         header p {
+
             margin: 28px 0 0;
 
             color: var(--muted);
@@ -188,27 +251,81 @@
             letter-spacing: 2px;
         }
 
+
         header p::before {
+
             content: "> ";
 
             color: var(--pink);
         }
 
-        header p a {
-            color: var(--pink);
+
+        /* =====================================
+           BOTÓN VOLVER
+        ===================================== */
+
+        .volver {
+
+            display: inline-block;
+
+            width: fit-content;
+
+            margin-top: 20px;
+
+            padding: 10px 16px;
+
+            border:
+                1px solid
+                #292d33;
+
+            border-left:
+                2px solid
+                var(--pink);
+
+            background:
+                rgba(255,255,255,.02);
+
+            color: #b9bdc4;
+
+            font:
+                600 11px
+                "JetBrains Mono",
+                monospace;
+
+            letter-spacing: 1px;
+
             text-decoration: none;
-            transition: .2s ease;
+
+            text-transform: uppercase;
+
+            transition: .25s ease;
         }
 
-        header p a:hover {
-            color: var(--cyan);
+
+        .volver:hover {
+
+            color: white;
+
+            border-color: var(--pink);
+
+            background:
+                rgba(255,15,112,.08);
+
+            transform:
+                translateX(5px);
+
+            box-shadow:
+                0 8px 25px
+                rgba(255,15,112,.10);
         }
 
-        /* =========================
+
+        /* =====================================
            TEXTO CENTRAL
-        ========================= */
+        ===================================== */
 
         .texto-centro {
+
             position: relative;
 
             margin: 0;
@@ -226,13 +343,17 @@
 
             letter-spacing: 3px;
 
-            border-bottom: 1px solid var(--line);
+            border-bottom:
+                1px solid var(--line);
 
-            background: rgba(255,255,255,.012);
+            background:
+                rgba(255,255,255,.012);
         }
+
 
         .texto-centro::before,
         .texto-centro::after {
+
             content: "—";
 
             color: var(--pink);
@@ -240,24 +361,30 @@
             margin: 0 14px;
         }
 
-        /* =========================
-           AUDIO
-        ========================= */
+
+        /* =====================================
+           SECCIÓN AUDIO
+        ===================================== */
 
         .audio-section {
+
             position: relative;
 
             padding: 45px 20px;
 
             text-align: center;
 
-            background: rgba(255,255,255,.015);
+            background:
+                rgba(255,255,255,.015);
 
-            border-bottom: 1px solid var(--line);
+            border-bottom:
+                1px solid var(--line);
         }
+
 
         .audio-section::before,
         .audio-section::after {
+
             content: "";
 
             position: absolute;
@@ -270,7 +397,9 @@
             opacity: .8;
         }
 
+
         .audio-section::before {
+
             bottom: 20px;
             left: 25px;
 
@@ -278,7 +407,9 @@
             border-left: 1px solid;
         }
 
+
         .audio-section::after {
+
             bottom: 20px;
             right: 25px;
 
@@ -286,8 +417,11 @@
             border-right: 1px solid;
         }
 
+
         audio {
-            width: min(80%, 600px);
+
+            width:
+                min(80%, 600px);
 
             filter:
                 sepia(1)
@@ -297,11 +431,13 @@
             opacity: .85;
         }
 
-        /* =========================
+
+        /* =====================================
            SECCIÓN GALERÍA
-        ========================= */
+        ===================================== */
 
         .gallery-section {
+
             position: relative;
 
             padding:
@@ -310,20 +446,26 @@
                 100px;
 
             background:
+
                 linear-gradient(
                     rgba(255,15,112,.025),
                     rgba(0,234,255,.015)
                 );
 
-            border-bottom: 1px solid var(--line);
+            border-bottom:
+                1px solid var(--line);
         }
 
+
         .gallery-section::before {
-            content: "ARCHIVO / VISUAL";
+
+            content:
+                "ARCHIVO / VIDEOS";
 
             display: block;
 
-            width: min(94%, 1200px);
+            width:
+                min(94%, 1200px);
 
             margin:
                 0 auto 15px;
@@ -338,10 +480,18 @@
             letter-spacing: 4px;
         }
 
-        .gallery-title {
-            width: min(94%, 1200px);
 
-            margin: 0 auto 10px;
+        /* =====================================
+           TÍTULO GALERÍA
+        ===================================== */
+
+        .gallery-title {
+
+            width:
+                min(94%, 1200px);
+
+            margin:
+                0 auto 10px;
 
             font-size:
                 clamp(32px, 5vw, 65px);
@@ -353,12 +503,21 @@
             text-transform: uppercase;
         }
 
+
+        /* =====================================
+           DESCRIPCIÓN
+        ===================================== */
+
         .gallery-description {
-            width: min(94%, 1200px);
 
-            margin: 0 auto 25px;
+            width:
+                min(94%, 1200px);
 
-            color: var(--muted);
+            margin:
+                0 auto 40px;
+
+            color:
+                var(--muted);
 
             font:
                 12px
@@ -368,18 +527,23 @@
             letter-spacing: 2px;
         }
 
+
         .gallery-description::before {
+
             content: "> ";
 
             color: var(--pink);
         }
 
-        /* =========================
+
+        /* =====================================
            GALERÍA
-        ========================= */
+        ===================================== */
 
         .gallery-container {
-            width: min(94%, 1200px);
+
+            width:
+                min(94%, 1200px);
 
             margin: auto;
 
@@ -391,20 +555,29 @@
             gap: 15px;
         }
 
+
+        /* =====================================
+           TARJETA VIDEO
+        ===================================== */
+
         .gallery-item {
+
             position: relative;
 
             display: block;
 
             overflow: hidden;
 
-            border: 1px solid #292d33;
+            border:
+                1px solid
+                #292d33;
 
             border-left:
                 2px solid
                 var(--pink);
 
-            background: #0b0e12;
+            background:
+                #0b0e12;
 
             cursor: pointer;
 
@@ -418,7 +591,11 @@
                 rgba(0,0,0,.25);
         }
 
+
+        /* Icono ↗ */
+
         .gallery-item::after {
+
             content: "↗";
 
             position: absolute;
@@ -426,7 +603,8 @@
             top: 9px;
             right: 12px;
 
-            color: #555a62;
+            color:
+                #555a62;
 
             font:
                 14px
@@ -435,10 +613,17 @@
 
             z-index: 2;
 
-            transition: .25s ease;
+            transition:
+                .25s ease;
         }
 
-        .gallery-item img {
+
+        /* =====================================
+           VIDEO PREVIEW
+        ===================================== */
+
+        .gallery-item video {
+
             width: 100%;
 
             height: 210px;
@@ -447,7 +632,7 @@
 
             display: block;
 
-            opacity: .88;
+            opacity: .82;
 
             transition:
                 transform .35s ease,
@@ -455,19 +640,30 @@
                 filter .35s ease;
         }
 
+
+        /* =====================================
+           HOVER
+        ===================================== */
+
         .gallery-item:hover {
-            border-color: var(--pink);
+
+            border-color:
+                var(--pink);
 
             transform:
                 translateY(-5px);
 
             box-shadow:
+
                 0 15px 35px
                 rgba(255,15,112,.12);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.06);
+
+        .gallery-item:hover video {
+
+            transform:
+                scale(1.06);
 
             opacity: 1;
 
@@ -476,15 +672,20 @@
                 contrast(1.05);
         }
 
+
         .gallery-item:hover::after {
-            color: var(--cyan);
+
+            color:
+                var(--cyan);
         }
 
-        /* =========================
+
+        /* =====================================
            LIGHTBOX
-        ========================= */
+        ===================================== */
 
         .lightbox {
+
             display: none;
 
             position: fixed;
@@ -494,21 +695,30 @@
             background:
                 rgba(4,5,7,.96);
 
-            justify-content: center;
+            justify-content:
+                center;
 
-            align-items: center;
+            align-items:
+                center;
 
             z-index: 1000;
 
             padding: 30px;
         }
 
-        .lightbox:target {
+
+        .lightbox.active {
+
             display: flex;
         }
 
-        .lightbox img {
+
+        /* Video grande */
+
+        .lightbox video {
+
             max-width: 92%;
+
             max-height: 88%;
 
             object-fit: contain;
@@ -518,6 +728,7 @@
                 rgba(255,15,112,.55);
 
             box-shadow:
+
                 0 0 0 8px
                 rgba(255,255,255,.015),
 
@@ -528,7 +739,13 @@
                 rgba(255,15,112,.12);
         }
 
+
+        /* =====================================
+           BOTÓN CERRAR
+        ===================================== */
+
         .close {
+
             position: absolute;
 
             top: 22px;
@@ -543,127 +760,177 @@
 
             text-decoration: none;
 
-            transition: .2s ease;
+            transition:
+                .2s ease;
+
+            cursor: pointer;
+
+            z-index: 1001;
         }
+
 
         .close:hover {
-            color: var(--pink);
 
-            transform: scale(1.1);
+            color:
+                var(--pink);
+
+            transform:
+                scale(1.1);
         }
 
-        /* =========================
+
+        /* =====================================
            FOOTER
-        ========================= */
+        ===================================== */
 
         footer {
+
             position: relative;
 
-            background: #06070a;
+            background:
+                #06070a;
 
-            color: #50545b;
+            color:
+                #50545b;
 
-            text-align: center;
+            text-align:
+                center;
 
-            padding: 35px 20px;
+            padding:
+                35px 20px;
 
             font:
                 10px
                 "JetBrains Mono",
                 monospace;
 
-            letter-spacing: 2px;
+            letter-spacing:
+                2px;
 
-            text-transform: uppercase;
+            text-transform:
+                uppercase;
         }
 
+
         footer::before {
-            content: "// conexión finalizada";
+
+            content:
+                "// conexión finalizada";
 
             display: block;
 
-            margin-bottom: 12px;
+            margin-bottom:
+                12px;
 
-            color: var(--pink);
+            color:
+                var(--pink);
         }
 
+
         footer p {
+
             margin: 0;
         }
 
-        /* =========================
+
+        /* =====================================
            RESPONSIVE
-        ========================= */
+        ===================================== */
 
         @media (max-width: 900px) {
 
             .gallery-container {
+
                 grid-template-columns:
                     repeat(3, minmax(0, 1fr));
             }
 
-            .gallery-item img {
+
+            .gallery-item video {
+
                 height: 190px;
             }
         }
 
+
         @media (max-width: 650px) {
 
             header {
+
                 min-height: 35vh;
 
                 padding-left: 25px;
                 padding-right: 25px;
             }
 
+
             header h1 {
+
                 letter-spacing: -3px;
             }
 
+
             .gallery-container {
+
                 grid-template-columns:
                     repeat(2, minmax(0, 1fr));
 
                 gap: 10px;
             }
 
-            .gallery-item img {
+
+            .gallery-item video {
+
                 height: 150px;
             }
         }
 
+
         @media (max-width: 430px) {
 
             header h1 {
+
                 font-size:
                     clamp(45px, 15vw, 70px);
             }
 
+
             .gallery-container {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
             }
 
-            .gallery-item img {
+
+            .gallery-item video {
+
                 height: 220px;
             }
 
+
             .texto-centro::before,
             .texto-centro::after {
+
                 display: none;
             }
 
+
             audio {
+
                 width: 100%;
             }
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- =========================
-         TÍTULO
-    ========================= -->
+
+    <!-- =====================================
+         HEADER
+    ===================================== -->
 
     <header>
 
@@ -671,39 +938,47 @@
             Archivo de recuerdos
         </div>
 
+
         <h1>
-            Fotitos<br>
+            Videos<br>
             Wiiwiwi
         </h1>
 
+
         <p>
-            <a href="inicio.html">
-                ← Volver al inicio
-            </a>
+            Momentos bonitos almacenados
         </p>
+
+
+        <a
+            href="inicio.html"
+            class="volver"
+        >
+            ← Volver al inicio
+        </a>
 
     </header>
 
 
-    <!-- =========================
+    <!-- =====================================
          TEXTO
-    ========================= -->
+    ===================================== -->
 
     <p class="texto-centro">
-        Angeles
+        Momentos bonitos 🎬
     </p>
 
 
-    <!-- =========================
+    <!-- =====================================
          AUDIO
-    ========================= -->
+    ===================================== -->
 
     <section class="audio-section">
 
         <audio controls>
 
             <source
-                src="Ang.mp3"
+                src="inthesea.mp3"
                 type="audio/mpeg"
             >
 
@@ -712,614 +987,750 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================
          GALERÍA
-    ========================= -->
+    ===================================== -->
 
     <section class="gallery-section">
 
+
         <h2 class="gallery-title">
-            Galería / Fotitos
+
+            Galería / Videos
+
         </h2>
 
-        <p class="gallery-description">
-            60 recuerdos que jamas podre olvidar, espero que si ves esto Maite puedas apreciar al igual que yo todas estas lindas fotitos.
-        </p>
 
         <p class="gallery-description">
-            si tuviera q elegir mi favorita seria en la que estamos los 2 en tu cerrito mirandonos con mucho amorrr
+
+            16 videitos bien guardados wiwiwi
+
         </p>
 
 
         <div class="gallery-container">
 
-            <a href="#foto1" class="gallery-item">
-                <img src="1.jpg" alt="Foto 1">
+
+            <!-- VIDEO 1 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video1"
+            >
+
+                <video
+                    src="video1.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto2" class="gallery-item">
-                <img src="2.jpg" alt="Foto 2">
+
+            <!-- VIDEO 2 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video2"
+            >
+
+                <video
+                    src="video2.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto3" class="gallery-item">
-                <img src="3.jpg" alt="Foto 3">
+
+            <!-- VIDEO 3 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video3"
+            >
+
+                <video
+                    src="video3.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto4" class="gallery-item">
-                <img src="4.jpg" alt="Foto 4">
+
+            <!-- VIDEO 4 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video4"
+            >
+
+                <video
+                    src="video4.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto5" class="gallery-item">
-                <img src="5.jpg" alt="Foto 5">
+
+            <!-- VIDEO 5 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video5"
+            >
+
+                <video
+                    src="video5.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto6" class="gallery-item">
-                <img src="6.jpg" alt="Foto 6">
+
+            <!-- VIDEO 6 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video6"
+            >
+
+                <video
+                    src="video6.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto7" class="gallery-item">
-                <img src="7.jpg" alt="Foto 7">
+
+            <!-- VIDEO 7 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video7"
+            >
+
+                <video
+                    src="video7.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto8" class="gallery-item">
-                <img src="8.jpg" alt="Foto 8">
+
+            <!-- VIDEO 8 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video8"
+            >
+
+                <video
+                    src="video8.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto9" class="gallery-item">
-                <img src="9.jpg" alt="Foto 9">
+
+            <!-- VIDEO 9 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video9"
+            >
+
+                <video
+                    src="video9.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto10" class="gallery-item">
-                <img src="10.jpg" alt="Foto 10">
+
+            <!-- VIDEO 10 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video10"
+            >
+
+                <video
+                    src="video10.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto11" class="gallery-item">
-                <img src="11.jpg" alt="Foto 11">
+
+            <!-- VIDEO 11 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video11"
+            >
+
+                <video
+                    src="video11.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto12" class="gallery-item">
-                <img src="12.jpg" alt="Foto 12">
+
+            <!-- VIDEO 12 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video12"
+            >
+
+                <video
+                    src="video12.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto13" class="gallery-item">
-                <img src="13.jpg" alt="Foto 13">
+
+            <!-- VIDEO 13 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video13"
+            >
+
+                <video
+                    src="video13.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto14" class="gallery-item">
-                <img src="14.jpg" alt="Foto 14">
+
+            <!-- VIDEO 14 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video14"
+            >
+
+                <video
+                    src="video14.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto15" class="gallery-item">
-                <img src="15.jpg" alt="Foto 15">
+
+            <!-- VIDEO 15 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video15"
+            >
+
+                <video
+                    src="video15.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto16" class="gallery-item">
-                <img src="16.jpg" alt="Foto 16">
+
+            <!-- VIDEO 16 -->
+
+            <a
+                href="#"
+                class="gallery-item"
+                data-video="video16"
+            >
+
+                <video
+                    src="video16.mp4"
+                    muted
+                    preload="metadata"
+                ></video>
+
             </a>
 
-            <a href="#foto17" class="gallery-item">
-                <img src="17.jpg" alt="Foto 17">
-            </a>
-
-            <a href="#foto18" class="gallery-item">
-                <img src="18.jpg" alt="Foto 18">
-            </a>
-
-            <a href="#foto19" class="gallery-item">
-                <img src="19.jpg" alt="Foto 19">
-            </a>
-
-            <a href="#foto20" class="gallery-item">
-                <img src="20.jpeg" alt="Foto 20">
-            </a>
-
-            <a href="#foto21" class="gallery-item">
-                <img src="21.jpg" alt="Foto 21">
-            </a>
-
-            <a href="#foto22" class="gallery-item">
-                <img src="22.jpg" alt="Foto 22">
-            </a>
-
-            <a href="#foto23" class="gallery-item">
-                <img src="23.jpg" alt="Foto 23">
-            </a>
-
-            <a href="#foto24" class="gallery-item">
-                <img src="24.jpg" alt="Foto 24">
-            </a>
-
-            <a href="#foto25" class="gallery-item">
-                <img src="25.jpg" alt="Foto 25">
-            </a>
-
-            <a href="#foto26" class="gallery-item">
-                <img src="26.jpg" alt="Foto 26">
-            </a>
-
-            <a href="#foto27" class="gallery-item">
-                <img src="27.jpg" alt="Foto 27">
-            </a>
-
-            <a href="#foto28" class="gallery-item">
-                <img src="28.jpg" alt="Foto 28">
-            </a>
-
-            <a href="#foto29" class="gallery-item">
-                <img src="29.jpg" alt="Foto 29">
-            </a>
-
-            <a href="#foto30" class="gallery-item">
-                <img src="30.jpg" alt="Foto 30">
-            </a>
-
-            <a href="#foto31" class="gallery-item">
-                <img src="31.jpg" alt="Foto 31">
-            </a>
-
-            <a href="#foto32" class="gallery-item">
-                <img src="32.jpg" alt="Foto 32">
-            </a>
-
-            <a href="#foto33" class="gallery-item">
-                <img src="33.jpg" alt="Foto 33">
-            </a>
-
-            <a href="#foto34" class="gallery-item">
-                <img src="34.jpg" alt="Foto 34">
-            </a>
-
-            <a href="#foto35" class="gallery-item">
-                <img src="35.jpg" alt="Foto 35">
-            </a>
-
-            <a href="#foto36" class="gallery-item">
-                <img src="36.jpg" alt="Foto 36">
-            </a>
-
-            <a href="#foto37" class="gallery-item">
-                <img src="37.jpg" alt="Foto 37">
-            </a>
-
-            <a href="#foto38" class="gallery-item">
-                <img src="38.jpg" alt="Foto 38">
-            </a>
-
-            <a href="#foto39" class="gallery-item">
-                <img src="39.jpg" alt="Foto 39">
-            </a>
-
-            <a href="#foto40" class="gallery-item">
-                <img src="40.jpg" alt="Foto 40">
-            </a>
-
-            <a href="#foto41" class="gallery-item">
-                <img src="41.jpg" alt="Foto 41">
-            </a>
-
-            <a href="#foto42" class="gallery-item">
-                <img src="42.jpg" alt="Foto 42">
-            </a>
-
-            <a href="#foto43" class="gallery-item">
-                <img src="43.jpg" alt="Foto 43">
-            </a>
-
-            <a href="#foto44" class="gallery-item">
-                <img src="44.jpg" alt="Foto 44">
-            </a>
-
-            <a href="#foto45" class="gallery-item">
-                <img src="45.jpg" alt="Foto 45">
-            </a>
-
-            <a href="#foto46" class="gallery-item">
-                <img src="46.jpg" alt="Foto 46">
-            </a>
-
-            <a href="#foto47" class="gallery-item">
-                <img src="47.jpg" alt="Foto 47">
-            </a>
-
-            <a href="#foto48" class="gallery-item">
-                <img src="48.jpg" alt="Foto 48">
-            </a>
-
-            <a href="#foto49" class="gallery-item">
-                <img src="49.jpeg" alt="Foto 49">
-            </a>
-
-            <a href="#foto50" class="gallery-item">
-                <img src="50.jpeg" alt="Foto 50">
-            </a>
-
-            <a href="#foto51" class="gallery-item">
-                <img src="51.jpeg" alt="Foto 51">
-            </a>
-
-            <a href="#foto52" class="gallery-item">
-                <img src="52.jpeg" alt="Foto 52">
-            </a>
-
-            <a href="#foto53" class="gallery-item">
-                <img src="53.jpeg" alt="Foto 53">
-            </a>
-
-            <a href="#foto54" class="gallery-item">
-                <img src="54.jpg" alt="Foto 54">
-            </a>
-
-            <a href="#foto55" class="gallery-item">
-                <img src="55.jpg" alt="Foto 55">
-            </a>
-
-            <a href="#foto56" class="gallery-item">
-                <img src="56.jpg" alt="Foto 56">
-            </a>
-
-            <a href="#foto57" class="gallery-item">
-                <img src="57.jpg" alt="Foto 57">
-            </a>
-
-            <a href="#foto58" class="gallery-item">
-                <img src="58.jpg" alt="Foto 58">
-            </a>
-
-            <a href="#foto59" class="gallery-item">
-                <img src="59.jpg" alt="Foto 59">
-            </a>
-
-            <a href="#foto60" class="gallery-item">
-                <img src="60.jpg" alt="Foto 60">
-            </a>
 
         </div>
 
     </section>
 
 
-    <!-- =========================
-         LIGHTBOX 1 - 10
-    ========================= -->
+    <!-- =====================================
+         LIGHTBOX VIDEOS
+    ===================================== -->
 
-    <div id="foto1" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="1.jpg" alt="Foto 1">
-    </div>
 
-    <div id="foto2" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="2.jpg" alt="Foto 2">
-    </div>
+    <div id="video1" class="lightbox">
 
-    <div id="foto3" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="3.jpg" alt="Foto 3">
-    </div>
+        <span class="close">&times;</span>
 
-    <div id="foto4" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="4.jpg" alt="Foto 4">
-    </div>
+        <video
+            src="video1.mp4"
+            controls
+            preload="metadata"
+        ></video>
 
-    <div id="foto5" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="5.jpg" alt="Foto 5">
-    </div>
-
-    <div id="foto6" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="6.jpg" alt="Foto 6">
-    </div>
-
-    <div id="foto7" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="7.jpg" alt="Foto 7">
-    </div>
-
-    <div id="foto8" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="8.jpg" alt="Foto 8">
-    </div>
-
-    <div id="foto9" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="9.jpg" alt="Foto 9">
-    </div>
-
-    <div id="foto10" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="10.jpg" alt="Foto 10">
     </div>
 
 
-    <!-- =========================
-         LIGHTBOX 11 - 20
-    ========================= -->
+    <div id="video2" class="lightbox">
 
-    <div id="foto11" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="11.jpg" alt="Foto 11">
-    </div>
+        <span class="close">&times;</span>
 
-    <div id="foto12" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="12.jpg" alt="Foto 12">
-    </div>
+        <video
+            src="video2.mp4"
+            controls
+            preload="metadata"
+        ></video>
 
-    <div id="foto13" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="13.jpg" alt="Foto 13">
-    </div>
-
-    <div id="foto14" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="14.jpg" alt="Foto 14">
-    </div>
-
-    <div id="foto15" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="15.jpg" alt="Foto 15">
-    </div>
-
-    <div id="foto16" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="16.jpg" alt="Foto 16">
-    </div>
-
-    <div id="foto17" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="17.jpg" alt="Foto 17">
-    </div>
-
-    <div id="foto18" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="18.jpg" alt="Foto 18">
-    </div>
-
-    <div id="foto19" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="19.jpg" alt="Foto 19">
-    </div>
-
-    <div id="foto20" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="20.jpeg" alt="Foto 20">
     </div>
 
 
-    <!-- =========================
-         LIGHTBOX 21 - 30
-    ========================= -->
+    <div id="video3" class="lightbox">
 
-    <div id="foto21" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="21.jpg" alt="Foto 21">
-    </div>
+        <span class="close">&times;</span>
 
-    <div id="foto22" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="22.jpg" alt="Foto 22">
-    </div>
+        <video
+            src="video3.mp4"
+            controls
+            preload="metadata"
+        ></video>
 
-    <div id="foto23" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="23.jpg" alt="Foto 23">
-    </div>
-
-    <div id="foto24" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="24.jpg" alt="Foto 24">
-    </div>
-
-    <div id="foto25" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="25.jpg" alt="Foto 25">
-    </div>
-
-    <div id="foto26" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="26.jpg" alt="Foto 26">
-    </div>
-
-    <div id="foto27" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="27.jpg" alt="Foto 27">
-    </div>
-
-    <div id="foto28" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="28.jpg" alt="Foto 28">
-    </div>
-
-    <div id="foto29" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="29.jpg" alt="Foto 29">
-    </div>
-
-    <div id="foto30" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="30.jpg" alt="Foto 30">
     </div>
 
 
-    <!-- =========================
-         LIGHTBOX 31 - 40
-    ========================= -->
+    <div id="video4" class="lightbox">
 
-    <div id="foto31" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="31.jpg" alt="Foto 31">
-    </div>
+        <span class="close">&times;</span>
 
-    <div id="foto32" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="32.jpg" alt="Foto 32">
-    </div>
+        <video
+            src="video4.mp4"
+            controls
+            preload="metadata"
+        ></video>
 
-    <div id="foto33" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="33.jpg" alt="Foto 33">
-    </div>
-
-    <div id="foto34" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="34.jpg" alt="Foto 34">
-    </div>
-
-    <div id="foto35" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="35.jpg" alt="Foto 35">
-    </div>
-
-    <div id="foto36" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="36.jpg" alt="Foto 36">
-    </div>
-
-    <div id="foto37" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="37.jpg" alt="Foto 37">
-    </div>
-
-    <div id="foto38" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="38.jpg" alt="Foto 38">
-    </div>
-
-    <div id="foto39" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="39.jpg" alt="Foto 39">
-    </div>
-
-    <div id="foto40" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="40.jpg" alt="Foto 40">
     </div>
 
 
-    <!-- =========================
-         LIGHTBOX 41 - 50
-    ========================= -->
+    <div id="video5" class="lightbox">
 
-    <div id="foto41" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="41.jpg" alt="Foto 41">
-    </div>
+        <span class="close">&times;</span>
 
-    <div id="foto42" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="42.jpg" alt="Foto 42">
-    </div>
+        <video
+            src="video5.mp4"
+            controls
+            preload="metadata"
+        ></video>
 
-    <div id="foto43" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="43.jpg" alt="Foto 43">
-    </div>
-
-    <div id="foto44" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="44.jpg" alt="Foto 44">
-    </div>
-
-    <div id="foto45" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="45.jpg" alt="Foto 45">
-    </div>
-
-    <div id="foto46" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="46.jpg" alt="Foto 46">
-    </div>
-
-    <div id="foto47" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="47.jpg" alt="Foto 47">
-    </div>
-
-    <div id="foto48" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="48.jpg" alt="Foto 48">
-    </div>
-
-    <div id="foto49" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="49.jpeg" alt="Foto 49">
-    </div>
-
-    <div id="foto50" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="50.jpeg" alt="Foto 50">
     </div>
 
 
-    <!-- =========================
-         LIGHTBOX 51 - 60
-    ========================= -->
+    <div id="video6" class="lightbox">
 
-    <div id="foto51" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="51.jpeg" alt="Foto 51">
-    </div>
+        <span class="close">&times;</span>
 
-    <div id="foto52" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="52.jpeg" alt="Foto 52">
-    </div>
+        <video
+            src="video6.mp4"
+            controls
+            preload="metadata"
+        ></video>
 
-    <div id="foto53" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="53.jpeg" alt="Foto 53">
-    </div>
-
-    <div id="foto54" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="54.jpg" alt="Foto 54">
-    </div>
-
-    <div id="foto55" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="55.jpg" alt="Foto 55">
-    </div>
-
-    <div id="foto56" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="56.jpg" alt="Foto 56">
-    </div>
-
-    <div id="foto57" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="57.jpg" alt="Foto 57">
-    </div>
-
-    <div id="foto58" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="58.jpg" alt="Foto 58">
-    </div>
-
-    <div id="foto59" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="59.jpg" alt="Foto 59">
-    </div>
-
-    <div id="foto60" class="lightbox">
-        <a href="#" class="close">&times;</a>
-        <img src="60.jpg" alt="Foto 60">
     </div>
 
 
-    <!-- =========================
+    <div id="video7" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video7.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video8" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video8.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video9" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video9.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video10" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video10.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video11" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video11.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video12" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video12.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video13" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video13.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video14" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video14.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video15" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video15.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video16" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video16.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <div id="video17" class="lightbox">
+
+        <span class="close">&times;</span>
+
+        <video
+            src="video17.mp4"
+            controls
+            preload="metadata"
+        ></video>
+
+    </div>
+
+
+    <!-- =====================================
          FOOTER
-    ========================= -->
+    ===================================== -->
 
     <footer>
 
         <p>
-            © 2026 - Web de Matiiii |
-            No sale nada de aquí ehh
+            © 2025 - Web de Matiiii |
+            No sale nada de aquí ehh Tomy
         </p>
 
     </footer>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+        const galleryItems =
+            document.querySelectorAll('.gallery-item');
+
+        const lightboxes =
+            document.querySelectorAll('.lightbox');
+
+
+        /* =====================================
+           PAUSAR TODOS LOS VIDEOS
+        ===================================== */
+
+        function pauseAllVideos() {
+
+            document
+                .querySelectorAll('video')
+                .forEach(video => {
+
+                    video.pause();
+
+                });
+
+        }
+
+
+        /* =====================================
+           ABRIR VIDEO
+        ===================================== */
+
+        galleryItems.forEach(item => {
+
+            item.addEventListener(
+                'click',
+                function(e) {
+
+                    e.preventDefault();
+
+
+                    /* Pausar todos */
+
+                    pauseAllVideos();
+
+
+                    /* Obtener ID */
+
+                    const videoId =
+                        this.dataset.video;
+
+
+                    const lightbox =
+                        document.getElementById(videoId);
+
+
+                    const video =
+                        lightbox.querySelector('video');
+
+
+                    /* Mostrar */
+
+                    lightbox.classList.add('active');
+
+
+                    /* Reiniciar */
+
+                    video.currentTime = 0;
+
+
+                    /* Reproducir */
+
+                    video.play().catch(error => {
+
+                        console.log(
+                            "El navegador bloqueó la reproducción automática:",
+                            error
+                        );
+
+                    });
+
+                }
+            );
+
+        });
+
+
+        /* =====================================
+           CERRAR LIGHTBOX
+        ===================================== */
+
+        lightboxes.forEach(lightbox => {
+
+
+            const closeButton =
+                lightbox.querySelector('.close');
+
+
+            const video =
+                lightbox.querySelector('video');
+
+
+            /* BOTÓN X */
+
+            closeButton.addEventListener(
+                'click',
+                function(e) {
+
+                    e.stopPropagation();
+
+
+                    video.pause();
+
+                    video.currentTime = 0;
+
+
+                    lightbox.classList.remove('active');
+
+                }
+            );
+
+
+            /* CLIC FUERA */
+
+            lightbox.addEventListener(
+                'click',
+                function(e) {
+
+                    if (e.target === lightbox) {
+
+                        video.pause();
+
+                        video.currentTime = 0;
+
+                        lightbox.classList.remove(
+                            'active'
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* EVITAR CERRAR SOBRE VIDEO */
+
+            video.addEventListener(
+                'click',
+                function(e) {
+
+                    e.stopPropagation();
+
+                }
+            );
+
+        });
+
+
+        /* =====================================
+           CERRAR CON ESC
+        ===================================== */
+
+        document.addEventListener(
+            'keydown',
+            function(e) {
+
+                if (e.key === 'Escape') {
+
+                    lightboxes.forEach(
+                        lightbox => {
+
+                            if (
+                                lightbox.classList
+                                .contains('active')
+                            ) {
+
+                                const video =
+                                    lightbox
+                                    .querySelector('video');
+
+
+                                video.pause();
+
+                                video.currentTime = 0;
+
+
+                                lightbox.classList
+                                    .remove('active');
+
+                            }
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
 
 </body>
 </html>
