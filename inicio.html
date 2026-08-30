@@ -123,67 +123,6 @@
     }
 
     /* =========================
-       CONTADORES
-       ========================= */
-
-    .contador-section {
-        padding: 55px 20px;
-        text-align: center;
-        border-bottom: 1px solid var(--line);
-        background: rgba(255,15,112,.025);
-    }
-
-    .contador-label {
-        color: var(--pink);
-        font: 700 11px "JetBrains Mono", monospace;
-        letter-spacing: 4px;
-        margin-bottom: 18px;
-    }
-
-    .contador-label::before {
-        content: "// ";
-        color: var(--cyan);
-    }
-
-    .contador {
-        font-family: "JetBrains Mono", monospace;
-        font-size: clamp(38px, 8vw, 75px);
-        font-weight: 700;
-        letter-spacing: 4px;
-        color: white;
-        text-shadow: 0 0 25px rgba(255,15,112,.25);
-    }
-
-    .contador-subtexto {
-        margin-top: 15px;
-        color: var(--muted);
-        font: 11px "JetBrains Mono", monospace;
-    }
-
-    .contador.oculto {
-        display: none;
-    }
-
-    .desbloqueado {
-        color: var(--cyan);
-        font: 700 clamp(22px, 5vw, 38px) "JetBrains Mono", monospace;
-        text-transform: uppercase;
-        animation: aparecer .6s ease;
-    }
-
-    @keyframes aparecer {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* =========================
        PÁGINAS
        ========================= */
 
@@ -216,7 +155,7 @@
     }
 
     /* =========================
-       BOTONES / PÁGINAS
+       BOTONES DE PÁGINAS
        ========================= */
 
     .pagina {
@@ -229,86 +168,68 @@
         justify-content: center;
         border: 1px solid #292d33;
         background: #0b0e12;
+        color: white;
         font: 600 12px "JetBrains Mono", monospace;
         text-transform: uppercase;
+        cursor: pointer;
         transition: .25s ease;
     }
 
-    .pagina.bloqueada {
+    .pagina:hover {
+        transform: translateY(-4px);
+        background: rgba(255,15,112,.08);
+        border-color: var(--pink);
+        box-shadow: 0 15px 40px rgba(255,15,112,.10);
+    }
+
+    .pagina::before {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .pagina.fotos {
+        border-left: 2px solid var(--pink);
+    }
+
+    .pagina.fotos::before {
+        content: "📸";
+    }
+
+    .pagina.videos {
+        border-left: 2px solid var(--cyan);
+    }
+
+    .pagina.videos::before {
+        content: "🎥";
+    }
+
+    .pagina.carta {
+        border-left: 2px solid #555b63;
         color: #555b63;
         cursor: not-allowed;
     }
 
-    .pagina.bloqueada::before {
+    .pagina.carta::before {
         content: "🔒";
-        font-size: 22px;
-        margin-bottom: 10px;
         filter: grayscale(1);
     }
 
-    .pagina.bloqueada .estado {
+    .pagina.carta:hover {
+        transform: none;
+        background: #0b0e12;
+        border-color: #292d33;
+        box-shadow: none;
+    }
+
+    .estado {
         margin-top: 8px;
-        color: #4d5259;
         font-size: 8px;
         letter-spacing: 2px;
-    }
-
-    .pagina.fotos {
-        border-left: 2px solid #555b63;
-    }
-
-    .pagina.fotos.desbloqueada {
-        color: white;
-        border-color: var(--pink);
-        border-left: 2px solid var(--pink);
-        cursor: pointer;
-        background: rgba(255,15,112,.05);
-        box-shadow: 0 0 25px rgba(255,15,112,.06);
-    }
-
-    .pagina.fotos.desbloqueada::before {
-        content: "📸";
-        filter: none;
-    }
-
-    .pagina.fotos.desbloqueada:hover {
-        transform: translateY(-4px);
-        background: rgba(255,15,112,.12);
-        box-shadow: 0 15px 40px rgba(255,15,112,.12);
-    }
-
-    .pagina.fotos.desbloqueada .estado {
         color: var(--cyan);
     }
 
-    /* VIDEOS */
-
-    .pagina.videos {
-        border-left: 2px solid #555b63;
-    }
-
-    .pagina.videos.desbloqueada {
-        color: white;
-        border-color: var(--pink);
-        border-left: 2px solid var(--pink);
-        cursor: pointer;
-        background: rgba(255,15,112,.05);
-        box-shadow: 0 0 25px rgba(255,15,112,.06);
-    }
-
-    .pagina.videos.desbloqueada::before {
-        content: "🎥";
-        filter: none;
-    }
-
-    .pagina.videos.desbloqueada:hover {
-        transform: translateY(-4px);
-        background: rgba(255,15,112,.12);
-        box-shadow: 0 15px 40px rgba(255,15,112,.12);
-    }
-
-    .pagina.videos.desbloqueada .estado {
-        color: var(--cyan);
+    .carta-estado {
+        color: #4d5259;
     }
 
     /* =========================
@@ -537,7 +458,7 @@
     }
 
     /* =========================
-       VIDEO
+       VIDEOS
        ========================= */
 
     .video-box {
@@ -602,11 +523,6 @@
 
     @media (max-width: 500px) {
 
-        .contador {
-            font-size: 35px;
-            letter-spacing: 1px;
-        }
-
         .quiz-box {
             padding: 25px 17px;
         }
@@ -628,14 +544,20 @@
 
 ```
 <header>
-    <div class="eyebrow">Inicioooo</div>
+
+    <div class="eyebrow">
+        Inicioooo
+    </div>
 
     <h1>
         Migajitas<br>
         en página
     </h1>
 
-    <p>Mish</p>
+    <p>
+        Mish
+    </p>
+
 </header>
 
 
@@ -647,7 +569,12 @@
 <section class="audio-section">
 
     <audio controls>
-        <source src="slow.mp3" type="audio/mpeg">
+
+        <source
+            src="slow.mp3"
+            type="audio/mpeg"
+        >
+
     </audio>
 
 </section>
@@ -655,29 +582,10 @@
 
 <section class="portada">
 
-    <img src="banne.jpg" alt="Imagen de portada">
-
-</section>
-
-
-<!-- ======================================
-     CONTADOR GALERÍA DE VIDEOS
-     29/08/2026 - 23:00
-     ====================================== -->
-
-<section class="contador-section">
-
-    <div class="contador-label">
-        Próxima actualización
-    </div>
-
-    <div id="contadorVideos" class="contador">
-        00:00:00
-    </div>
-
-    <div id="contadorVideosSubtexto" class="contador-subtexto">
-        La Galería de Videos se desbloqueará el 29/08/2026 a las 23:00
-    </div>
+    <img
+        src="banne.jpg"
+        alt="Imagen de portada"
+    >
 
 </section>
 
@@ -696,41 +604,33 @@
     <div class="galeria">
 
 
-        <!-- FOTOS -->
+        <!-- FOTOS HABILITADAS -->
 
         <div
-            id="paginaFotos"
-            class="pagina fotos bloqueada"
+            class="pagina fotos"
             onclick="abrirFotos()"
         >
 
             Galería de fotitos
 
-            <span
-                id="estadoFotos"
-                class="estado"
-            >
-                🔒 BLOQUEADA
+            <span class="estado">
+                ✓ ENTRAR
             </span>
 
         </div>
 
 
-        <!-- VIDEOS -->
+        <!-- VIDEOS HABILITADOS -->
 
         <div
-            id="paginaVideos"
-            class="pagina videos bloqueada"
+            class="pagina videos"
             onclick="abrirVideos()"
         >
 
-            🎥 Galería de videos
+            Galería de videos
 
-            <span
-                id="estadoVideos"
-                class="estado"
-            >
-                🔒 BLOQUEADA HASTA LAS 23:00
+            <span class="estado">
+                ✓ ENTRAR
             </span>
 
         </div>
@@ -738,11 +638,11 @@
 
         <!-- CARTA -->
 
-        <div class="pagina bloqueada">
+        <div class="pagina carta">
 
-            💌 Carta
+            Carta
 
-            <span class="estado">
+            <span class="estado carta-estado">
                 🔒 EN PROCESO DE CREACIÓN
             </span>
 
@@ -1221,185 +1121,121 @@
 <script>
 
     /* ==================================================
-       FECHAS DE DESBLOQUEO
+       NAVEGACIÓN DE PÁGINAS
        ================================================== */
 
-    /*
-     * GALERÍA DE VIDEOS
-     * 29 de agosto de 2026 a las 23:00
-     */
+    function abrirFotos() {
 
-    const fechaVideos =
-        new Date(2026, 7, 29, 23, 0, 0, 0);
-
-
-    /*
-     * QUEMA
-     * 29 de agosto de 2026 a las 23:30
-     */
-
-    const fechaQuema =
-        new Date(2026, 7, 29, 23, 30, 0, 0);
-
-
-    /* ==================================================
-       ELEMENTOS VIDEOS
-       ================================================== */
-
-    const contadorVideos =
-        document.getElementById("contadorVideos");
-
-    const contadorVideosSubtexto =
-        document.getElementById("contadorVideosSubtexto");
-
-    const paginaVideos =
-        document.getElementById("paginaVideos");
-
-    const estadoVideos =
-        document.getElementById("estadoVideos");
-
-
-    /* ==================================================
-       ELEMENTOS QUEMA
-       ================================================== */
-
-    const contadorQuema =
-        document.getElementById("contadorQuema");
-
-    const btnQuema =
-        document.getElementById("btnQuema");
-
-    const quemaCard =
-        document.getElementById("quemaCard");
-
-    const quemaDescripcion =
-        document.getElementById("quemaDescripcion");
-
-
-    /* ==================================================
-       FORMATO DEL TIEMPO
-       ================================================== */
-
-    function formatoTiempo(diferencia) {
-
-        if (diferencia < 0) {
-            diferencia = 0;
-        }
-
-        const horas =
-            Math.floor(
-                diferencia / (1000 * 60 * 60)
-            );
-
-        const minutos =
-            Math.floor(
-                (diferencia % (1000 * 60 * 60))
-                / (1000 * 60)
-            );
-
-        const segundos =
-            Math.floor(
-                (diferencia % (1000 * 60))
-                / 1000
-            );
-
-        return (
-            String(horas).padStart(2, "0")
-            + ":" +
-            String(minutos).padStart(2, "0")
-            + ":" +
-            String(segundos).padStart(2, "0")
-        );
-    }
-
-
-    /* ==================================================
-       DESBLOQUEAR VIDEOS
-       ================================================== */
-
-    function desbloquearVideos() {
-
-        contadorVideos.classList.add("oculto");
-
-        contadorVideosSubtexto.innerHTML =
-            '<span class="desbloqueado">✨ GALERÍA DE VIDEOS DESBLOQUEADA ✨</span>';
-
-
-        paginaVideos.classList.remove(
-            "bloqueada"
-        );
-
-        paginaVideos.classList.add(
-            "desbloqueada"
-        );
-
-
-        estadoVideos.textContent =
-            "✓ AHORA PUEDES ENTRAR";
-
-
-        paginaVideos.onclick =
-            function() {
-
-                window.location.href =
-                    "gale1.html";
-
-            };
-    }
-
-
-    /* ==================================================
-       CONTADOR VIDEOS
-       ================================================== */
-
-    function actualizarContadorVideos() {
-
-        const ahora =
-            new Date();
-
-        const diferencia =
-            fechaVideos.getTime()
-            -
-            ahora.getTime();
-
-
-        if (diferencia <= 0) {
-
-            desbloquearVideos();
-
-            return;
-
-        }
-
-
-        contadorVideos.textContent =
-            formatoTiempo(diferencia);
+        window.location.href = "gale.html";
 
     }
 
-
-    /* ==================================================
-       ABRIR VIDEOS
-       ================================================== */
 
     function abrirVideos() {
 
-        if (
-            paginaVideos.classList.contains(
-                "desbloqueada"
-            )
-        ) {
-
-            window.location.href =
-                "gale1.html";
-
-        }
+        window.location.href = "gale1.html";
 
     }
 
 
     /* ==================================================
-       CONTADOR QUEMA
+       FECHA DE DESBLOQUEO DE QUEMA
+       29/08/2026 - 23:30
+       ================================================== */
+
+    const fechaQuema =
+        new Date(
+            2026,
+            7,
+            29,
+            23,
+            30,
+            0,
+            0
+        );
+
+
+    const contadorQuema =
+        document.getElementById(
+            "contadorQuema"
+        );
+
+    const btnQuema =
+        document.getElementById(
+            "btnQuema"
+        );
+
+    const quemaCard =
+        document.getElementById(
+            "quemaCard"
+        );
+
+    const quemaDescripcion =
+        document.getElementById(
+            "quemaDescripcion"
+        );
+
+
+    /* ==================================================
+       FORMATO DEL CONTADOR
+       ================================================== */
+
+    function formatoTiempo(
+        diferencia
+    ) {
+
+        if (
+            diferencia < 0
+        ) {
+
+            diferencia = 0;
+
+        }
+
+
+        const horas =
+            Math.floor(
+                diferencia /
+                (1000 * 60 * 60)
+            );
+
+
+        const minutos =
+            Math.floor(
+                (
+                    diferencia %
+                    (1000 * 60 * 60)
+                ) /
+                (1000 * 60)
+            );
+
+
+        const segundos =
+            Math.floor(
+                (
+                    diferencia %
+                    (1000 * 60)
+                ) /
+                1000
+            );
+
+
+        return (
+            String(horas)
+                .padStart(2, "0")
+            + ":" +
+            String(minutos)
+                .padStart(2, "0")
+            + ":" +
+            String(segundos)
+                .padStart(2, "0")
+        );
+
+    }
+
+
+    /* ==================================================
+       ACTUALIZAR CONTADOR DE QUEMA
        ================================================== */
 
     function actualizarContadorQuema() {
@@ -1407,13 +1243,16 @@
         const ahora =
             new Date();
 
+
         const diferencia =
             fechaQuema.getTime()
             -
             ahora.getTime();
 
 
-        if (diferencia <= 0) {
+        if (
+            diferencia <= 0
+        ) {
 
             desbloquearQuema();
 
@@ -1423,7 +1262,10 @@
 
 
         contadorQuema.textContent =
-            "⏳ " + formatoTiempo(diferencia);
+            "⏳ " +
+            formatoTiempo(
+                diferencia
+            );
 
     }
 
@@ -1437,6 +1279,7 @@
         quemaCard.classList.remove(
             "proceso"
         );
+
 
         quemaCard.classList.add(
             "quema-desbloqueada"
@@ -1457,18 +1300,7 @@
     }
 
 
-    /* ==================================================
-       INICIAR CONTADORES
-       ================================================== */
-
-    actualizarContadorVideos();
     actualizarContadorQuema();
-
-
-    setInterval(
-        actualizarContadorVideos,
-        1000
-    );
 
 
     setInterval(
@@ -1651,13 +1483,9 @@
 
     function abrirQuizQuema() {
 
-        /*
-         * Por seguridad, comprobamos que
-         * ya haya llegado la hora.
-         */
-
         if (
-            new Date() < fechaQuema
+            new Date() <
+            fechaQuema
         ) {
 
             return;
@@ -1713,9 +1541,7 @@
             }
 
 
-            /*
-             * SOLO B ES CORRECTA
-             */
+            /* SOLO B ES CORRECTA */
 
             if (
                 respuesta.value === "b"
