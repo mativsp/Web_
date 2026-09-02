@@ -636,14 +636,18 @@
         </div>
 
 
-        <!-- CARTA -->
+        <!-- CARTA HABILITADA -->
 
-        <div class="pagina carta">
+        <div
+            class="pagina carta"
+            onclick="abrirCarta()"
+            style="cursor:pointer; color:white; border-left-color:#00eaff;"
+        >
 
             Carta
 
-            <span class="estado carta-estado">
-                🔒 EN PROCESO DE CREACIÓN
+            <span class="estado">
+                ✓ ENTRAR
             </span>
 
         </div>
@@ -1134,6 +1138,13 @@
     function abrirVideos() {
 
         window.location.href = "gale1.html";
+
+    }
+
+
+    function abrirCarta() {
+
+        window.location.href = "poe.html";
 
     }
 
