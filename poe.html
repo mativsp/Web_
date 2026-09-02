@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para Maite ❤️</title>
+
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #ff4f9a;
+            --pink-light: #ff8fc4;
+            --cyan: #4de8ff;
+            --bg: #08080d;
+            --bg-card: rgba(18, 18, 27, 0.88);
+            --text: #eeeeee;
+            --text-soft: #bcbcc8;
+            --border: rgba(255, 79, 154, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 79, 154, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(77, 232, 255, 0.08),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           FONDO DECORATIVO
+        ========================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                );
+
+            background-size: 40px 40px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent
+            );
+
+            z-index: 0;
+        }
+
+        /* =========================================
+           CORAZONES
+        ========================================= */
+
+        .heart {
+            position: fixed;
+            bottom: -10vh;
+
+            color: rgba(255, 79, 154, 0.30);
+
+            text-shadow:
+                0 0 10px rgba(255, 79, 154, 0.35),
+                0 0 20px rgba(255, 79, 154, 0.15);
+
+            animation: float 10s linear infinite;
+
+            pointer-events: none;
+            user-select: none;
+
+            z-index: 1;
+        }
+
+        @keyframes float {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 0.45;
+            }
+
+            100% {
+                transform:
+                    translateY(-120vh)
+                    rotate(35deg);
+
+                opacity: 0;
+            }
+        }
+
+        /* =========================================
+           CONTENEDOR
+        ========================================= */
+
+        .wrapper {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 60px 20px;
+
+            display: flex;
+            justify-content: center;
+
+            position: relative;
+            z-index: 5;
+        }
+
+        /* =========================================
+           CARTA
+        ========================================= */
+
+        .carta {
+
+            width: min(900px, 100%);
+
+            background: var(--bg-card);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 24px;
+
+            padding: 55px 65px;
+
+            position: relative;
+            overflow: hidden;
+
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.02),
+                0 25px 80px rgba(0,0,0,0.55),
+                0 0 45px rgba(255,79,154,0.07);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            animation: appear 0.8s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Brillos */
+
+        .carta::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            top: -180px;
+            right: -100px;
+
+            background: var(--pink);
+
+            opacity: 0.08;
+
+            filter: blur(80px);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .carta::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            bottom: -150px;
+            left: -100px;
+
+            background: var(--cyan);
+
+            opacity: 0.05;
+
+            filter: blur(70px);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        /* =========================================
+           ENCABEZADO
+        ========================================= */
+
+        .tag {
+
+            text-align: center;
+
+            font-family: 'Space Grotesk', sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: var(--cyan);
+
+            margin-bottom: 10px;
+
+            opacity: 0.85;
+        }
+
+        h1 {
+
+            margin: 0;
+
+            text-align: center;
+
+            font-family: 'Playfair Display', serif;
+
+            font-style: italic;
+
+            font-size: clamp(
+                38px,
+                6vw,
+                58px
+            );
+
+            font-weight: 400;
+
+            color: #fff;
+
+            text-shadow:
+                0 0 18px rgba(
+                    255,
+                    79,
+                    154,
+                    0.25
+                );
+
+            letter-spacing: 1px;
+        }
+
+        .linea {
+
+            width: 90px;
+
+            height: 2px;
+
+            margin:
+                20px auto 35px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--pink),
+                    var(--cyan),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 12px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.35
+                );
+        }
+
+        /* =========================================
+           MÚSICA
+        ========================================= */
+
+        .music-control {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 42px;
+        }
+
+        .music-control button {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.35
+                );
+
+            background:
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.08
+                );
+
+            color: #fff;
+
+            padding:
+                12px 25px;
+
+            border-radius: 30px;
+
+            font-family:
+                'Space Grotesk',
+                sans-serif;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .music-control button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.16
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.7
+                );
+
+            box-shadow:
+                0 0 20px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.18
+                );
+        }
+
+        /* =========================================
+           CONTENIDO DE LA CARTA
+        ========================================= */
+
+        .contenido {
+
+            font-family:
+                'Playfair Display',
+                serif;
+
+            font-size: 19px;
+
+            line-height: 2;
+
+            color: #d5d5dc;
+
+            text-align: justify;
+        }
+
+        .contenido p {
+
+            margin:
+                0 0 30px;
+        }
+
+        .contenido p:first-child::first-letter {
+
+            font-size: 48px;
+
+            float: left;
+
+            line-height: 0.9;
+
+            padding-right: 7px;
+
+            color: var(--pink);
+
+            text-shadow:
+                0 0 15px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.25
+                );
+        }
+
+        /* =========================================
+           FRASE DESTACADA
+        ========================================= */
+
+        .destacado {
+
+            color: #fff;
+
+            font-style: italic;
+
+            border-left:
+                2px solid
+                var(--pink);
+
+            padding-left: 20px;
+
+            margin:
+                35px 0;
+        }
+
+        /* =========================================
+           PREGUNTA FINAL
+        ========================================= */
+
+        .pregunta {
+
+            margin-top: 45px;
+
+            padding:
+                30px 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(
+                        255,
+                        79,
+                        154,
+                        0.09
+                    ),
+                    rgba(
+                        77,
+                        232,
+                        255,
+                        0.04
+                    )
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.22
+                );
+
+            border-radius: 18px;
+
+            font-family:
+                'Playfair Display',
+                serif;
+
+            font-size: 22px;
+
+            line-height: 1.5;
+
+            text-align: center;
+
+            font-style: italic;
+
+            color: #fff;
+
+            box-shadow:
+                inset 0 0 25px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.025
+                ),
+
+                0 10px 35px
+                rgba(0,0,0,0.2);
+        }
+
+        .pregunta::before {
+
+            content: "♥";
+
+            display: block;
+
+            font-size: 22px;
+
+            color: var(--pink);
+
+            margin-bottom: 8px;
+
+            text-shadow:
+                0 0 15px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.5
+                );
+        }
+
+        /* =========================================
+           BOTÓN
+        ========================================= */
+
+        .boton {
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+        .boton a {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4f9a,
+                    #d9367b
+                );
+
+            padding:
+                14px 32px;
+
+            border-radius: 40px;
+
+            font-family:
+                'Space Grotesk',
+                sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 500;
+
+            box-shadow:
+                0 8px 25px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.22
+                );
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                filter 0.3s ease;
+        }
+
+        .boton a:hover {
+
+            transform:
+                translateY(-3px)
+                scale(1.02);
+
+            box-shadow:
+                0 12px 35px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.35
+                ),
+
+                0 0 20px
+                rgba(
+                    255,
+                    79,
+                    154,
+                    0.12
+                );
+
+            filter:
+                brightness(1.08);
+        }
+
+        /* =========================================
+           PIE
+        ========================================= */
+
+        .pie {
+
+            margin-top: 50px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.07
+                );
+
+            text-align: center;
+
+            font-family:
+                'Space Grotesk',
+                sans-serif;
+
+            font-size: 13px;
+
+            color: #777784;
+        }
+
+        .pie p {
+
+            margin:
+                0 0 12px;
+        }
+
+        .pie a {
+
+            color: var(--cyan);
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .pie a:hover {
+
+            color: #fff;
+
+            text-shadow:
+                0 0 10px
+                rgba(
+                    77,
+                    232,
+                    255,
+                    0.45
+                );
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .wrapper {
+
+                padding:
+                    25px 12px;
+            }
+
+            .carta {
+
+                padding:
+                    38px 25px;
+
+                border-radius: 20px;
+            }
+
+            h1 {
+
+                font-size: 38px;
+            }
+
+            .contenido {
+
+                font-size: 17px;
+
+                line-height: 1.85;
+
+                text-align: left;
+            }
+
+            .contenido p:first-child::first-letter {
+
+                font-size: 40px;
+            }
+
+            .pregunta {
+
+                font-size: 19px;
+
+                padding:
+                    25px 18px;
+            }
+
+            .boton a {
+
+                width: 85%;
+
+                padding:
+                    14px 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .carta {
+
+                padding:
+                    32px 20px;
+            }
+
+            h1 {
+
+                font-size: 33px;
+            }
+
+            .tag {
+
+                font-size: 10px;
+
+                letter-spacing: 3px;
+            }
+
+            .contenido {
+
+                font-size: 16px;
+            }
+
+            .pregunta {
+
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         MÚSICA
+    ========================================= -->
+
+    <audio id="musica" loop>
+        <source
+            src="ifnotforyou.mp3"
+            type="audio/mpeg"
+        >
+    </audio>
+
+
+    <!-- =========================================
+         CORAZONES FLOTANTES
+    ========================================= -->
+
+    <script>
+
+        for (let i = 0; i < 22; i++) {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML = "❤";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (8 + Math.random() * 7) + "s";
+
+            heart.style.animationDelay =
+                (Math.random() * 8) + "s";
+
+            heart.style.fontSize =
+                (12 + Math.random() * 18) + "px";
+
+            document.body.appendChild(heart);
+        }
+
+
+        function toggleMusica() {
+
+            const audio =
+                document.getElementById("musica");
+
+            const btn =
+                document.getElementById("btnMusica");
+
+
+            if (audio.paused) {
+
+                audio.play();
+
+                btn.innerHTML =
+                    "⏸️ Pausar música";
+
+            } else {
+
+                audio.pause();
+
+                btn.innerHTML =
+                    "▶️ Reproducir música";
+            }
+        }
+
+    </script>
+
+
+    <!-- =========================================
+         CARTA
+    ========================================= -->
+
+    <main class="wrapper">
+
+        <div class="carta">
+
+            <!-- Encabezado -->
+
+            <div class="tag">
+                Una carta para ti Maite
+            </div>
+
+            <h1>
+                IF NOT FOR YOU
+            </h1>
+
+            <div class="linea"></div>
+
+
+            <!-- Música -->
+
+            <div class="music-control">
+
+                <button
+                    id="btnMusica"
+                    onclick="toggleMusica()"
+                >
+                    ▶️ Reproducir música
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 TEXTO DE LA CARTA
+            ====================================== -->
+
+            <div class="contenido">
+
+                <p>
+                    Ya ha pasado mucho tiempo desde que terminamos nuestra relación, pero sigo pensando en ti todos los días.
+                    Al despertar, miro mi teléfono esperando ver alguna señal tuya. Desde que lo nuestro terminó pensando en que en algún momento me llegara alguna señal tuya,
+                    vivo cada día con un vacío que no he podido llenar, por más que lo intente ¿y porque? quiza asea porque tu eres una persona muy importante en mi vida puesto a que enserio me importas y me cuesta aceptar que ya no estas aqui y aun asi te sigo amando todos los dias un poquito más.
+                </p>
+
+
+                <p>
+                    Tú tienes algo que me complementa y me hace más feliz, algo que solo tú tienes y que nadie más puede igualar.
+                    Aún te amo, y me ha costado mucho aceptarlo.
+                </p>
+
+
+                <p>
+                    Cada vez que te veo caminar siento la necesidad de hablarte como antes, cuando éramos inseparables,
+                    pero no puedo. Me duele verte todos los días y no poder estar a tu lado para preguntarte
+                    ¿cómo estás? ¿me extrañas? yo te extraño.
+                </p>
+
+
+                <p>
+                    Si no fuera por ti yo no hubiera hecho muchas cosas como mejorar en la musica,
+                    o tratar de ser mejor para ti en general. Si no fuera por ti no hubiera podido haber vivido
+                    momentos tan lindos como los que pase contigo, todo lo que hice fue por ti.
+                </p>
+
+
+                <p class="destacado">
+                    Quiero verte.
+                </p>
+
+
+                <p>
+                    todos los dias tengo ese pensamiento, y no se si tu igual me pienses todos los días,
+                    si esq también a veces esperas por un mensaje mío o si te as desvelado pensando en mi,
+                    en verdad quiero pensar que tu me estas esperando para volver aunque sea vergonzoso al principio
+                    yo estoy dispuesto a intentarlo y volver a lo de antes a cuando llegaba con tantas ganas al liceo
+                    tan solo para verte y estar a tu lado, y se que al principio será vergonzoso y quizá pienses q no va
+                    funcionar, pero es cosa de tiempo, si ambos nos esforzamos podemos hacer lo que sea, yo por lo menos
+                    estoy dispuesto a lo que sea por ti.
+                </p>
+
+
+                <p>
+                    quizá te preguntes si ya no te extraño por haber tenido pareja hace poco, o por eso que paso una
+                    semana después de que terminaramos, solo me queda decir que no pensé las cosas cuando deje que esa
+                    persona entrara a mi vida con intenciones amorosas, mi intención jamás fue hacerte sentir remplazable
+                    la verdad es que te veo ahora y te eh intentado buscar en todo lo que eh intentado últimamente,
+                    pero no hay nadie con tu sonrisa, tus ojitos, la forma en que me traatabas, y algo que ya me quedo
+                    claro después de todo lo que pase después de terminar contigo es que no hay ni habrá nadie nunca que
+                    se compare contigo, tu eres única, y siento que para mi tu eres la mujer mas hermosa que eh visto y no
+                    creo poder encontrar a alguien que se pueda comparar contigo, tu eres lo que de verdad quiero para toda
+                    mi vida.
+                </p>
+
+
+                 <p class="destacado">
+                    Intente buscarte en el pasado en otra persona o deje que entraran personas en mi vida que no correspondían
+                    y ese fue el error mas grande que eh cometido, y fue ahí que me di cuenta que tu eres única e irremplazable
+                    mi Amor.
+                </p>
+
+
+                <p>
+                    Mi madre te extraña; siempre se acuerda de ti, de lo tierna que eras y de lo feliz que me hacías.
+                    Siempre me dice "y as visto a la Maite?????" me da wiwi que pregunte pero igualmente.
+                </p>
+
+
+                <p>
+                    Yo también te extraño demasiado y me gustaría poder estar a tu lado una vez más, poder estar junto a ti
+                    en tus momentos difíciles y tambien en los que estés llena de felicidad, pq de verdad que te amo Maite
+                    y quiero estar contigo otra vez volver a tener esos bellos días donde legaba feliz a verte y juntarnos
+                    y pasear reírnos de los cabros chicos y hacer cosas de pareja pues,
+                    por eso con esta cartita te quiero dejar una sola pregunta.
+                </p>
+
+            </div>
+
+
+            <!-- =====================================
+                 PREGUNTA
+            ====================================== -->
+
+            <div class="pregunta">
+
+                ¿Te gustaría arreglar las cosas y volver a amarnos para siempre?
+
+            </div>
+
+
+            <!-- =====================================
+                 BOTÓN
+            ====================================== -->
+
+            <div class="boton">
+
+                <a
+                    href="https://www.instagram.com/matias_mchc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Sí, hablemos 💖
+                </a>
+
+            </div>
+
+
+            <!-- =====================================
+                 PIE
+            ====================================== -->
+
+            <footer class="pie">
+
+                <p>
+                    Lo di todo JAKJKJSDKA &gt;:3.
+                </p>
+
+                <a href="inicio.html">
+                    ← Volver al inicio
+                </a>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
