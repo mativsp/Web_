@@ -5,533 +5,705 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momentos Bonitos</title>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
 
-        * {
-            box-sizing: border-box;
+    * {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --pink: #ff0f70;
+        --cyan: #00eaff;
+        --bg: #08090c;
+        --text: #eeeeee;
+        --muted: #777c84;
+        --line: rgba(255,255,255,.10);
+    }
+
+    html {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+        font-family: "Space Grotesk", Arial, sans-serif;
+        background:
+            radial-gradient(circle at 10% 10%, rgba(255,15,112,.11), transparent 28%),
+            radial-gradient(circle at 90% 60%, rgba(0,234,255,.055), transparent 30%),
+            var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 100;
+        opacity: .08;
+        background: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 3px,
+            rgba(255,255,255,.18) 4px
+        );
+    }
+
+    header {
+        position: relative;
+        min-height: 45vh;
+        padding: 80px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    header .eyebrow {
+        font: 700 12px "JetBrains Mono", monospace;
+        letter-spacing: 5px;
+        color: var(--pink);
+        margin-bottom: 25px;
+    }
+
+    header .eyebrow::before {
+        content: "// ";
+        color: var(--cyan);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: clamp(55px, 10vw, 145px);
+        line-height: .82;
+        letter-spacing: -6px;
+        text-transform: uppercase;
+    }
+
+    header p {
+        margin-top: 30px;
+        color: var(--muted);
+        font: 13px "JetBrains Mono", monospace;
+    }
+
+    header p::before {
+        content: "> ";
+        color: var(--pink);
+    }
+
+    .texto-centro {
+        padding: 28px 20px;
+        text-align: center;
+        color: #9a9da5;
+        font: italic 14px "JetBrains Mono", monospace;
+        letter-spacing: 3px;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .audio-section {
+        padding: 55px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    audio {
+        width: min(80%, 600px);
+    }
+
+    .portada {
+        padding: 70px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .portada img {
+        width: 90%;
+        max-width: 1000px;
+        border: 1px solid rgba(255,15,112,.35);
+        box-shadow: 0 25px 70px rgba(0,0,0,.55);
+    }
+
+    /* =========================
+       PÁGINAS
+       ========================= */
+
+    .paginas {
+        padding: 80px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .paginas h2,
+    .especiales h2 {
+        margin: 0 0 35px;
+        font-size: clamp(25px, 4vw, 42px);
+        text-transform: uppercase;
+    }
+
+    .paginas h2::before,
+    .especiales h2::before {
+        content: "> ";
+        color: var(--pink);
+        font-family: "JetBrains Mono", monospace;
+    }
+
+    .galeria {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    /* =========================
+       BOTONES DE PÁGINAS
+       ========================= */
+
+    .pagina {
+        position: relative;
+        min-height: 120px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #292d33;
+        background: #0b0e12;
+        color: white;
+        font: 600 12px "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: .25s ease;
+    }
+
+    .pagina:hover {
+        transform: translateY(-4px);
+        background: rgba(255,15,112,.08);
+        border-color: var(--pink);
+        box-shadow: 0 15px 40px rgba(255,15,112,.10);
+    }
+
+    .pagina::before {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .pagina.fotos {
+        border-left: 2px solid var(--pink);
+    }
+
+    .pagina.fotos::before {
+        content: "📸";
+    }
+
+    .pagina.videos {
+        border-left: 2px solid var(--cyan);
+    }
+
+    .pagina.videos::before {
+        content: "🎥";
+    }
+
+    .pagina.carta {
+        border-left: 2px solid var(--cyan);
+        color: white;
+        cursor: pointer;
+    }
+
+    .pagina.carta::before {
+        content: "💌";
+    }
+
+    .pagina.carta:hover {
+        transform: translateY(-4px);
+        background: rgba(0,234,255,.06);
+        border-color: var(--cyan);
+        box-shadow: 0 15px 40px rgba(0,234,255,.08);
+    }
+
+    .estado {
+        margin-top: 8px;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--cyan);
+    }
+
+    /* =========================
+       COSITAS ESPECIALES
+       ========================= */
+
+    .especiales {
+        padding: 80px 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .especiales-subtitulo {
+        color: var(--muted);
+        font: 12px "JetBrains Mono", monospace;
+        margin-bottom: 40px;
+    }
+
+    .especiales-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .especial-card {
+        min-height: 180px;
+        padding: 30px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #292d33;
+        border-left: 2px solid var(--pink);
+        background: #0b0e12;
+    }
+
+    .especial-card.proceso {
+        border-left-color: #555b63;
+        opacity: .65;
+    }
+
+    .especial-card.quema-desbloqueada {
+        border-left-color: var(--pink);
+        border-color: var(--pink);
+        opacity: 1;
+        background: rgba(255,15,112,.05);
+        box-shadow: 0 0 25px rgba(255,15,112,.06);
+    }
+
+    .especial-icono {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .especial-card h3 {
+        margin: 0 0 8px;
+        font-size: 19px;
+        text-transform: uppercase;
+    }
+
+    .especial-card p {
+        margin: 0;
+        color: var(--muted);
+        font: 11px "JetBrains Mono", monospace;
+        line-height: 1.6;
+    }
+
+    .btn-especial {
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid var(--pink);
+        background: rgba(255,15,112,.07);
+        color: white;
+        font: 700 11px "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+        cursor: pointer;
+    }
+
+    .btn-especial:hover {
+        background: var(--pink);
+    }
+
+    .proceso-tag {
+        margin-top: 18px;
+        padding: 8px 13px;
+        border: 1px solid #343941;
+        color: #777c84;
+        font: 700 10px "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+    }
+
+    /* =========================
+       FORMULARIOS
+       ========================= */
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(4,5,8,.97);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .overlay.activo {
+        display: flex;
+    }
+
+    .quiz-box {
+        width: min(850px, 100%);
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        padding: 40px;
+        background: #0b0e12;
+        border: 1px solid rgba(255,15,112,.4);
+        box-shadow: 0 25px 80px rgba(0,0,0,.6);
+    }
+
+    .quiz-label {
+        color: var(--pink);
+        font: 700 11px "JetBrains Mono", monospace;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+    }
+
+    .quiz-label::before {
+        content: "// ";
+        color: var(--cyan);
+    }
+
+    .quiz-box h2 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 5vw, 48px);
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .quiz-subtitle {
+        color: var(--muted);
+        font: 12px "JetBrains Mono", monospace;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .pregunta {
+        padding: 22px;
+        border: 1px solid #252a30;
+        border-left: 2px solid var(--pink);
+        margin-bottom: 18px;
+    }
+
+    .pregunta-titulo {
+        display: block;
+        margin-bottom: 17px;
+        line-height: 1.5;
+    }
+
+    .opcion {
+        display: block;
+        margin: 9px 0;
+        cursor: pointer;
+    }
+
+    .opcion input {
+        display: none;
+    }
+
+    .opcion-contenido {
+        display: block;
+        padding: 13px 16px;
+        border: 1px solid #292d33;
+        background: #090b0e;
+        color: #aeb2b9;
+        font: 12px "JetBrains Mono", monospace;
+        line-height: 1.5;
+        transition: .2s;
+        border-radius: 2px;
+    }
+
+    .opcion input:checked + .opcion-contenido {
+        border-color: var(--pink);
+        color: white;
+        background: rgba(255,15,112,.10);
+    }
+
+    .quiz-botones {
+        display: flex;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .btn-quiz {
+        flex: 1;
+        min-height: 52px;
+        padding: 16px;
+        border: 1px solid var(--pink);
+        background: rgba(255,15,112,.08);
+        color: white;
+        font: 700 11px "JetBrains Mono", monospace;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+
+    .btn-quiz:hover {
+        background: var(--pink);
+    }
+
+    .btn-cerrar {
+        border-color: #343941;
+        background: rgba(255,255,255,.02);
+    }
+
+    .mensaje {
+        display: none;
+        margin-top: 20px;
+        padding: 15px;
+        font: 600 12px "JetBrains Mono", monospace;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .mensaje.error {
+        display: block;
+        color: #ff6b9f;
+        border: 1px solid rgba(255,15,112,.45);
+    }
+
+    .mensaje.exito {
+        display: block;
+        color: var(--cyan);
+        border: 1px solid rgba(0,234,255,.4);
+    }
+
+    /* =========================
+       VIDEOS
+       ========================= */
+
+    .video-box {
+        position: relative;
+        width: min(1000px, 100%);
+        padding: 20px;
+        background: #0b0e12;
+        border: 1px solid rgba(255,15,112,.4);
+    }
+
+    .video-box h2 {
+        margin: 5px 0 18px;
+    }
+
+    .video-box video {
+        width: 100%;
+        max-height: 75vh;
+        background: black;
+    }
+
+    .cerrar-video {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #343941;
+        background: #000;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    footer {
+        padding: 35px 20px;
+        text-align: center;
+        color: #50545b;
+        font: 10px "JetBrains Mono", monospace;
+        letter-spacing: 2px;
+    }
+
+    /* =========================
+       TABLET
+       ========================= */
+
+    @media (max-width: 800px) {
+
+        .galeria {
+            grid-template-columns: 1fr;
+            max-width: 500px;
         }
 
-        :root {
-            --pink: #ff0f70;
-            --cyan: #00eaff;
-            --bg: #08090c;
-            --text: #eeeeee;
-            --muted: #777c84;
-            --line: rgba(255,255,255,.10);
-        }
-
-        body {
-            margin: 0;
-            font-family: "Space Grotesk", Arial, sans-serif;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(255,15,112,.11), transparent 28%),
-                radial-gradient(circle at 90% 60%, rgba(0,234,255,.055), transparent 30%),
-                var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 100;
-            opacity: .08;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0,
-                transparent 3px,
-                rgba(255,255,255,.18) 4px
-            );
-        }
-
-        header {
-            position: relative;
-            min-height: 45vh;
-            padding: 80px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-bottom: 1px solid var(--line);
-        }
-
-        header .eyebrow {
-            font: 700 12px "JetBrains Mono", monospace;
-            letter-spacing: 5px;
-            color: var(--pink);
-            margin-bottom: 25px;
-        }
-
-        header .eyebrow::before {
-            content: "// ";
-            color: var(--cyan);
+        .especiales-grid {
+            grid-template-columns: 1fr;
+            max-width: 500px;
         }
 
         header h1 {
-            margin: 0;
-            font-size: clamp(55px, 10vw, 145px);
-            line-height: .82;
-            letter-spacing: -6px;
-            text-transform: uppercase;
+            letter-spacing: -3px;
+        }
+    }
+
+    /* =========================
+       CELULAR
+       ========================= */
+
+    @media (max-width: 600px) {
+
+        header {
+            min-height: 38vh;
+            padding: 55px 18px;
         }
 
-        header p {
-            margin-top: 30px;
-            color: var(--muted);
-            font: 13px "JetBrains Mono", monospace;
-        }
-
-        header p::before {
-            content: "> ";
-            color: var(--pink);
+        header h1 {
+            font-size: clamp(43px, 14vw, 70px);
+            line-height: .88;
+            letter-spacing: -2px;
         }
 
         .texto-centro {
-            padding: 28px 20px;
-            text-align: center;
-            color: #9a9da5;
-            font: italic 14px "JetBrains Mono", monospace;
-            letter-spacing: 3px;
-            border-bottom: 1px solid var(--line);
+            padding: 20px 12px;
+            font-size: 11px;
+            letter-spacing: 2px;
         }
 
         .audio-section {
-            padding: 55px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
+            padding: 35px 12px;
         }
 
         audio {
-            width: min(80%, 600px);
+            width: 100%;
         }
 
         .portada {
-            padding: 70px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
+            padding: 35px 12px;
         }
 
         .portada img {
-            width: 90%;
-            max-width: 1000px;
-            border: 1px solid rgba(255,15,112,.35);
-            box-shadow: 0 25px 70px rgba(0,0,0,.55);
+            width: 100%;
         }
 
-        /* =========================
-           PÁGINAS
-           ========================= */
-
-        .paginas {
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
+        .paginas,
+        .especiales {
+            padding: 50px 12px;
         }
 
         .paginas h2,
         .especiales h2 {
-            margin: 0 0 35px;
-            font-size: clamp(25px, 4vw, 42px);
-            text-transform: uppercase;
+            font-size: 26px;
+            margin-bottom: 25px;
         }
-
-        .paginas h2::before,
-        .especiales h2::before {
-            content: "> ";
-            color: var(--pink);
-            font-family: "JetBrains Mono", monospace;
-        }
-
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        /* =========================
-           BOTONES DE PÁGINAS
-           ========================= */
 
         .pagina {
-            position: relative;
-            min-height: 120px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #292d33;
-            background: #0b0e12;
-            color: white;
-            font: 600 12px "JetBrains Mono", monospace;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: .25s ease;
+            min-height: 105px;
         }
 
-        .pagina:hover {
-            transform: translateY(-4px);
-            background: rgba(255,15,112,.08);
-            border-color: var(--pink);
-            box-shadow: 0 15px 40px rgba(255,15,112,.10);
-        }
-
-        .pagina::before {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .pagina.fotos {
-            border-left: 2px solid var(--pink);
-        }
-
-        .pagina.fotos::before {
-            content: "📸";
-        }
-
-        .pagina.videos {
-            border-left: 2px solid var(--cyan);
-        }
-
-        .pagina.videos::before {
-            content: "🎥";
-        }
-
-        .pagina.carta {
-            border-left: 2px solid var(--cyan);
-            color: white;
-            cursor: pointer;
-        }
-
-        .pagina.carta::before {
-            content: "💌";
-            filter: grayscale(0);
-        }
-
-        .pagina.carta:hover {
-            transform: translateY(-4px);
-            background: rgba(0,234,255,.06);
-            border-color: var(--cyan);
-            box-shadow: 0 15px 40px rgba(0,234,255,.08);
-        }
-
-        .estado {
-            margin-top: 8px;
-            font-size: 8px;
-            letter-spacing: 2px;
-            color: var(--cyan);
-        }
-
-        /* =========================
-           COSITAS ESPECIALES
-           ========================= */
-
-        .especiales {
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .especiales-subtitulo {
-            color: var(--muted);
-            font: 12px "JetBrains Mono", monospace;
-            margin-bottom: 40px;
-        }
-
-        .especiales-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .especial-card {
-            min-height: 180px;
-            padding: 30px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #292d33;
-            border-left: 2px solid var(--pink);
-            background: #0b0e12;
-        }
-
-        .especial-card.proceso {
-            border-left-color: #555b63;
-            opacity: .65;
-        }
-
-        .especial-card.quema-desbloqueada {
-            border-left-color: var(--pink);
-            border-color: var(--pink);
-            opacity: 1;
-            background: rgba(255,15,112,.05);
-            box-shadow: 0 0 25px rgba(255,15,112,.06);
-        }
-
-        .especial-icono {
-            font-size: 30px;
-            margin-bottom: 12px;
-        }
-
-        .especial-card h3 {
-            margin: 0 0 8px;
-            font-size: 19px;
-            text-transform: uppercase;
-        }
-
-        .especial-card p {
-            margin: 0;
-            color: var(--muted);
-            font: 11px "JetBrains Mono", monospace;
-            line-height: 1.6;
-        }
-
-        .btn-especial {
-            width: 100%;
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid var(--pink);
-            background: rgba(255,15,112,.07);
-            color: white;
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-
-        .btn-especial:hover {
-            background: var(--pink);
-        }
-
-        .proceso-tag {
-            margin-top: 18px;
-            padding: 8px 13px;
-            border: 1px solid #343941;
-            color: #777c84;
-            font: 700 10px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
-        }
-
-        /* =========================
-           FORMULARIOS
-           ========================= */
+        /* FORMULARIO EN CELULAR */
 
         .overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(4,5,8,.97);
-            overflow-y: auto;
-        }
-
-        .overlay.activo {
-            display: flex;
+            align-items: flex-start;
+            padding: 10px;
         }
 
         .quiz-box {
-            width: min(850px, 100%);
-            padding: 40px;
-            background: #0b0e12;
-            border: 1px solid rgba(255,15,112,.4);
+            width: 100%;
+            max-height: calc(100vh - 20px);
+            padding: 22px 15px;
+            margin: 0;
+            border-radius: 3px;
         }
 
         .quiz-label {
-            color: var(--pink);
-            font: 700 11px "JetBrains Mono", monospace;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        }
-
-        .quiz-label::before {
-            content: "// ";
-            color: var(--cyan);
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
         }
 
         .quiz-box h2 {
-            margin: 0 0 10px;
-            font-size: clamp(28px, 5vw, 48px);
-            text-transform: uppercase;
+            font-size: 29px;
+            line-height: 1.05;
+            margin-bottom: 10px;
         }
 
         .quiz-subtitle {
-            color: var(--muted);
-            font: 12px "JetBrains Mono", monospace;
-            margin-bottom: 30px;
+            font-size: 10px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
         .pregunta {
-            padding: 22px;
-            border: 1px solid #252a30;
-            border-left: 2px solid var(--pink);
-            margin-bottom: 18px;
+            padding: 15px 12px;
+            margin-bottom: 13px;
         }
 
         .pregunta-titulo {
-            display: block;
-            margin-bottom: 17px;
+            font-size: 12px;
             line-height: 1.5;
+            margin-bottom: 13px;
         }
 
         .opcion {
-            display: block;
-            margin: 9px 0;
-            cursor: pointer;
-        }
-
-        .opcion input {
-            display: none;
+            margin: 7px 0;
         }
 
         .opcion-contenido {
-            display: block;
-            padding: 13px 16px;
-            border: 1px solid #292d33;
-            background: #090b0e;
-            color: #aeb2b9;
-            font: 12px "JetBrains Mono", monospace;
-            transition: .2s;
-        }
-
-        .opcion input:checked + .opcion-contenido {
-            border-color: var(--pink);
-            color: white;
-            background: rgba(255,15,112,.10);
+            padding: 12px 11px;
+            font-size: 10px;
+            line-height: 1.45;
         }
 
         .quiz-botones {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
+            flex-direction: column;
+            gap: 9px;
+            margin-top: 18px;
         }
 
         .btn-quiz {
-            flex: 1;
-            padding: 16px;
-            border: 1px solid var(--pink);
-            background: rgba(255,15,112,.08);
-            color: white;
-            font: 700 11px "JetBrains Mono", monospace;
-            cursor: pointer;
-        }
-
-        .btn-quiz:hover {
-            background: var(--pink);
-        }
-
-        .btn-cerrar {
-            border-color: #343941;
-            background: rgba(255,255,255,.02);
+            width: 100%;
+            min-height: 50px;
+            padding: 14px 10px;
+            font-size: 10px;
         }
 
         .mensaje {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            font: 600 12px "JetBrains Mono", monospace;
-            text-align: center;
+            margin-top: 14px;
+            padding: 12px 10px;
+            font-size: 10px;
+        }
+    }
+
+    /* =========================
+       CELULARES PEQUEÑOS
+       ========================= */
+
+    @media (max-width: 380px) {
+
+        .overlay {
+            padding: 6px;
         }
 
-        .mensaje.error {
-            display: block;
-            color: #ff6b9f;
-            border: 1px solid rgba(255,15,112,.45);
+        .quiz-box {
+            max-height: calc(100vh - 12px);
+            padding: 19px 12px;
         }
 
-        .mensaje.exito {
-            display: block;
-            color: var(--cyan);
-            border: 1px solid rgba(0,234,255,.4);
+        .quiz-box h2 {
+            font-size: 26px;
         }
 
-        /* =========================
-           VIDEOS
-           ========================= */
-
-        .video-box {
-            position: relative;
-            width: min(1000px, 100%);
-            padding: 20px;
-            background: #0b0e12;
-            border: 1px solid rgba(255,15,112,.4);
+        .quiz-subtitle {
+            font-size: 9px;
         }
 
-        .video-box h2 {
-            margin: 5px 0 18px;
+        .pregunta {
+            padding: 13px 10px;
         }
 
-        .video-box video {
-            width: 100%;
-            max-height: 75vh;
-            background: black;
+        .pregunta-titulo {
+            font-size: 11px;
         }
 
-        .cerrar-video {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 38px;
-            height: 38px;
-            border: 1px solid #343941;
-            background: #000;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
+        .opcion-contenido {
+            padding: 11px 9px;
+            font-size: 9px;
         }
 
-        footer {
-            padding: 35px 20px;
-            text-align: center;
-            color: #50545b;
-            font: 10px "JetBrains Mono", monospace;
-            letter-spacing: 2px;
+        .btn-quiz {
+            min-height: 48px;
+            font-size: 9px;
         }
-
-        /* =========================
-           RESPONSIVE
-           ========================= */
-
-        @media (max-width: 800px) {
-
-            .galeria {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .especiales-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            header h1 {
-                letter-spacing: -3px;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            .quiz-box {
-                padding: 25px 17px;
-            }
-
-            .quiz-botones {
-                flex-direction: column;
-            }
-
-            .portada img {
-                width: 95%;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
